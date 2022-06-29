@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.entity.FoodCategory;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.model.userModel.UserServiceModel;
 import com.example.demo.repository.UserRepository;
@@ -35,6 +36,11 @@ public class UserServiceImpl {
         userRepository.save(user);
 
         return user.getUsername();
+    }
+
+
+    public User findByName(String userName) {
+        return this.userRepository.findUserByUsername(userName);
     }
 
 }

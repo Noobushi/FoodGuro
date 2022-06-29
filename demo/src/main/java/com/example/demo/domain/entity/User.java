@@ -1,11 +1,15 @@
 package com.example.demo.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User extends BaseEntity {
 
+
+    @OneToMany(targetEntity = OrderFood.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
+    private List<OrderFood> orderFood;
     private String firstName;
 
     private String lastName;
@@ -57,4 +61,13 @@ public class User extends BaseEntity {
     public void setPassword(Integer password) {
         this.password = password;
     }
+
+    public List<OrderFood> getOrder() {
+        return orderFood;
+    }
+
+    public void setOrder(List<OrderFood> orderFood) {
+        this.orderFood = orderFood;
+    }
 }
+

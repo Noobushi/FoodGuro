@@ -5,6 +5,8 @@ import com.example.demo.domain.model.foodModel.FoodServiceModel;
 import java.util.List;
 
 public class FoodCategoryServiceModel {
+
+    private int id;
     private String name;
 
     private List<FoodServiceModel> foods;
@@ -26,5 +28,13 @@ public class FoodCategoryServiceModel {
 
     public void setFoods(List<FoodServiceModel> foods) {
         this.foods = foods;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

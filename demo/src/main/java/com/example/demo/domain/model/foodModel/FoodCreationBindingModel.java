@@ -36,4 +36,6 @@ public class FoodCreationBindingModel {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+
 }

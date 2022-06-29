@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 @Entity
 public class Food extends BaseEntity {
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private FoodCategory foodCategory;
     private String name;
 
     private BigDecimal price;
@@ -27,5 +31,13 @@ public class Food extends BaseEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
+    }
+
+    public void setFoodCategory(FoodCategory foodCategory) {
+        this.foodCategory = foodCategory;
     }
 }

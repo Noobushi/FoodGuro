@@ -31,4 +31,14 @@ public class    FoodCategoryServiceImpl {
     public FoodCategory findByName(String name) {
         return this.foodCategoryRepository.findByName(name);
     }
+
+    @Transactional
+    public String deleteFoodCategory(FoodCategoryServiceModel foodCategoryServiceModel) {
+        FoodCategory foodCategory = foodCategoryRepository.findByName(foodCategoryServiceModel.getName());
+        String foodCategoryName = foodCategory.getName();
+        foodCategoryRepository.delete(foodCategory);
+        return foodCategoryName;
+    }
+
+
 }

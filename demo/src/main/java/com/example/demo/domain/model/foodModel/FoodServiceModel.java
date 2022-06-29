@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class FoodServiceModel {
 
+    private int id;
+
     private String foodCategory;
 
     private String name;
@@ -37,6 +39,13 @@ public class FoodServiceModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

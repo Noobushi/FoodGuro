@@ -33,4 +33,36 @@ public class FoodServiceImpl {
         category.getFoods().add(food);
         return food.getName();
     }
+
+    @Transactional
+    public String deleteFood(FoodServiceModel foodServiceModel) {
+        Food food = foodRepository.findByName(foodServiceModel.getName());
+        String foodName = food.getName();
+        foodRepository.delete(food);
+        return foodName;
+    }
+
+    @Transactional
+    public FoodServiceModel editFood(FoodServiceModel foodServiceModel) {
+        Food food = foodRepository.findById(foodServiceModel.getId()).get();
+
+        FoodCategory newCategory = foodCategoryService.findByName(foodServiceModel.getFoodCategory());
+        newCategory.getFoods().add(food);
+
+        FoodCategory oldCategory = food.getFoodCategory();
+        oldCategory.getFoods().remove(food);
+
+        food.setName(foodServiceModel.getName());
+        food.setPrice(foodServiceModel.getPrice());
+
+
+        FoodServiceModel edited = modelMapper.map(food, FoodServiceModel.class);
+        edited.setFoodCategory(foodServiceModel.getFoodCategory());
+
+        return edited;
+    }
+
+    public Food findByName(String name){
+        return this.foodRepository.findByName(name);
+    }
 }

@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryCreationBindingModel;
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryCreationResponseModel;
+import com.example.demo.domain.model.foodCategoryModel.FoodCategoryDeleteResponseAndBindingModel;
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryServiceModel;
+import com.example.demo.domain.model.foodModel.FoodDeleteResponseAndBindingModel;
 import com.example.demo.service.FoodCategoryServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -32,5 +34,15 @@ public class FoodCategoryController {
         FoodCategoryCreationResponseModel createFoodCatalog = new FoodCategoryCreationResponseModel();
         createFoodCatalog.setName(name);
         return new ResponseEntity<>(createFoodCatalog, HttpStatus.CREATED );
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<FoodCategoryDeleteResponseAndBindingModel> deleteFoodCategory (@RequestBody FoodCategoryDeleteResponseAndBindingModel foodCategoryDeleteResponseAndBindingModel){
+
+        String categoryName = foodCategoryServiceImpl.deleteFoodCategory(modelMapper.map(foodCategoryDeleteResponseAndBindingModel, FoodCategoryServiceModel.class));
+
+        FoodCategoryDeleteResponseAndBindingModel deletedFoodCategory = new FoodCategoryDeleteResponseAndBindingModel();
+       deletedFoodCategory.setName(categoryName);
+        return new ResponseEntity<>(deletedFoodCategory, HttpStatus.OK );
     }
 }
