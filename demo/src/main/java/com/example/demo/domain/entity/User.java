@@ -15,7 +15,7 @@ public class User extends BaseEntity {
     private String lastName;
 
     private String city;
-
+    
     @Column(nullable = false, unique = true)
     private String username;
 
