@@ -1,0 +1,31 @@
+.registerButton {
+    position: absolute;
+    left: 240px;
+    top: 18px;
+    background-color: rgba(240, 182, 24, 0.966);
+    color: black;
+}
+
+.loginButton {
+    position: absolute;
+    left: 340px;
+    top: 18px;
+    background-color: rgb(240, 182, 24);
+    color: black;
+    height: 35spx;
+    width: 70px;
+}
+
+.guroLogo{
+    width:50px;
+    height:50px;
+    position:absolute; 
+    left: 170px;
+    top:10px; 
+    border:none;
+}
+
+.shoppingCart{
+    width:30px;
+    height:25px;
+}

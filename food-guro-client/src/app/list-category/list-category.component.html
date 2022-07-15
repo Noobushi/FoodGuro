@@ -1,0 +1,25 @@
+<div class="mainPage">
+<div>
+<h1>Categories</h1>
+
+<div class="dropdown" *ngFor="let category of categories$ | async">
+
+  <h2>
+      <a [title]="category.name + ' details'">
+        <button onclick="myFunction()" class="dropbtn">{{ category.name }}</button>
+      
+    </a>
+  </h2>
+
+
+  
+  <div id="myDropdown" class="dropdown-content" *ngFor="let food of category.foods">
+    <h2>
+      <h6>{{ food.name }}</h6>
+      <h6>{{ food.price | currency }}</h6>
+    </h2>
+  </div>
+
+</div>
+</div>
+</div>

@@ -4,15 +4,13 @@ import com.example.demo.domain.model.foodCategoryModel.FoodCategoryCreationBindi
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryCreationResponseModel;
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryDeleteResponseAndBindingModel;
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryServiceModel;
-import com.example.demo.domain.model.foodModel.FoodDeleteResponseAndBindingModel;
 import com.example.demo.service.FoodCategoryServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/foodCategory")
@@ -44,5 +42,10 @@ public class FoodCategoryController {
         FoodCategoryDeleteResponseAndBindingModel deletedFoodCategory = new FoodCategoryDeleteResponseAndBindingModel();
        deletedFoodCategory.setName(categoryName);
         return new ResponseEntity<>(deletedFoodCategory, HttpStatus.OK );
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<FoodCategoryServiceModel>> getAllFoods(){
+        return new ResponseEntity<>(foodCategoryServiceImpl.findAll(),HttpStatus.OK);
     }
 }

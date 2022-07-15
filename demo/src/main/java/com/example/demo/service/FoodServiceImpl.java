@@ -28,9 +28,10 @@ public class FoodServiceImpl {
     public String createFood(FoodServiceModel foodServiceModel) {
         Food food = modelMapper.map(foodServiceModel, Food.class);
         FoodCategory category = foodCategoryService.findByName(foodServiceModel.getFoodCategory());
+        food.setFoodCategory(category);
 
-        foodRepository.save(food);
-        category.getFoods().add(food);
+        Food persisted = foodRepository.save(food);
+        category.getFoods().add(persisted);
         return food.getName();
     }
 

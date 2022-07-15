@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Foods, foods } from '../foods';
+import { Food} from '../food';
 @Component({
   selector: 'app-food-alerts',
   templateUrl: './food-alerts.component.html',
@@ -7,7 +7,7 @@ import { Foods, foods } from '../foods';
 })
 export class FoodAlertsComponent implements OnInit {
 
-  @Input() food!:Foods;
+  @Input() food!:Food;
 
   constructor() { }
 
