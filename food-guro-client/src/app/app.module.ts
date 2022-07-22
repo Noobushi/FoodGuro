@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+
+
 import { RouterModule } from '@angular/router';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { ToastrModule } from 'ngx-toastr';
-
 import { FoodAlertsComponent } from './food-alerts/food-alerts.component';
 import { FoodService } from './service/food-service';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,8 +15,12 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { CommonModule } from '@angular/common';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { UserService } from './service/user.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './carousel/carousel.component';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -66,12 +70,14 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: ListCategoryComponent },
+      { path: '', component: CarouselComponent },
       {path: 'register',component: RegisterUserComponent},
-      {path: 'login',component: LoginUserComponent}
-    ])
+      {path: 'login',component: LoginUserComponent},
+      {path: 'category',component: ListCategoryComponent}
+
+    ]),
+    NgbModule
   ],
   declarations: [
     AppComponent,
@@ -80,15 +86,17 @@ const customNotifierOptions: NotifierOptions = {
     FoodAlertsComponent,
     RegisterUserComponent,
     LoginUserComponent,
-   
+    CarouselComponent,
   ],
   providers: [
     FoodService,
     UserService
   ],
+  exports: [CarouselComponent],
+
   bootstrap: [
-    AppComponent
+    AppComponent,
+    CarouselComponent
   ]
 })
 export class AppModule { }
-
