@@ -48,4 +48,5 @@ public class FoodCategoryController {
     public ResponseEntity<List<FoodCategoryServiceModel>> getAllFoods(){
         return new ResponseEntity<>(foodCategoryServiceImpl.findAll(),HttpStatus.OK);
     }
+
 }

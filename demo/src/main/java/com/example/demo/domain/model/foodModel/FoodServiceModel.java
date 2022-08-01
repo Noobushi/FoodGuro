@@ -2,6 +2,7 @@ package com.example.demo.domain.model.foodModel;
 
 import com.example.demo.domain.entity.FoodCategory;
 
+import javax.persistence.Lob;
 import java.math.BigDecimal;
 
 public class FoodServiceModel {
@@ -14,6 +15,7 @@ public class FoodServiceModel {
 
     private BigDecimal price;
 
+    private String description;
     public FoodServiceModel() {
     }
 
@@ -48,4 +50,11 @@ public class FoodServiceModel {
         this.id = id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

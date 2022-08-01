@@ -1,5 +1,6 @@
 package com.example.demo.domain.model.foodModel;
 
+import javax.persistence.Lob;
 import java.math.BigDecimal;
 
 public class FoodCreationResponseAndEditModel {
@@ -11,6 +12,8 @@ public class FoodCreationResponseAndEditModel {
     private String foodCategory;
 
     private BigDecimal price;
+
+    private String description;
 
     public FoodCreationResponseAndEditModel() {
     }
@@ -45,5 +48,13 @@ public class FoodCreationResponseAndEditModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

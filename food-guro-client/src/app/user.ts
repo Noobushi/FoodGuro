@@ -5,7 +5,7 @@ export interface User{
 
     lastName: string;
 
-     city: string;
+    city: string;
 
     username: string;
 

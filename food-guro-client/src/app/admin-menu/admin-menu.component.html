@@ -1,0 +1,167 @@
+<div class="adminMenuPage;"  style="margin-left: 20px; margin-top: 15px;">
+  
+        <!-- Manage category menu -->
+        <h1>Manage Categories</h1>
+        <div class="d-inline-block" ngbDropdown #categoryDropMenu="ngbDropdown">
+        <button type="button" class="btn btn-outline-primary me-2" id="dropdownManual" ngbDropdownAnchor (focus)="categoryDropMenu.open()">Actions</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+          <button ngbDropdownItem  type="button" (click)="open(createCategoryContent)">Create Category</button>
+          <button ngbDropdownItem type="button" (click)="open(deleteCategoryContent)">Delete Category</button>
+        </div>
+
+        <!-- create category option -->
+        <ng-template #createCategoryContent let-modal>
+            <div class="modal-header">
+              <h4>Category Creation</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div>
+                  <label>Create category</label>
+                  <div>
+                    <input #nameField id="categoryName" class="form-control" placeholder="Enter name">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button"  class="btn btn-outline-dark" (click)="createCategory(nameField.value)">Create</button>
+            </div>
+          </ng-template> 
+          
+          <!-- delete category option -->
+          <ng-template #deleteCategoryContent let-modal>
+            <div class="modal-header">
+              <h4>Category Removal</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div>
+                  <label>Delete category</label>
+                  <div>
+                    <input #nameField id="categoryName" class="form-control" placeholder="Enter name">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button"  class="btn btn-outline-dark" (click)="deleteCategory(nameField.value)">Delete</button>
+            </div>
+          </ng-template> 
+          
+            <!-- Manage food menu -->
+          <div>
+            <div style="margin-top: 15px;">
+                <h1>Manage Foods</h1>
+                    <div class="d-inline-block" ngbDropdown #foodDropMenu="ngbDropdown">
+                    <button type="button" class="btn btn-outline-primary me-2" id="dropdownManual" ngbDropdownAnchor (focus)="foodDropMenu.open()">Actions</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                      <button ngbDropdownItem  type="button" (click)="open(createFoodContent)">Add Food</button>
+                      <button ngbDropdownItem type="button" (click)="open(deleteFoodContent)">Delete Food</button>
+                      <button ngbDropdownItem type="button" (click)="open(editFoodContent)">Edit Food</button>
+                    </div>
+                  </div>        
+            </div>
+
+        <!-- create food option -->
+        <ng-template #createFoodContent let-modal>
+          <div class="modal-header">
+            <h4>Food Creation</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form #foodForm="ngForm" (ngSubmit)="createFood(foodForm.value)" >
+              <div class="form-group">
+                <label>Add food</label>
+                <div>
+                  <input name="name" ngModel #foodNameField="ngModel" id="name" class="form-control" placeholder="Enter name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >Add in category</label>
+                <div>
+                  <input name="foodCategory" ngModel #foodCategoryField="ngModel" id="foodCategory" class="form-control" placeholder="Enter category name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >Add price</label>
+                <div>
+                  <input name="price" ngModel #foodPriceField="ngModel" id="price" class="form-control" placeholder="Enter food price">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >Add Description</label>
+                <div>
+                  <input name="description" ngModel #foodDescriptionField="ngModel" id="description" class="form-control" placeholder="Enter food description">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit"  class="btn btn-outline-dark">Create</button>
+              </div>
+            </form>
+          </div>
+        </ng-template> 
+
+        <!-- delete food option -->
+        <ng-template #deleteFoodContent let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Food Removal</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div>
+                <label for="foodName">Delete food</label>
+                <div class="input-group">
+                  <input #nameField id="foodName" class="form-control" placeholder="Enter name">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn btn-outline-dark" (click)="deleteFood(nameField.value)">Delete</button>
+          </div>
+        </ng-template> 
+
+        <!-- edit food option -->
+        <ng-template #editFoodContent let-modal>
+          <div class="modal-header">
+            <h4>Edit Food</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form #foodForm="ngForm" (ngSubmit)="editFood(foodForm.value)" >
+              <div class="form-group">
+                <label>Rename food</label>
+                <div>
+                  <input name="name" ngModel #foodNameField="ngModel" id="name" class="form-control" placeholder="Enter name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >Add in category</label>
+                <div>
+                  <input name="foodCategory" ngModel #foodCategoryField="ngModel" id="foodCategory" class="form-control" placeholder="Enter category name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >New price</label>
+                <div>
+                  <input name="price" ngModel #foodPriceField="ngModel" id="price" class="form-control" placeholder="Enter food price">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >New Description</label>
+                <div>
+                  <input name="description" ngModel #foodDescriptionField="ngModel" id="description" class="form-control" placeholder="Enter food description">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit"  class="btn btn-outline-dark">Edit</button>
+              </div>
+            </form>
+          </div>
+        </ng-template> 
+
+        <app-food-table [categories]="categories$"></app-food-table>

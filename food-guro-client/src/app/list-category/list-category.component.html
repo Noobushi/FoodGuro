@@ -1,25 +1,22 @@
 <div class="mainPage">
-<div>
-<h1>Categories</h1>
+  <div>
+    <h1>Categories</h1>
 
-<div class="dropdown" *ngFor="let category of categories$ | async">
+    <div class="dropdown" *ngFor="let category of categories$ | async">
 
-  <h2>
-      <a [title]="category.name + ' details'">
-        <button onclick="myFunction()" class="dropbtn">{{ category.name }}</button>
-      
-    </a>
-  </h2>
+      <h2>
+          <a [title]="category.name + ' details'">
+            <button class="dropbtn">{{ category.name }}</button>
+        </a>
+      </h2>
 
-
-  
-  <div id="myDropdown" class="dropdown-content" *ngFor="let food of category.foods">
-    <h2>
-      <h6>{{ food.name }}</h6>
-      <h6>{{ food.price | currency }}</h6>
-    </h2>
+      <div id="myDropdown" class="dropdown-content" *ngFor="let food of category.foods">
+        <button (click)="onClick()" type="button" style="background-color: white;">
+          <p>{{ food.name }}</p>
+          <p>{{ food.price | currency }}</p>
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
 

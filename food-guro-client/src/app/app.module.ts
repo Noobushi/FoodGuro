@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
+import { AdminMenuComponent } from './admin-menu/admin-menu.component';
+import { FoodTableComponent } from './food-table/food-table.component';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -29,7 +31,6 @@ const customNotifierOptions: NotifierOptions = {
         },
         vertical: {
             position: 'bottom',
-
         }
     },
   theme: 'material',
@@ -74,7 +75,9 @@ const customNotifierOptions: NotifierOptions = {
       { path: '', component: CarouselComponent },
       {path: 'register',component: RegisterUserComponent},
       {path: 'login',component: LoginUserComponent},
-      {path: 'category',component: ListCategoryComponent}
+      {path: 'category',component: ListCategoryComponent},
+      {path: 'adminMenu',component: AdminMenuComponent}
+
 
     ]),
     NgbModule
@@ -87,6 +90,8 @@ const customNotifierOptions: NotifierOptions = {
     RegisterUserComponent,
     LoginUserComponent,
     CarouselComponent,
+    AdminMenuComponent,
+    FoodTableComponent,
   ],
   providers: [
     FoodService,
@@ -97,6 +102,6 @@ const customNotifierOptions: NotifierOptions = {
   bootstrap: [
     AppComponent,
     CarouselComponent
-  ]
+  ],
 })
 export class AppModule { }

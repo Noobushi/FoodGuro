@@ -1,0 +1,54 @@
+<form>
+    <div class="mb-3 row">
+        <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+        <div class="col-xs-3 col-sm-auto">
+            <input id="table-filtering-search" class="form-control" type="text">
+        </div>
+    </div>
+</form>
+
+
+<div *ngFor="let category of categories | async">
+    <h3>{{category.name}}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let food of category.foods; index as i">
+                <th scope="row">{{i + 1}}</th>
+                <th scope="row">{{food.name}}</th>
+                <th scope="row">{{food.price}}</th>
+                <th scope="row">{{food.description}}</th>
+                <th>
+                    <button type="button" class="btn btn-danger" (click)="open(deleteFoodContent, food.name)">Delete</button>
+                </th>
+                <th>
+                    <button type="button" class="btn btn-success"> Edit</button>
+                </th>
+                <ng-template #deleteFoodContent let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Food Removal</h4>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                     <span>Are you sure you want to delete this Food?</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button"  class="btn btn-outline-dark" (click)="deleteFood(food.name)">Delete</button>
+                    </div>
+                  </ng-template> 
+                
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+

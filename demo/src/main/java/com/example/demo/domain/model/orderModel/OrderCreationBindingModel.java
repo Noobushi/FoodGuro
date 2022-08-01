@@ -4,19 +4,19 @@ import java.util.List;
 
 public class OrderCreationBindingModel {
 
-    private String User;
+    public String username;
 
     List<String> foods;
 
     public OrderCreationBindingModel() {
     }
 
-    public String getUser() {
-        return User;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        User = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<String> getFoods() {

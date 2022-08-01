@@ -14,6 +14,9 @@ public class Food extends BaseEntity {
 
     private BigDecimal price;
 
+    @Lob
+    private String description;
+
     public Food() {
     }
 
@@ -39,5 +42,13 @@ public class Food extends BaseEntity {
 
     public void setFoodCategory(FoodCategory foodCategory) {
         this.foodCategory = foodCategory;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
