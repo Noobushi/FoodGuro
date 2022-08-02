@@ -2,13 +2,13 @@
     <div class="mb-3 row">
         <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
         <div class="col-xs-3 col-sm-auto">
-            <input id="table-filtering-search" class="form-control" type="text">
+            <input #q id="table-filtering-search" class="form-control" type="text" id="search_id"  (keyup)="searchByName(q.value)">
         </div>
     </div>
 </form>
 
 
-<div *ngFor="let category of categories | async">
+<div *ngFor="let category of filterCategories">
     <h3>{{category.name}}</h3>
     <table class="table table-striped">
         <thead>
@@ -28,27 +28,71 @@
                 <th scope="row">{{food.price}}</th>
                 <th scope="row">{{food.description}}</th>
                 <th>
-                    <button type="button" class="btn btn-danger" (click)="open(deleteFoodContent, food.name)">Delete</button>
+                    <button type="button" class="btn btn-danger"
+                        (click)="openDelete(deleteFoodContent, food.name)">Delete</button>
                 </th>
                 <th>
-                    <button type="button" class="btn btn-success"> Edit</button>
+                    <button type="button" class="btn btn-success"
+                        (click)="openEdit(editFoodContent, food)">Edit</button>
                 </th>
                 <ng-template #deleteFoodContent let-modal>
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Food Removal</h4>
-                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                        <h4 class="modal-title" id="modal-basic-title">Food Removal</h4>
+                        <button type="button" class="btn-close" aria-label="Close"
+                            (click)="modal.dismiss('Cross click')"></button>
                     </div>
                     <div class="modal-body">
-                     <span>Are you sure you want to delete this Food?</span>
+                        <span>Are you sure you want to delete this Food?</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button"  class="btn btn-outline-dark" (click)="deleteFood(food.name)">Delete</button>
+                        <button type="button" class="btn btn-outline-dark"
+                            (click)="deleteFood(food.name)">Delete</button>
                     </div>
-                  </ng-template> 
-                
-            </tr>
+                </ng-template>
 
+                <ng-template #editFoodContent let-modal>
+                    <div class="modal-header">
+                        <h4>Edit Food</h4>
+                        <button type="button" class="btn-close" aria-label="Close"
+                            (click)="modal.dismiss('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form #foodForm="ngForm" (ngSubmit)="editFood(foodForm.value, food.id)">
+                            <div class="form-group">
+                                <label>Rename food</label>
+                                <div>
+                                    <input [ngModel]="food.name" name="name" id="name" class="form-control"
+                                        placeholder="Enter name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Add in category</label>
+                                <div>
+                                    <input name="foodCategory" [ngModel]="food.foodCategory" id="foodCategory"
+                                        class="form-control" placeholder="Enter category name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>New price</label>
+                                <div>
+                                    <input name="price" [ngModel]="food.price" id="price" class="form-control"
+                                        placeholder="Enter food price">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>New Description</label>
+                                <div>
+                                    <input name="description" [ngModel]="food.description" id="description"
+                                        class="form-control" placeholder="Enter food description">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-dark">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </ng-template>
+            </tr>
         </tbody>
     </table>
 </div>
-

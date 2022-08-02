@@ -55,6 +55,7 @@ public class FoodServiceImpl {
 
         food.setName(foodServiceModel.getName());
         food.setPrice(foodServiceModel.getPrice());
+        food.setDescription(foodServiceModel.getDescription());
 
 
         FoodServiceModel edited = modelMapper.map(food, FoodServiceModel.class);

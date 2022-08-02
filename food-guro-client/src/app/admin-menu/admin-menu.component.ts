@@ -13,15 +13,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin-menu.component.css']
 })
 export class AdminMenuComponent implements OnInit{
-categories$!: Observable<FoodCategory[]>;
+  public categories!: FoodCategory[];
+  public filterCategories! :FoodCategory[];
   closeResult = '';
+
+  enteredSearchValue: string='';
 
   constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService:FoodService) {}
 
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getAll();
-
+    this.categoryService.getAll().subscribe(x => {
+      this.categories = x;
+      this.filterCategories = this.categories;
+    });
+    
   }
+  
 
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -56,13 +63,7 @@ categories$!: Observable<FoodCategory[]>;
     this.foodService.create(nameForm).subscribe(x=> this.notifierService.notify("success", `Food ${x.name} created successfully!`));
   }
 
-  deleteFood(nameForm:any){
-    console.log(nameForm);
-    this.foodService.delete(nameForm).subscribe(x=> this.notifierService.notify("success", `Food ${x.name} deleted successfully!`));
-  }
-
-  editFood(nameForm:any){
-    console.log(nameForm);
-    this.foodService.edit(nameForm).subscribe(x=> this.notifierService.notify("success", `Food ${x.name} created successfully!`));
-  }
+  // eventFromChild(dsad : string){
+  //   this.categoryService.getAll().subscribe(x => this.categories = x);
+  // }
 }
