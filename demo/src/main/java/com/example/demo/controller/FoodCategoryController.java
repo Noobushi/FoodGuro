@@ -8,6 +8,7 @@ import com.example.demo.service.FoodCategoryServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class FoodCategoryController {
         this.foodCategoryServiceImpl = foodCategoryServiceImpl;
         this.modelMapper = modelMapper;
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<FoodCategoryCreationResponseModel> createFoodCategory (@RequestBody FoodCategoryCreationBindingModel foodCategoryCreationBindingModel){
 
@@ -33,7 +34,7 @@ public class FoodCategoryController {
         createFoodCatalog.setName(name);
         return new ResponseEntity<>(createFoodCatalog, HttpStatus.CREATED );
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete")
     public ResponseEntity<FoodCategoryDeleteResponseAndBindingModel> deleteFoodCategory (@RequestBody FoodCategoryDeleteResponseAndBindingModel foodCategoryDeleteResponseAndBindingModel){
 

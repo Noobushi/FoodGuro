@@ -1,10 +1,7 @@
 package com.example.demo.domain.model.userModel;
 
-
-public class UserServiceModel {
-
-    private Integer id;
-
+public class UserEditResponseModel {
+    private int id;
     private String firstName;
 
     private String lastName;
@@ -17,16 +14,7 @@ public class UserServiceModel {
 
     private String userRole;
 
-
-    public UserServiceModel() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public UserEditResponseModel() {
     }
 
     public String getFirstName() {
@@ -75,5 +63,13 @@ public class UserServiceModel {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

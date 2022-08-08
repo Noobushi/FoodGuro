@@ -20,7 +20,11 @@ public class User extends BaseEntity {
     private String username;
 
     @Column(nullable = false)
-    private Integer password;
+    private String password;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRoles userRole;
 
     public String getFirstName() {
         return firstName;
@@ -54,11 +58,11 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -68,6 +72,14 @@ public class User extends BaseEntity {
 
     public void setOrder(List<OrderFood> orderFood) {
         this.orderFood = orderFood;
+    }
+
+    public UserRoles getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRoles userRole) {
+        this.userRole = userRole;
     }
 }
 

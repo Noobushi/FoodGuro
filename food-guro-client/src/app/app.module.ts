@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FoodAlertsComponent } from './food-alerts/food-alerts.component';
 import { FoodService } from './service/food-service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ListCategoryComponent } from './list-category/list-category.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { CommonModule } from '@angular/common';
@@ -22,6 +22,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { FoodTableComponent } from './food-table/food-table.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthService } from './auth.service';
+import { UserTableComponent } from './user-table/user-table.component';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -92,10 +95,13 @@ const customNotifierOptions: NotifierOptions = {
     CarouselComponent,
     AdminMenuComponent,
     FoodTableComponent,
+    UserTableComponent,
   ],
   providers: [
     FoodService,
-    UserService
+    UserService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    AuthService
   ],
   exports: [CarouselComponent],
 

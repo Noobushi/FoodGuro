@@ -1,6 +1,5 @@
 package com.example.demo.domain.model.foodModel;
 
-import javax.persistence.Lob;
 import java.math.BigDecimal;
 
 public class FoodCreationBindingModel {

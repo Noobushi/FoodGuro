@@ -1,6 +1,6 @@
 package com.example.demo.domain.model.userModel;
 
-public class UserRegisterBindingModel {
+public class UserRegisterAndDeleteBindingModel {
 
     private String firstName;
 
@@ -10,9 +10,11 @@ public class UserRegisterBindingModel {
 
     private String username;
 
-    private Integer password;
+    private String password;
 
-    public UserRegisterBindingModel() {
+    private String userRole;
+
+    public UserRegisterAndDeleteBindingModel() {
     }
 
     public String getFirstName() {
@@ -47,11 +49,19 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

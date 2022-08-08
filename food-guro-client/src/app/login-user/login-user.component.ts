@@ -1,4 +1,11 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../user';
+import { NotifierService } from 'angular-notifier';
+import { AuthService } from '../auth.service';
+import { take } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-login-user',
@@ -6,15 +13,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-user.component.css']
 })
 export class LoginUserComponent implements OnInit {
+  user!: User;
 
-  constructor() { }
+  showPassword: boolean = false;
+  constructor(private router: Router, private authService: AuthService, private notifierservice: NotifierService) { }
 
   ngOnInit(): void {
+  
   }
 
-  submitted = false;
-
-  onSubmit(userForm:any) { 
-    console.log(userForm);
-   }
+  login(loginForm: any){
+    this.authService.login(loginForm).pipe(take(1)).subscribe({
+      next: (response : HttpResponse<User>) => {
+        const token = response.headers.get("Jwt-Token")!;
+        this.authService.saveJwtToken(token);
+          this.authService.saveUser(response.body!);    
+        this.router.navigateByUrl('/');
+        const user = response.body! as User| null;
+        this.authService.userSubject.next(user);
+      this.authService.isLoginSubject.next(true);
+    },
+    });
+  }
 }

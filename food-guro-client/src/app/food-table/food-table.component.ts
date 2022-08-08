@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, PipeTransform } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
 
@@ -12,6 +12,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Food } from '../food';
 import { AdminMenuComponent } from '../admin-menu/admin-menu.component';
 import { group } from '@angular/animations';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+
+
 
 
 @Component({
@@ -19,15 +22,14 @@ import { group } from '@angular/animations';
   templateUrl: './food-table.component.html',
   styleUrls: ['./food-table.component.css']
 })
-export class FoodTableComponent {
+export class FoodTableComponent  {
   @Input() categories!: FoodCategory[];
   @Input() filterCategories!: FoodCategory[];
-
-  text = '';
    
   constructor(private foodService: FoodService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute) {
-
+      
   }
+  
 
   private reloadCurrentRoute() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -69,37 +71,14 @@ export class FoodTableComponent {
       this.reloadCurrentRoute();
     });
   }
-  //const result = a.reduce((accumulator, value) => accumulator.concat(value), []);
+searchByName(name:string) {
+  let cloneCategory: FoodCategory[] = []; 
+  this.categories.forEach(val => cloneCategory.push(Object.assign({}, val)));  ;
 
-searchByName(name:string){
+  this.filterCategories = (name) ? cloneCategory.map(function(cloneCategory) {
+    cloneCategory.foods = cloneCategory.foods.filter(x1 => x1.name.toLocaleLowerCase().includes(name.toLowerCase()));
+    return cloneCategory;
+  }) : this.categories;
 
-  
-  
-  let foods = this.categories.flatMap((c)=>{
-    return c.foods as Food[];
-  }).filter((c)=>{
-    //console.log(c.name);
-    
-    return c.name.toLowerCase() === name.toLowerCase();
-  });
-  
-    this.filterCategories.forEach(x =>{
-      x.foods = foods.filter(f =>{
-        return f.foodCategory === x.name;
-      });
-    })
-  //  console.log(this.filterCategories);
-   
-  if(name.length == 0){
-    this.filterCategories = this.categories;
-  }
-  
-  
-  
-  
-}
-
-  // onClick(){
-  //   this.newItemEvent.emit("click");
-  // }
+};
 }

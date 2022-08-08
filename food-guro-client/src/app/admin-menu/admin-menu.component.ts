@@ -4,8 +4,6 @@ import { CategoryService } from '../service/category.service';
 import { NotifierService } from 'angular-notifier';
 import { FoodService } from '../service/food-service';
 import { FoodCategory } from '../food-category';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-admin-menu',
@@ -17,8 +15,6 @@ export class AdminMenuComponent implements OnInit{
   public filterCategories! :FoodCategory[];
   closeResult = '';
 
-  enteredSearchValue: string='';
-
   constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService:FoodService) {}
 
   ngOnInit(): void {
@@ -29,7 +25,6 @@ export class AdminMenuComponent implements OnInit{
     
   }
   
-
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

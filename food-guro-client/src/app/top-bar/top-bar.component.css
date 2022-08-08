@@ -16,6 +16,16 @@
     width: 70px;
 }
 
+.logoutButton {
+    position: absolute;
+    left: 240px;
+    top: 18px;
+    background-color: rgb(240, 182, 24);
+    color: black;
+    height: 35spx;
+    width: 70px;
+}
+
 .guroLogo{
     width:50px;
     height:50px;

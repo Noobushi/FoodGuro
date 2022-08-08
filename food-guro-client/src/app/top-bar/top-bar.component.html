@@ -6,19 +6,24 @@
 
 <img class="guroLogo"  src="assets/pictures/guro-logo.png" alt="Guro logo">
 
-<button class="registerButton" type="button" routerLink="/register" name="Register" >
+<button class="registerButton" type="button" routerLink="/register" name="Register" *ngIf="!this.isLoggedIn">
   Register
 </button>
 
-<button class="loginButton" type="button" routerLink="/login" name="Login" >
+<button class="loginButton" type="button" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn" >
   Login
 </button>
 
-<button class="adminMenuButton" type="button" routerLink="/adminMenu" name="adminMenu" >
+<button class="logoutButton" type="button" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()" >
+  Logout
+</button>
+
+<button class="adminMenuButton" type="button" routerLink="/adminMenu" name="adminMenu" *ngIf="isAdmin()">
   Admin Menu
 </button>
 
-<a class="button fancy-button"  style="color: rgb(0, 0, 0);" >
+
+<a class="button fancy-button"  style="color: rgb(0, 0, 0);"  *ngIf="this.isLoggedIn">
   <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="Shopping cart">
   Checkout
 </a>
