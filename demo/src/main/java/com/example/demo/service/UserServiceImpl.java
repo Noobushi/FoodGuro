@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.domain.entity.FoodCategory;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoles;
+import com.example.demo.domain.model.foodCategoryModel.FoodCategoryServiceModel;
+import com.example.demo.domain.model.foodModel.FoodServiceModel;
 import com.example.demo.domain.model.userModel.UserServiceModel;
 import com.example.demo.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -10,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl {
@@ -67,5 +73,10 @@ public class UserServiceImpl {
     public User findByName(String userName) {
         return this.userRepository.findUserByUsername(userName);
     }
+
+    public List<User> findAll() {
+     return this.userRepository.findAll();
+    }
+
 
 }

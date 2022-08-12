@@ -12,61 +12,61 @@ import { User } from '../user';
 })
 export class UserTableComponent {
 
-//   @Input() users!: User[];
-//   @Input() filterUsers!: User[];
+  @Input() users!: User[];
+  @Input() filterUsers!: User[];
    
-//   constructor(private userService: UserService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private userService: UserService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute) {
       
-//   }
+  }
 
-//   private reloadCurrentRoute() {
-//     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-//       this.router.navigate(['/adminMenu']);
-//     });
-//   }
+  private reloadCurrentRoute() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/adminMenu']);
+    });
+  }
 
-//   deleteFood(name: string) {
-//     this.foodService.delete(name).subscribe(x => {
-//       this.notifierService.notify("success", `Food ${x.name} deleted successfully!`);
-//       this.modalService.dismissAll();
-//       this.reloadCurrentRoute();
-//     });
+  deleteUser(username: string) {
+    this.userService.delete(username).subscribe(x => {
+      this.notifierService.notify("success", `User ${x.username} deleted successfully!`);
+      this.modalService.dismissAll();
+      this.reloadCurrentRoute();
+    });
   
-//   }
+  }
 
-//   openDelete(form: any, foodName: string) {
-//     const modalRef = this.modalService.open(form);
-//     modalRef.componentInstance.name = foodName;
-//   }
+  openDelete(form: any, username: string) {
+    const modalRef = this.modalService.open(form);
+    modalRef.componentInstance.name = username;
+  }
 
-//   openEdit(form: any, food: Food) {
-//     const modalRef = this.modalService.open(form);
-//     modalRef.componentInstance.food = food;
+  openEdit(form: any, user: User) {
+    const modalRef = this.modalService.open(form);
+    modalRef.componentInstance.user = user;
 
-//   }
+  }
 
-//   editFood(nameForm: Food, id: number) {
-//     const food: Food = {
-//       id: id,
-//       name: nameForm.name,
-//       foodCategory: nameForm.foodCategory,
-//       price: nameForm.price,
-//       description: nameForm.description
-//     };
-//     this.foodService.edit(food).subscribe(x => {
-//       this.notifierService.notify("success", `Food ${x.name} updated successfully!`);
-//       this.modalService.dismissAll();
-//       this.reloadCurrentRoute();
-//     });
-//   }
-// searchByName(name:string) {
-//   let cloneCategory: FoodCategory[] = []; 
-//   this.categories.forEach(val => cloneCategory.push(Object.assign({}, val)));  ;
+  editUser(userForm: User, id: number) {
+    const user: User = {
+      id: id,
+      username: userForm.username,
+      firstName: userForm.firstName,
+      lastName: userForm.lastName,
+      city: userForm.city,
+      password: userForm.password,
+      userRole: userForm.userRole
+    };
+    this.userService.edit(user).subscribe(x => {
+      this.notifierService.notify("success", `User ${x.username} updated successfully!`);
+      this.modalService.dismissAll();
+      this.reloadCurrentRoute();
+    });
+  }
+searchByName(name:string) {
+  let cloneUsers: User[] = []; 
+  this.users.forEach(val => cloneUsers.push(Object.assign({}, val)));  ;
 
-//   this.filterCategories = (name) ? cloneCategory.map(function(cloneCategory) {
-//     cloneCategory.foods = cloneCategory.foods.filter(x1 => x1.name.toLocaleLowerCase().includes(name.toLowerCase()));
-//     return cloneCategory;
-//   }) : this.categories;
+  this.filterUsers = (name) ? cloneUsers.filter(x1 => x1.username.toLocaleLowerCase().includes(name.toLowerCase()))
+  : this.users;
+}
 
-// };
 }

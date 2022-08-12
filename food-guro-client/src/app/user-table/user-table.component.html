@@ -1,4 +1,4 @@
-<!-- <form>
+<form>
     <div class="mb-3 row">
         <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
         <div class="col-xs-3 col-sm-auto">
@@ -8,82 +8,102 @@
 </form>
 
 
-<div *ngFor="let category of filterCategories">
-    <h3 *ngIf="category.foods.length != 0">{{category.name}}</h3>
+<div>
+    <h3 ></h3>
     <table class="table table-striped">
         <thead>
-            <tr *ngIf="category.foods.length != 0">
+            <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Description</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">City</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">User Role</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let food of category.foods; index as i" >
+            <tr *ngFor="let user of users; index as i" >
                 <th scope="row">{{i + 1}}</th>
-                <th scope="row">{{food.name}}</th>
-                <th scope="row">{{food.price}}</th>
-                <th scope="row">{{ (food.description.length>20)? (food.description | slice:0:20)+'...':(food.description) }}</th>
+                <th scope="row">{{user.firstName}}</th>
+                <th scope="row">{{user.lastName}}</th>
+                <th scope="row">{{user.city}}</th>
+                <th scope="row">{{user.username}}</th>
+                <th scope="row">{{user.password}}</th>
+                <th scope="row">{{user.userRole}}</th>
                 <th>
                     <button type="button" class="btn btn-danger"
-                        (click)="openDelete(deleteFoodContent, food.name)">Delete</button>
+                        (click)="openDelete(deleteUserContent, user.username)">Delete</button>
                 </th>
                 <th>
                     <button type="button" class="btn btn-success"
-                        (click)="openEdit(editFoodContent, food)">Edit</button>
+                        (click)="openEdit(editUserContent, user)">Edit</button>
                 </th>
-                <ng-template #deleteFoodContent let-modal>
+                <ng-template #deleteUserContent let-modal>
                     <div class="modal-header">
-                        <h4 class="modal-title" id="modal-basic-title">Food Removal</h4>
+                        <h4 class="modal-title" id="modal-basic-title">User Removal</h4>
                         <button type="button" class="btn-close" aria-label="Close"
                             (click)="modal.dismiss('Cross click')"></button>
                     </div>
                     <div class="modal-body">
-                        <span>Are you sure you want to delete this Food?</span>
+                        <span>Are you sure you want to delete this User?</span>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-dark"
-                            (click)="deleteFood(food.name)">Delete</button>
+                            (click)="deleteUser(user.username)">Delete</button>
                     </div>
                 </ng-template>
 
-                <ng-template #editFoodContent let-modal>
+                <ng-template #editUserContent let-modal>
                     <div class="modal-header">
-                        <h4>Edit Food</h4>
+                        <h4>Edit user</h4>
                         <button type="button" class="btn-close" aria-label="Close"
                             (click)="modal.dismiss('Cross click')"></button>
                     </div>
                     <div class="modal-body">
-                        <form #foodForm="ngForm" (ngSubmit)="editFood(foodForm.value, food.id)">
+                        <form #userForm="ngForm" (ngSubmit)="editUser(userForm.value, user.id)">
                             <div class="form-group">
-                                <label>Rename food</label>
+                                <label>Rename user</label>
                                 <div>
-                                    <input [ngModel]="food.name" name="name" id="name" class="form-control"
+                                    <input [ngModel]="user.username" name="name" id="name" class="form-control"
                                         placeholder="Enter name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Add in category</label>
+                                <label>Change first name</label>
                                 <div>
-                                    <input name="foodCategory" [ngModel]="food.foodCategory" id="foodCategory"
-                                        class="form-control" placeholder="Enter category name">
+                                    <input name="firstName" [ngModel]="user.firstName" id="firstName"
+                                        class="form-control" placeholder="Enter First Name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>New price</label>
+                                <label>Change last name</label>
                                 <div>
-                                    <input name="price" [ngModel]="food.price" id="price" class="form-control"
-                                        placeholder="Enter food price">
+                                    <input name="lastName" [ngModel]="user.lastName" id="lastName" class="form-control"
+                                        placeholder="Enter Last Name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>New Description</label>
+                                <label>Change city</label>
                                 <div>
-                                    <input name="description" [ngModel]="food.description" id="description"
-                                        class="form-control" placeholder="Enter food description">
+                                    <input name="city" [ngModel]="user.city" id="city"
+                                        class="form-control" placeholder="Enter city">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Change password</label>
+                                <div>
+                                    <input name="password" [ngModel]="user.password" id="password" class="form-control"
+                                        placeholder="Enter password ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Change role</label>
+                                <div>
+                                    <input name="role" [ngModel]="user.userRole" id="role" class="form-control"
+                                        placeholder="Enter role">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -95,4 +115,4 @@
             </tr>
         </tbody>
     </table>
-</div> -->
+</div>  

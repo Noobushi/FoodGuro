@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.entity.User;
+import com.example.demo.domain.model.foodCategoryModel.FoodCategoryServiceModel;
 import com.example.demo.domain.model.foodModel.FoodCreationResponseAndEditModel;
 import com.example.demo.domain.model.foodModel.FoodServiceModel;
 import com.example.demo.domain.model.userModel.UserEditResponseModel;
@@ -13,10 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -63,5 +63,10 @@ public class UserController {
         UserServiceModel editedUser = userServiceImpl.editUser(modelMapper.map(userEditResponseModel, UserServiceModel.class));
 
         return new ResponseEntity<>(editedUser, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers(){
+        return new ResponseEntity<>(userServiceImpl.findAll(),HttpStatus.OK);
     }
 }

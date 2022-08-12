@@ -5,7 +5,6 @@ import { User } from '../user';
 import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../auth.service';
 import { take } from 'rxjs';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-login-user',

@@ -4,6 +4,8 @@ import { CategoryService } from '../service/category.service';
 import { NotifierService } from 'angular-notifier';
 import { FoodService } from '../service/food-service';
 import { FoodCategory } from '../food-category';
+import { User } from '../user';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-admin-menu',
@@ -13,16 +15,22 @@ import { FoodCategory } from '../food-category';
 export class AdminMenuComponent implements OnInit{
   public categories!: FoodCategory[];
   public filterCategories! :FoodCategory[];
+  public users!: User[];
+  public filterUsers!: User[];
+  
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService:FoodService) {}
+  constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService:FoodService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe(x => {
       this.categories = x;
       this.filterCategories = this.categories;
     });
-    
+    this.userService.getAll().subscribe(x => {
+      this.users = x;
+      this.filterUsers = this.users;
+    });
   }
   
   open(content:any) {
@@ -58,7 +66,4 @@ export class AdminMenuComponent implements OnInit{
     this.foodService.create(nameForm).subscribe(x=> this.notifierService.notify("success", `Food ${x.name} created successfully!`));
   }
 
-  // eventFromChild(dsad : string){
-  //   this.categoryService.getAll().subscribe(x => this.categories = x);
-  // }
 }

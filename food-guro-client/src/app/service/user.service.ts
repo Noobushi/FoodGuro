@@ -16,4 +16,16 @@ export class UserService {
   public register(userForm:any): Observable<User>{
     return this.http.post<User>(`${this.host}/api/users/register`, userForm);
   }
+
+  public delete(userForm:any) : Observable<User>{
+    return this.http.post<User>(`${this.host}/api/users/delete`, {name : userForm});
+   }
+
+   public edit(userForm:any) : Observable<User>{
+    return this.http.post<User>(`${this.host}/api/users/edit`, userForm);
+   }
+
+   public getAll() : Observable<User[]>{
+    return this.http.get<User[]>(`${this.host}/api/users/all`);
+   }
 }
