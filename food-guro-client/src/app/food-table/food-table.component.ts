@@ -71,6 +71,7 @@ export class FoodTableComponent  {
       this.reloadCurrentRoute();
     });
   }
+  
 searchByName(name:string) {
   let cloneCategory: FoodCategory[] = []; 
   this.categories.forEach(val => cloneCategory.push(Object.assign({}, val)));  ;

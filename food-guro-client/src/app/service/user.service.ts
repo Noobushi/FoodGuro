@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public delete(userForm:any) : Observable<User>{
-    return this.http.post<User>(`${this.host}/api/users/delete`, {name : userForm});
+    return this.http.post<User>(`${this.host}/api/users/delete`, {username : userForm});
    }
 
    public edit(userForm:any) : Observable<User>{

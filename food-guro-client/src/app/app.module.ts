@@ -26,7 +26,6 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
 
-
 const customNotifierOptions: NotifierOptions = {
   position: {
         horizontal: {

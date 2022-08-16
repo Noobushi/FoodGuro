@@ -11,7 +11,6 @@ import { User } from '../user';
   styleUrls: ['./user-table.component.css']
 })
 export class UserTableComponent {
-
   @Input() users!: User[];
   @Input() filterUsers!: User[];
    
@@ -36,7 +35,7 @@ export class UserTableComponent {
 
   openDelete(form: any, username: string) {
     const modalRef = this.modalService.open(form);
-    modalRef.componentInstance.name = username;
+    modalRef.componentInstance.username = username;
   }
 
   openEdit(form: any, user: User) {
@@ -46,6 +45,7 @@ export class UserTableComponent {
   }
 
   editUser(userForm: User, id: number) {
+    console.log(userForm);
     const user: User = {
       id: id,
       username: userForm.username,
@@ -60,7 +60,10 @@ export class UserTableComponent {
       this.modalService.dismissAll();
       this.reloadCurrentRoute();
     });
+    console.log(user);
+    
   }
+  
 searchByName(name:string) {
   let cloneUsers: User[] = []; 
   this.users.forEach(val => cloneUsers.push(Object.assign({}, val)));  ;
