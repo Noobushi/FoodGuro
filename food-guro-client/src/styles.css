@@ -1,4 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import 'primeflex/primeflex.css';
+
 @import "~angular-notifier/styles";
 * {
     font-family: 'Roboto', Arial, sans-serif;
@@ -89,5 +91,6 @@
     color: red;
     margin: 0;
   }
+  
 
   

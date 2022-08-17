@@ -13,7 +13,7 @@
       <div id="myDropdown" class="dropdown-content" *ngFor="let food of category.foods">
         <button (click)="onClick()" type="button" style="background-color: white;">
           <p>{{ food.name }}</p>
-          <p>{{ food.price | currency }}</p>
+          <p>{{ food.price  }}</p>
         </button>
       </div>
     </div>

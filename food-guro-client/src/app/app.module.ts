@@ -25,6 +25,16 @@ import { FoodTableComponent } from './food-table/food-table.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
+import {DataViewModule} from 'primeng/dataview';
+import { DataViewComponent } from './data-view/data-view.component';
+import { ProductService } from './service/product.service';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {DropdownModule} from 'primeng/dropdown';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+import {RatingModule} from 'primeng/rating';
+import {RippleModule} from 'primeng/ripple';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -67,14 +77,23 @@ const customNotifierOptions: NotifierOptions = {
 @NgModule({
   imports: [
     BrowserModule,
+    DataViewModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
     FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
+    PanelModule,
+    DialogModule,
+    DropdownModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    RatingModule,
     RouterModule.forRoot([
-      { path: '', component: CarouselComponent },
+      {path: '',component: DataViewComponent},
+      // { path: '', component: CarouselComponent },
       {path: 'register',component: RegisterUserComponent},
       {path: 'login',component: LoginUserComponent},
       {path: 'category',component: ListCategoryComponent},
@@ -95,10 +114,12 @@ const customNotifierOptions: NotifierOptions = {
     AdminMenuComponent,
     FoodTableComponent,
     UserTableComponent,
+    DataViewComponent
   ],
   providers: [
     FoodService,
     UserService,
+    ProductService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService
   ],
@@ -106,7 +127,8 @@ const customNotifierOptions: NotifierOptions = {
 
   bootstrap: [
     AppComponent,
-    CarouselComponent
+    CarouselComponent,
+    DataViewComponent
   ],
 })
 export class AppModule { }

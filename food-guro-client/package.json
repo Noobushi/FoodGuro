@@ -11,7 +11,8 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^13.2.0",
-    "@angular/common": "^13.2.0",
+    "@angular/cdk": "^13.3.9",
+    "@angular/common": "^13.0.2",
     "@angular/compiler": "^13.2.0",
     "@angular/core": "^13.2.0",
     "@angular/forms": "^13.2.0",
@@ -24,8 +25,9 @@
     "angular-notifier": "^11.0.0",
     "bootstrap": "^5.2.0",
     "package_name": "^1.0.2",
+    "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
-    "primeng": "^14.0.1",
+    "primeng": "^13.2.1",
     "rxjs": "~7.5.6",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.6"
