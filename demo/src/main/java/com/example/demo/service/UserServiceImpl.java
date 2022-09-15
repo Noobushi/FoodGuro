@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.entity.Food;
 import com.example.demo.domain.entity.FoodCategory;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoles;
@@ -51,8 +52,11 @@ public class UserServiceImpl {
     }
 
     @Transactional
-    public void deleteUser(Integer id) {
-        this.userRepository.deleteById(id);
+    public String deleteUser(UserServiceModel userServiceModel) {
+        User user = userRepository.findUserByUsername(userServiceModel.getUsername());
+        String username = user.getUsername();
+        userRepository.delete(user);
+        return username;
     }
 
     @Transactional

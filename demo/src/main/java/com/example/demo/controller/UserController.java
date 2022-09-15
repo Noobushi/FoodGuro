@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.model.foodCategoryModel.FoodCategoryServiceModel;
 import com.example.demo.domain.model.foodModel.FoodCreationResponseAndEditModel;
+import com.example.demo.domain.model.foodModel.FoodDeleteResponseAndBindingModel;
 import com.example.demo.domain.model.foodModel.FoodServiceModel;
 import com.example.demo.domain.model.userModel.UserEditResponseModel;
 import com.example.demo.domain.model.userModel.UserRegisterAndDeleteBindingModel;
@@ -51,9 +52,11 @@ public class UserController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity deleteUser(@RequestBody UserRegisterAndDeleteResponseModel userRegisterAndDeleteResponseModel){
-        userServiceImpl.deleteUser(userServiceImpl.findByName(userRegisterAndDeleteResponseModel.getUsername()).getId());
-        return new ResponseEntity( HttpStatus.OK);
+    public ResponseEntity <UserRegisterAndDeleteResponseModel>deleteUser(@RequestBody UserRegisterAndDeleteResponseModel userRegisterAndDeleteResponseModel){
+       String username = userServiceImpl.deleteUser(modelMapper.map(userRegisterAndDeleteResponseModel, UserServiceModel.class));
+        UserRegisterAndDeleteResponseModel deleteUser = new UserRegisterAndDeleteResponseModel();
+        deleteUser.setUsername(username);
+        return new ResponseEntity<>(deleteUser, HttpStatus.OK );
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

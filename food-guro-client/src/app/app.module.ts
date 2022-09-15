@@ -25,9 +25,6 @@ import { FoodTableComponent } from './food-table/food-table.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
-import {DataViewModule} from 'primeng/dataview';
-import { DataViewComponent } from './data-view/data-view.component';
-import { ProductService } from './service/product.service';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
@@ -77,7 +74,6 @@ const customNotifierOptions: NotifierOptions = {
 @NgModule({
   imports: [
     BrowserModule,
-    DataViewModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
@@ -92,8 +88,7 @@ const customNotifierOptions: NotifierOptions = {
     RippleModule,
     RatingModule,
     RouterModule.forRoot([
-      {path: '',component: DataViewComponent},
-      // { path: '', component: CarouselComponent },
+      { path: '', component: CarouselComponent },
       {path: 'register',component: RegisterUserComponent},
       {path: 'login',component: LoginUserComponent},
       {path: 'category',component: ListCategoryComponent},
@@ -113,13 +108,11 @@ const customNotifierOptions: NotifierOptions = {
     CarouselComponent,
     AdminMenuComponent,
     FoodTableComponent,
-    UserTableComponent,
-    DataViewComponent
+    UserTableComponent
   ],
   providers: [
     FoodService,
     UserService,
-    ProductService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService
   ],
@@ -127,8 +120,7 @@ const customNotifierOptions: NotifierOptions = {
 
   bootstrap: [
     AppComponent,
-    CarouselComponent,
-    DataViewComponent
+    CarouselComponent
   ],
 })
 export class AppModule { }
