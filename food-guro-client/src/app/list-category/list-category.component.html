@@ -1,22 +1,32 @@
 <div class="mainPage">
   <div>
-    <h1>Categories</h1>
-
-    <div class="dropdown" *ngFor="let category of categories$ | async">
-
-      <h2>
-          <a [title]="category.name + ' details'">
-            <button class="dropbtn">{{ category.name }}</button>
-        </a>
-      </h2>
-
-      <div id="myDropdown" class="dropdown-content" *ngFor="let food of category.foods">
-        <button (click)="onClick()" type="button" style="background-color: white;">
-          <p>{{ food.name }}</p>
-          <p>{{ food.price  }}</p>
-        </button>
+    <div class="container py-5">
+      <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+          <h1 class="display-4">Categories</h1>
+        </div>
+      </div>
+      <div class="row" style="min-width: 70%;">
+        <div class="col-lg-8 mx-auto" *ngFor="let category of categories$ | async">
+          <!-- List group-->
+          <ul class="list-group shadow">
+            <!-- list group item-->
+            <li class="list-group-item">
+              <!-- Custom content-->
+              <div class="media flex-lg-row p-3">
+                <div class="media-body order-2 order-lg-1">
+                  <h5 style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{category.name}}</h5>
+                  <div class="font-italic text-muted mb-0 small"  *ngFor="let food of category.foods">
+                    <h6 class="font-weight-bold my-2" style=" font-size:240%;">{{food.name}}</h6>
+                    <p style="font-size: 140%;">{{food.description}}</p>
+                    <p style="font-size: 140%;">{{food.price}}</p>
+                  </div>
+                </div>
+              </div>
+            </li> 
+          </ul> 
+        </div>
       </div>
     </div>
   </div>
 </div>
-
