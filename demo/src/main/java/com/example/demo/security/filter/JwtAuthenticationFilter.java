@@ -1,7 +1,7 @@
 package com.example.demo.security.filter;
 
 
-import com.example.demo.domain.model.userModel.UserRegisterAndDeleteResponseModel;
+import com.example.demo.dto.userDTO.UserResponseDTO;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
         String token = jwtTokenProvider.generateToken(userPrincipal);
         response.setHeader("Jwt-Token", token);
-        UserRegisterAndDeleteResponseModel userDto = this.modelMapper.map(userPrincipal.getUser(), UserRegisterAndDeleteResponseModel.class);
+        UserResponseDTO userDto = this.modelMapper.map(userPrincipal.getUser(), UserResponseDTO.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(response.getOutputStream(), userDto);
 

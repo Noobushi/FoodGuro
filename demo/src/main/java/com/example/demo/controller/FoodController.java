@@ -1,11 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.model.foodModel.FoodCreationBindingModel;
-import com.example.demo.domain.model.foodModel.FoodCreationResponseAndEditModel;
-import com.example.demo.domain.model.foodModel.FoodDeleteResponseAndBindingModel;
-import com.example.demo.domain.model.foodModel.FoodServiceModel;
+import com.example.demo.dto.foodDTO.FoodResponseDTO;
+import com.example.demo.dto.foodDTO.FoodServiceDTO;
 import com.example.demo.service.FoodServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,45 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/food")
+public class FoodController extends BaseController{
 
-@RequestMapping("/api/food")
-public class FoodController {
+    private final FoodServiceImpl foodServiceImpl;
 
-   private final FoodServiceImpl foodServiceImpl;
-
-   private final ModelMapper modelMapper;
-
-    public FoodController(FoodServiceImpl foodServiceImpl, ModelMapper modelMapper) {
+    public FoodController(FoodServiceImpl foodServiceImpl) {
         this.foodServiceImpl = foodServiceImpl;
-        this.modelMapper = modelMapper;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<FoodCreationResponseAndEditModel> createFood (@RequestBody FoodCreationBindingModel foodCreationBindingModel){
-
-        String name = foodServiceImpl.createFood(modelMapper.map(foodCreationBindingModel, FoodServiceModel.class));
-
-        FoodCreationResponseAndEditModel createdFood = new FoodCreationResponseAndEditModel();
-        createdFood.setName(name);
-        return new ResponseEntity<>(createdFood, HttpStatus.CREATED );
+    public ResponseEntity<FoodResponseDTO> createFood(@RequestBody FoodServiceDTO food) {
+        return new ResponseEntity<>(foodServiceImpl.createFood(food), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete")
-    public ResponseEntity<FoodDeleteResponseAndBindingModel> deleteFood (@RequestBody FoodDeleteResponseAndBindingModel foodDeleteResponseAndBindingModel){
-
-        String foodName = foodServiceImpl.deleteFood(modelMapper.map(foodDeleteResponseAndBindingModel, FoodServiceModel.class));
-
-        FoodDeleteResponseAndBindingModel deletedFood = new FoodDeleteResponseAndBindingModel();
-        deletedFood.setName(foodName);
-        return new ResponseEntity<>(deletedFood, HttpStatus.OK );
+    public ResponseEntity<FoodResponseDTO> deleteFood(@RequestBody FoodServiceDTO foodServiceDTO) {
+        return new ResponseEntity<>(foodServiceImpl.deleteFood(foodServiceDTO), HttpStatus.OK);
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/edit")
-    public ResponseEntity<FoodServiceModel> editFood (@RequestBody FoodCreationResponseAndEditModel foodCreationResponseAndEditModel){
-
-        FoodServiceModel editedFood = foodServiceImpl.editFood(modelMapper.map(foodCreationResponseAndEditModel, FoodServiceModel.class));
-
-        return new ResponseEntity<>(editedFood, HttpStatus.CREATED);
+    public ResponseEntity<FoodResponseDTO> editFood(@RequestBody FoodServiceDTO foodServiceDTO) {
+        return new ResponseEntity<>(foodServiceImpl.editFood(foodServiceDTO), HttpStatus.CREATED);
     }
 }

@@ -1,14 +1,14 @@
-package com.example.demo.domain.model.orderModel;
+package com.example.demo.dto.orderFoodDTO;
 
 import java.util.List;
 
-public class OrderCreationBindingModel {
+public class OrderFoodResponseDTO {
 
     public String username;
 
     List<String> foods;
 
-    public OrderCreationBindingModel() {
+    public OrderFoodResponseDTO() {
     }
 
     public String getUsername() {

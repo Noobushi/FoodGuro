@@ -1,70 +1,74 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.entity.Food;
-import com.example.demo.domain.entity.FoodCategory;
-import com.example.demo.domain.model.foodModel.FoodServiceModel;
+import com.example.demo.dto.foodDTO.FoodResponseDTO;
+import com.example.demo.entity.Food;
+import com.example.demo.entity.FoodCategory;
+import com.example.demo.dto.foodDTO.FoodServiceDTO;
 import com.example.demo.repository.FoodRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class FoodServiceImpl {
-    private final FoodCategoryServiceImpl foodCategoryService;
+import java.util.Objects;
 
+@Service
+public class FoodServiceImpl extends BaseService{
+    private final FoodCategoryServiceImpl foodCategoryService;
     private final FoodRepository foodRepository;
 
-    private final ModelMapper modelMapper;
-
     @Autowired
-    public FoodServiceImpl(FoodCategoryServiceImpl foodCategoryService, FoodRepository foodRepository, ModelMapper modelMapper) {
+    public FoodServiceImpl(FoodCategoryServiceImpl foodCategoryService, FoodRepository foodRepository) {
         this.foodCategoryService = foodCategoryService;
         this.foodRepository = foodRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Transactional
-    public String createFood(FoodServiceModel foodServiceModel) {
-        Food food = modelMapper.map(foodServiceModel, Food.class);
-        FoodCategory category = foodCategoryService.findByName(foodServiceModel.getFoodCategory());
-        food.setFoodCategory(category);
-
-        Food persisted = foodRepository.save(food);
-        category.getFoods().add(persisted);
-        return food.getName();
+    public FoodResponseDTO createFood(FoodServiceDTO input) {
+        Food newFood = modelMapper.map(input, Food.class);
+        FoodCategory category = foodCategoryService.findByName(input.getFoodCategory());
+        newFood.setFoodCategory(category);
+        Food persistedFood = foodRepository.save(newFood);
+        category.getFoods().add(persistedFood);
+        FoodResponseDTO createdFood = modelMapper.map(newFood, FoodResponseDTO.class);
+        return createdFood;
     }
 
     @Transactional
-    public String deleteFood(FoodServiceModel foodServiceModel) {
-        Food food = foodRepository.findByName(foodServiceModel.getName());
-        String foodName = food.getName();
-        foodRepository.delete(food);
-        return foodName;
+    public FoodResponseDTO deleteFood(FoodServiceDTO input) {
+        Food foundFood = foodRepository.findByName(input.getName());
+        if (Objects.isNull(foundFood)){
+            throw new NullPointerException("No such food found!");
+        }
+        foodRepository.delete(foundFood);
+        FoodResponseDTO deletedFood = modelMapper.map(foundFood,FoodResponseDTO.class);
+        return deletedFood;
     }
 
     @Transactional
-    public FoodServiceModel editFood(FoodServiceModel foodServiceModel) {
-        Food food = foodRepository.findById(foodServiceModel.getId()).get();
+    public FoodResponseDTO editFood(FoodServiceDTO input) {
+        Food food = foodRepository.findById(input.getId()).get();
 
-        FoodCategory newCategory = foodCategoryService.findByName(foodServiceModel.getFoodCategory());
+        FoodCategory newCategory = foodCategoryService.findByName(input.getFoodCategory());
         newCategory.getFoods().add(food);
 
         FoodCategory oldCategory = food.getFoodCategory();
         oldCategory.getFoods().remove(food);
 
-        food.setName(foodServiceModel.getName());
-        food.setPrice(foodServiceModel.getPrice());
-        food.setDescription(foodServiceModel.getDescription());
+        food.setName(input.getName());
+        food.setPrice(input.getPrice());
+        food.setDescription(input.getDescription());
 
 
-        FoodServiceModel edited = modelMapper.map(food, FoodServiceModel.class);
-        edited.setFoodCategory(foodServiceModel.getFoodCategory());
+        FoodResponseDTO newFood = modelMapper.map(food, FoodResponseDTO.class);
+        newFood.setFoodCategory(input.getFoodCategory());
 
-        return edited;
+        return newFood;
     }
 
     public Food findByName(String name){
+        if (Objects.isNull(name)){
+            throw new NullPointerException("No such food found!");
+        }
         return this.foodRepository.findByName(name);
     }
 }

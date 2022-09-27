@@ -1,6 +1,6 @@
-package com.example.demo.domain.model.userModel;
+package com.example.demo.dto.userDTO;
 
-public class UserRegisterAndDeleteBindingModel {
+public class UserResponseDTO {
 
     private String firstName;
 
@@ -14,7 +14,23 @@ public class UserRegisterAndDeleteBindingModel {
 
     private String userRole;
 
-    public UserRegisterAndDeleteBindingModel() {
+    public UserResponseDTO() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     public String getFirstName() {
@@ -41,27 +57,11 @@ public class UserRegisterAndDeleteBindingModel {
         this.city = city;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
     }
 }

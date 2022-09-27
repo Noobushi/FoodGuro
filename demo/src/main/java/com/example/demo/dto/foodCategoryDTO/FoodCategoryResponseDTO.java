@@ -1,9 +1,9 @@
-package com.example.demo.domain.model.foodModel;
+package com.example.demo.dto.foodCategoryDTO;
 
-public class FoodDeleteResponseAndBindingModel {
+public class FoodCategoryResponseDTO {
     private String name;
 
-    public FoodDeleteResponseAndBindingModel() {
+    public FoodCategoryResponseDTO() {
     }
 
     public String getName() {
@@ -13,4 +13,5 @@ public class FoodDeleteResponseAndBindingModel {
     public void setName(String name) {
         this.name = name;
     }
+
 }

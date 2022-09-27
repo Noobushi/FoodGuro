@@ -1,7 +1,6 @@
-package com.example.demo.domain.entity;
+package com.example.demo.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity

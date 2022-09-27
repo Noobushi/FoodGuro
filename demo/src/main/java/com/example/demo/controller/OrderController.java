@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.model.orderModel.OrderCreationBindingModel;
-import com.example.demo.domain.model.orderModel.OrderServiceModel;
+import com.example.demo.dto.orderFoodDTO.OrderFoodResponseDTO;
+import com.example.demo.dto.orderFoodDTO.OrderFoodServiceDTO;
 import com.example.demo.service.OrderServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,23 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/order")
-public class OrderController {
+@RequestMapping("/order")
+public class OrderController extends BaseController{
 
     private final OrderServiceImpl orderServiceImpl;
 
-    private final ModelMapper modelMapper;
-
-    public OrderController(OrderServiceImpl orderServiceImpl, ModelMapper modelMapper) {
+    public OrderController(OrderServiceImpl orderServiceImpl) {
         this.orderServiceImpl = orderServiceImpl;
-        this.modelMapper = modelMapper;
     }
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/create")
-    public ResponseEntity createOrder(@RequestBody OrderCreationBindingModel orderCreationBindingModel) {
-
-        orderServiceImpl.createOrder(modelMapper.map(orderCreationBindingModel, OrderServiceModel.class));
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<OrderFoodResponseDTO> createOrder(@RequestBody OrderFoodServiceDTO orderFood) {
+        return new ResponseEntity<>(orderServiceImpl.createOrder(orderFood),HttpStatus.CREATED);
     }
 }

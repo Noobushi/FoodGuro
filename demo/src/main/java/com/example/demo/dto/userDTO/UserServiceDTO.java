@@ -1,30 +1,33 @@
-package com.example.demo.domain.entity;
-
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-public class User extends BaseEntity {
+package com.example.demo.dto.userDTO;
 
 
-    @OneToMany(targetEntity = OrderFood.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<OrderFood> orderFood;
+public class UserServiceDTO {
+
+    private Integer id;
+
     private String firstName;
 
     private String lastName;
 
     private String city;
-    
-    @Column(nullable = false, unique = true)
+
     private String username;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRoles userRole;
+    private String userRole;
+
+
+    public UserServiceDTO() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -66,20 +69,11 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public List<OrderFood> getOrder() {
-        return orderFood;
-    }
-
-    public void setOrder(List<OrderFood> orderFood) {
-        this.orderFood = orderFood;
-    }
-
-    public UserRoles getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserRoles userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 }
-

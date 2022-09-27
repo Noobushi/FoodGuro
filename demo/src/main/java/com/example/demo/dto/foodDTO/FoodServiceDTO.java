@@ -1,23 +1,27 @@
-package com.example.demo.domain.entity;
+package com.example.demo.dto.foodDTO;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-public class Food extends BaseEntity {
+public class FoodServiceDTO {
 
+    private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private FoodCategory foodCategory;
+    private String foodCategory;
+
     private String name;
 
     private BigDecimal price;
 
-    @Lob
     private String description;
+    public FoodServiceDTO() {
+    }
 
-    public Food() {
+    public String getFoodCategory() {
+        return foodCategory;
+    }
+
+    public void setFoodCategory(String foodCategory) {
+        this.foodCategory = foodCategory;
     }
 
     public String getName() {
@@ -35,13 +39,12 @@ public class Food extends BaseEntity {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
+    public int getId() {
+        return id;
     }
 
-    public void setFoodCategory(FoodCategory foodCategory) {
-        this.foodCategory = foodCategory;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {

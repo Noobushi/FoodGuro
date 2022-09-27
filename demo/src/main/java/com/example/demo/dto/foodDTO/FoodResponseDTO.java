@@ -1,9 +1,8 @@
-package com.example.demo.domain.model.foodModel;
+package com.example.demo.dto.foodDTO;
 
-import javax.persistence.Lob;
 import java.math.BigDecimal;
 
-public class FoodCreationResponseAndEditModel {
+public class FoodResponseDTO {
 
 
     private int id;
@@ -15,7 +14,7 @@ public class FoodCreationResponseAndEditModel {
 
     private String description;
 
-    public FoodCreationResponseAndEditModel() {
+    public FoodResponseDTO() {
     }
 
     public String getName() {

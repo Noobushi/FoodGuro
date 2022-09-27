@@ -1,17 +1,17 @@
-package com.example.demo.domain.model.foodCategoryModel;
+package com.example.demo.dto.foodCategoryDTO;
 
-import com.example.demo.domain.model.foodModel.FoodServiceModel;
+import com.example.demo.dto.foodDTO.FoodServiceDTO;
 
 import java.util.List;
 
-public class FoodCategoryServiceModel {
+public class FoodCategoryServiceDTO {
 
     private int id;
     private String name;
 
-    private List<FoodServiceModel> foods;
+    private List<FoodServiceDTO> foods;
 
-    public FoodCategoryServiceModel() {
+    public FoodCategoryServiceDTO() {
     }
 
     public String getName() {
@@ -22,11 +22,11 @@ public class FoodCategoryServiceModel {
         this.name = name;
     }
 
-    public List<FoodServiceModel> getFoods() {
+    public List<FoodServiceDTO> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<FoodServiceModel> foods) {
+    public void setFoods(List<FoodServiceDTO> foods) {
         this.foods = foods;
     }
 

@@ -1,30 +1,23 @@
-package com.example.demo.domain.model.foodModel;
+package com.example.demo.entity;
 
-import com.example.demo.domain.entity.FoodCategory;
-
-import javax.persistence.Lob;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-public class FoodServiceModel {
+@Entity
+public class Food extends BaseEntity {
 
-    private int id;
 
-    private String foodCategory;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private FoodCategory foodCategory;
     private String name;
 
     private BigDecimal price;
 
+    @Lob
     private String description;
-    public FoodServiceModel() {
-    }
 
-    public String getFoodCategory() {
-        return foodCategory;
-    }
-
-    public void setFoodCategory(String foodCategory) {
-        this.foodCategory = foodCategory;
+    public Food() {
     }
 
     public String getName() {
@@ -42,12 +35,13 @@ public class FoodServiceModel {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    public int getId() {
-        return id;
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFoodCategory(FoodCategory foodCategory) {
+        this.foodCategory = foodCategory;
     }
 
     public String getDescription() {

@@ -1,7 +1,7 @@
-package com.example.demo.domain.model.orderModel;
+package com.example.demo.dto.orderFoodDTO;
 import java.util.List;
 
-public class OrderServiceModel {
+public class OrderFoodServiceDTO {
 
     private int id;
 
@@ -9,7 +9,7 @@ public class OrderServiceModel {
 
     List<String> foods;
 
-    public OrderServiceModel() {
+    public OrderFoodServiceDTO() {
     }
 
     public int getId() {
