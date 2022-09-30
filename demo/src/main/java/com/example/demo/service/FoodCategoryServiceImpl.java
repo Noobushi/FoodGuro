@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class FoodCategoryServiceImpl extends BaseService{
+public class FoodCategoryServiceImpl extends BaseService {
 
     private final FoodCategoryRepository foodCategoryRepository;
 
@@ -32,11 +32,10 @@ public class FoodCategoryServiceImpl extends BaseService{
         return returnFoodCategory;
     }
 
-    public FoodCategory findByName(String name) {
-        if (Objects.isNull(name)){
-            throw new NullPointerException("No such category found!");
-        }
-        return this.foodCategoryRepository.findByName(name);
+    public FoodCategory findByName(String foodCategoryName) {
+        FoodCategory foundFoodCategory = foodCategoryRepository.findByName(foodCategoryName);
+        checkIfNull(foundFoodCategory, foodCategoryName);
+        return foundFoodCategory;
     }
 
     public List<FoodCategoryServiceDTO> findAll() {
@@ -58,20 +57,16 @@ public class FoodCategoryServiceImpl extends BaseService{
     @Transactional
     public FoodCategoryResponseDTO deleteFoodCategory(FoodCategoryServiceDTO input) {
         FoodCategory foundFoodCategory = foodCategoryRepository.findByName(input.getName());
-        if (Objects.isNull(foundFoodCategory)){
-            throw new NullPointerException("No such category found!");
-        }
+        checkIfNull(foundFoodCategory, input.getName());
         foodCategoryRepository.delete(foundFoodCategory);
         FoodCategoryResponseDTO deletedFoodCategory = modelMapper.map(foundFoodCategory, FoodCategoryResponseDTO.class);
         return deletedFoodCategory;
     }
 
     @Transactional
-    public List<FoodServiceDTO> getFoodsInCategory(FoodCategoryServiceDTO foodCategoryServiceDTO) {
-        FoodCategory foodCategory = foodCategoryRepository.findByName(foodCategoryServiceDTO.getName());
-        if (Objects.isNull(foodCategory)) {
-            throw new NullPointerException("No such category found!");
-        }
+    public List<FoodServiceDTO> getFoodsInCategory(FoodCategoryServiceDTO input) {
+        FoodCategory foodCategory = foodCategoryRepository.findByName(input.getName());
+        checkIfNull(foodCategory, input.getName());
         return foodCategory.getFoods().stream().map(food -> modelMapper.map(food, FoodServiceDTO.class)
         ).collect(Collectors.toList());
     }

@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
-
 @Service
-public class FoodServiceImpl extends BaseService{
+public class FoodServiceImpl extends BaseService {
     private final FoodCategoryServiceImpl foodCategoryService;
     private final FoodRepository foodRepository;
 
@@ -36,11 +34,9 @@ public class FoodServiceImpl extends BaseService{
     @Transactional
     public FoodResponseDTO deleteFood(FoodServiceDTO input) {
         Food foundFood = foodRepository.findByName(input.getName());
-        if (Objects.isNull(foundFood)){
-            throw new NullPointerException("No such food found!");
-        }
+        checkIfNull(foundFood, input.getName());
         foodRepository.delete(foundFood);
-        FoodResponseDTO deletedFood = modelMapper.map(foundFood,FoodResponseDTO.class);
+        FoodResponseDTO deletedFood = modelMapper.map(foundFood, FoodResponseDTO.class);
         return deletedFood;
     }
 
@@ -58,17 +54,15 @@ public class FoodServiceImpl extends BaseService{
         food.setPrice(input.getPrice());
         food.setDescription(input.getDescription());
 
-
         FoodResponseDTO newFood = modelMapper.map(food, FoodResponseDTO.class);
         newFood.setFoodCategory(input.getFoodCategory());
 
         return newFood;
     }
 
-    public Food findByName(String name){
-        if (Objects.isNull(name)){
-            throw new NullPointerException("No such food found!");
-        }
-        return this.foodRepository.findByName(name);
+    public Food findByName(String foodName) {
+        Food foundFood = foodRepository.findByName(foodName);
+        checkIfNull(foundFood,foodName);
+        return foundFood;
     }
 }

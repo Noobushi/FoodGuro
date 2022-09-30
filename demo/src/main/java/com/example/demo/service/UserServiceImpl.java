@@ -5,7 +5,6 @@ import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoles;
 import com.example.demo.dto.userDTO.UserServiceDTO;
 import com.example.demo.repository.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,9 +21,8 @@ public class UserServiceImpl extends BaseService {
 
     private final PasswordEncoder passwordEncoder;
 
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -44,9 +41,7 @@ public class UserServiceImpl extends BaseService {
     @Transactional
     public UserResponseDTO deleteUser(UserServiceDTO user) {
         User foundUser = userRepository.findUserByUsername(user.getUsername());
-        if (Objects.isNull(foundUser)){
-            throw new NullPointerException("No such user found!");
-        }
+        checkIfNull(foundUser, user.getUsername());
         userRepository.delete(foundUser);
         UserResponseDTO deleteUser = modelMapper.map(user, UserResponseDTO.class);
         return deleteUser;
@@ -54,7 +49,7 @@ public class UserServiceImpl extends BaseService {
 
     @Transactional
     public UserServiceDTO editUser(UserServiceDTO userServiceDTO) {
-        User foundUser = userRepository.findById(userServiceDTO.getId()).orElseThrow(() -> new UsernameNotFoundException("No user found"));
+        User foundUser = userRepository.findById(userServiceDTO.getId()).orElseThrow(() -> new UsernameNotFoundException("No user found!"));
 
         foundUser.setFirstName(userServiceDTO.getFirstName());
         foundUser.setLastName(userServiceDTO.getLastName());
@@ -64,19 +59,16 @@ public class UserServiceImpl extends BaseService {
         foundUser.setUserRole(UserRoles.valueOf(userServiceDTO.getUserRole()));
 
         return modelMapper.map(foundUser, UserServiceDTO.class);
-
     }
 
-    public User findByName(String userName) {
-        if (Objects.isNull(userName)){
-            throw new NullPointerException("No such user found!");
-        }
-        return this.userRepository.findUserByUsername(userName);
+    public User findByName(String username) {
+        User foundUser = userRepository.findUserByUsername(username);
+        checkIfNull(foundUser, username);
+        return foundUser;
     }
 
     public List<UserServiceDTO> findAll() {
         return this.userRepository.findAll().stream().map(user -> modelMapper.map(user, UserServiceDTO.class)).collect(Collectors.toList());
     }
-
 
 }
