@@ -32,6 +32,8 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {RatingModule} from 'primeng/rating';
 import {RippleModule} from 'primeng/ripple';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ShoppingCartService } from './service/shopping-cart.service';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -92,8 +94,8 @@ const customNotifierOptions: NotifierOptions = {
       {path: 'register',component: RegisterUserComponent},
       {path: 'login',component: LoginUserComponent},
       {path: 'category',component: ListCategoryComponent},
-      {path: 'adminMenu',component: AdminMenuComponent}
-
+      {path: 'adminMenu',component: AdminMenuComponent},
+      {path: 'checkout',component: CheckoutComponent}
 
     ]),
     NgbModule
@@ -108,11 +110,13 @@ const customNotifierOptions: NotifierOptions = {
     CarouselComponent,
     AdminMenuComponent,
     FoodTableComponent,
-    UserTableComponent
+    UserTableComponent,
+    CheckoutComponent,
   ],
   providers: [
     FoodService,
     UserService,
+    ShoppingCartService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService
   ],
