@@ -20,9 +20,9 @@ public class OrderController extends BaseController{
     public OrderController(OrderServiceImpl orderServiceImpl) {
         this.orderServiceImpl = orderServiceImpl;
     }
-    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/create")
     public ResponseEntity<OrderFoodResponseDTO> createOrder(@RequestBody OrderFoodServiceDTO orderFood) {
         return new ResponseEntity<>(orderServiceImpl.createOrder(orderFood),HttpStatus.CREATED);
     }
+
 }

@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ModelMapper modelMapper;
-    public static final String[] PUBLIC_URLS = {"/login","/users/register","/users/all","/foodCategory/allFoods","/users/delete"};
+    public static final String[] PUBLIC_URLS = {"/login","/users/register","/users/all","/foodCategory/allFoods","/users/delete","/order/create"};
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {//konfigurira auth obekta
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {//konfigurira spring securityto
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManagerBean(), jwtTokenProvider, modelMapper);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/api/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
         http
                 .cors().and().
                 csrf().disable().

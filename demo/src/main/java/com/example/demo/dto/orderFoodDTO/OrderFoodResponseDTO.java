@@ -1,5 +1,7 @@
 package com.example.demo.dto.orderFoodDTO;
 
+import com.example.demo.entity.Food;
+
 import java.util.List;
 
 public class OrderFoodResponseDTO {

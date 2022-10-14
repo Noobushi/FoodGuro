@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.foodDTO.FoodServiceDTO;
 import com.example.demo.dto.orderFoodDTO.OrderFoodResponseDTO;
 import com.example.demo.entity.Food;
 import com.example.demo.entity.OrderFood;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,12 +30,14 @@ public class OrderServiceImpl extends BaseService{
 
     @Transactional
     public OrderFoodResponseDTO createOrder(OrderFoodServiceDTO input) {
-        List<Food> foods = input.getFoods().stream().map(foodServiceImpl::findByName).collect(Collectors.toList());
-        OrderFood newOrderFood = modelMapper.map(input,OrderFood.class);
+        OrderFood newOrderFood = new OrderFood();
+        newOrderFood.setFoods(input.getFoods().stream().map(foodServiceImpl::findByName).collect(Collectors.toList()));
         User foundUser = userService.findByName(input.getUsername());
-        foundUser.getOrder().add(newOrderFood);
+        newOrderFood.setUser(foundUser);
         orderRepository.save(newOrderFood);
-        OrderFoodResponseDTO order = modelMapper.map(newOrderFood, OrderFoodResponseDTO.class);
+        OrderFoodResponseDTO order = new OrderFoodResponseDTO();
+        order.setUsername(newOrderFood.getUser().getUsername());
+        order.setFoods(newOrderFood.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
         return order;
     }
 

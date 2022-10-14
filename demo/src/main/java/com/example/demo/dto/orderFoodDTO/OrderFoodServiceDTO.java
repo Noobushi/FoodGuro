@@ -1,23 +1,15 @@
 package com.example.demo.dto.orderFoodDTO;
+import com.example.demo.entity.Food;
+
 import java.util.List;
 
 public class OrderFoodServiceDTO {
-
-    private int id;
 
     private String username;
 
     List<String> foods;
 
     public OrderFoodServiceDTO() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {

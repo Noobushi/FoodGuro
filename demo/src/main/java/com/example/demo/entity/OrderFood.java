@@ -10,7 +10,7 @@ public class OrderFood extends BaseEntity {
     @JoinColumn(name = "order_id")
     private User user;
 
-    @ManyToMany(targetEntity = Food.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Food.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "order_food_foods",
             joinColumns = @JoinColumn(
