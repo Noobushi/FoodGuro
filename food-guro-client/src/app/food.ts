@@ -1,10 +1,11 @@
-export interface Food {
-    id: number;
-    foodCategory: string;
-    name: string;
-    price: number;
-    description: string;
+export class Food {
+    id!: number;
+    foodCategory!: string;
+    name!: string;
+    price!: number;
+    description!: string;
+
+    public constructor() {
+        
+    }
 }
-
-  
-
