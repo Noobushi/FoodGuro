@@ -1,0 +1,31 @@
+.detail-section {
+    background-image: url('src\assets\pictures\singleProductBackground.jpg');
+    background-size: cover;
+    min-height: 1000px;
+    color: rgb(105, 128, 128);
+}
+
+.productImage {
+    width: 400px;
+    filter: drop-shadow(8px 8px 10px gray);
+}
+
+.productName {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(105, 128, 128);
+
+}
+
+.productDescription {
+    font-size: 25px;
+    color: rgb(105, 128, 128);
+
+}
+
+.productPrice {
+    text-align: left;
+    color: rgb(105, 128, 128);
+
+}

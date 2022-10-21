@@ -1,7 +1,123 @@
-<div class="font-italic text-muted mb-0 small"  *ngFor="let shoppingCartItem of checkoutList">
-    <h6 id="fname" class="font-weight-bold my-2" style=" font-size:240%;">{{shoppingCartItem.name}}</h6>
-    <p id="fdesc" style="font-size: 140%;">{{shoppingCartItem.description}}</p>
-    <p id="fprice" style="font-size: 140%;">{{shoppingCartItem.price}}</p>
-    <p id="fquantity" style="font-size: 140%;">{{shoppingCartItem.quantity}}</p>
+<div class="checkoutMenu">
+    <div style="margin-left:10px; font-size: 25px;"><strong>Your order:</strong></div>
+    <div *ngIf="checkoutList.length < 1" style="margin-left:10px; font-size:20px;"><strong>Your cart is empty!</strong></div>
+    <table *ngIf="checkoutList.length!==0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="width: 500px;">Product</td>
+            <td style="width: 1px;"></td>
+            <td style="width: 120px;">Quantity</td>
+            <td style="width: 1px;"></td>
+            <td style="width: 100px;">Price</td>
+            <td style="width: 1px;"></td>
+            <td style="width: 100px;">Discount</td>
+            <td style="width: 1px;"></td>
+            <td style="width: 100px;">Total</td>
+        </tr>
+        <tr *ngFor="let shoppingCartItem of checkoutList">
+            <td style="text-align:left;">
+                <div class="product-image" [routerLink]="['/productDetails', shoppingCartItem.id]">
+                    <img src=assets\pictures\loginPageBackground.jpg width="81">
+                </div>
+                <div style="margin-top:10px;">
+                    {{shoppingCartItem.name}} : {{shoppingCartItem.description}}
+                </div>
+            </td>
+            <td class="sc_col"></td>
+            <td class="sc_col">
+                <div style="padding-top: 10px;">
+                    <div class="quantityCell">
+                        <div class="btn_minus"><img src=assets\pictures\minus.png (click)="decrease(shoppingCartItem)"></div>
+                        <div class="ml-3 mr-3">{{shoppingCartItem.quantity}}</div>
+                        <div class="btn_plus"><img src=assets\pictures\plus.png (click)="increase(shoppingCartItem)"></div>
+                    </div>
+                </div>
+            </td>
+            <td class="sc_col"></td>
+            <td class="sc_col">
+                <div style="padding-top: 10px;">
+                    {{shoppingCartItem.price | currency:'EUR'}}
+                </div>
+            </td>
+            <td class="sc_col"></td>
+            <td class="sc_col">
+                <div style="padding-top: 10px;">
+                    {{discount | percent}}
+                </div>
+            </td>
+            <td class="sc_col"></td>
+            <td class="sc_col">
+                <div>
+                    {{(shoppingCartItem.price*shoppingCartItem.quantity).toFixed(2) | currency:'EUR'}}
+                </div>
+            </td>
+        </tr>
+    </table>
 
+    <div class="totalSum" *ngIf="checkoutList.length !== 0">
+        <strong> <mark style="background-color: rgb(236, 230, 230);">Your total is: {{total.toFixed(2) | currency:'EUR'}}</mark></strong>
+    </div>
+    <button routerLink="/category" style="margin-left: 10px;">Back to Categories</button>
+
+    <div name="separator" style="height:30px;"></div>
+
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="inputFields">
+                    <h3>Billing Address</h3>
+                    <label for="fname" style="margin-top: 44px;">Full Name</label>
+                    <input type="text" id="fname" placeholder="John M. Doe">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" placeholder="john@example.com">
+                    <label for="adress">Address</label>
+                    <input type="text" id="adress" placeholder="542 W. 15th Street">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Sofia">
+
+                    <div class="row">
+                        <div class="inputFields">
+                            <label for="number">Telephone Number</label>
+                            <input type="text" id="number" placeholder="0899-9999-89">
+                        </div>
+                        <div class="inputFields">
+                            <label for="zip">Zip</label>
+                            <input type="text" id="zip" placeholder="1001">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inputFields">
+                    <h3>Payment</h3>
+                    <label for="fname">Accepted Cards</label>
+                    <div class="icon-container">
+                        <img class="visaCard" src="assets\pictures\visaIcon.jpg" width="80">
+                        <img class="visaCard" src="assets\pictures\mastercardIcon.jpg" width="80">
+                        <img class="visaCard" src="assets\pictures\paypalIcon.png" width="120">
+                        <img class="visaCard" src="assets\pictures\revolutIcon.png" width="130">
+                    </div>
+                    <label for="cname">Name on Card</label>
+                    <input type="text" id="cname" placeholder="John More Doe">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" placeholder="1111-2222-3333-4444">
+                    <label for="expmonth">Exp Month</label>
+                    <input type="text" id="expmonth" placeholder="September">
+
+                    <div class="row">
+                        <div class="inputFields">
+                            <label for="expyear">Exp Year</label>
+                            <input type="text" id="expyear" placeholder="2018">
+                        </div>
+                        <div class="inputFields">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="352">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label>
+                <input type="checkbox" unchecked="unchecked" name="sameadr"> Shipping address same as billing
+            </label>
+            <input type="submit" value="Confirm my order" class="btn">
+        </form>
+    </div>
 </div>

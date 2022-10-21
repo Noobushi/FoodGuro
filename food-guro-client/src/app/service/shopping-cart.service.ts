@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Food } from '../food';
 import { ShoppingCartItem } from '../shopping-cart-item';
@@ -8,20 +7,41 @@ import { ShoppingCartItem } from '../shopping-cart-item';
 })
 export class ShoppingCartService {
   shoppingCartList: ShoppingCartItem[];
-  constructor(private http: HttpClient) {
+  discount: number = 0;
 
+  constructor() {
     this.shoppingCartList = [];
   }
 
-  addToCart(food:Food){
-    const foundFood:ShoppingCartItem[] = this.shoppingCartList.filter(product => product.id === food.id)
-    if(foundFood.length === 0){
-      const newCartItem = new ShoppingCartItem(food.id,food.foodCategory,food.name,food.price,food.description);
+  addToCart(food: Food) {
+    const foundFood: ShoppingCartItem[] = this.shoppingCartList.filter(product => product.id === food.id)
+    if (foundFood.length === 0) {
+      const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description);
       this.shoppingCartList.push(newCartItem);
     }
-    else{
+    else {
       foundFood[0].quantity++;
     }
+  }
+
+  removeFromCart(cartItem: ShoppingCartItem) {
+    this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
+  }
+
+  calculateDiscount(total: number) {
+    if (total < 50) {
+      return this.discount = 0;
+    }
+    else if (total > 50 && total < 100) {
+      return this.discount = 0.1;
+    }
+    else {
+      return this.discount = 0.2;
+    }
+  }
+
+  getProduct(productId: number) {
+    return this.shoppingCartList.filter(e => e.id == productId);
   }
 
 }

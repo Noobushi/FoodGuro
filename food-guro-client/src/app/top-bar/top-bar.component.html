@@ -4,17 +4,17 @@
   </h1>
 </a>
 
-<img class="guroLogo"  src="assets/pictures/guro-logo.png" alt="Guro logo">
+<img class="guroLogo" src="assets/pictures/guro-logo.png" alt="Guro logo">
 
-<button class="registerButton" type="button" routerLink="/register" name="Register" *ngIf="!this.isLoggedIn">
+<button class="registerButton" type="button" name="Register" *ngIf="!this.isLoggedIn">
   Register
 </button>
 
-<button class="loginButton" type="button" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn" >
+<button class="loginButton" type="button" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn">
   Login
 </button>
 
-<button class="logoutButton" type="button" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()" >
+<button class="logoutButton" type="button" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()">
   Logout
 </button>
 
@@ -23,7 +23,7 @@
 </button>
 
 
-<a class="button fancy-button"  style="color: rgb(0, 0, 0);"  *ngIf="this.isLoggedIn" routerLink="/checkout" name="Chekout">
-  <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="Shopping cart" >
+<a class="button fancy-button" style="color: rgb(0, 0, 0);" *ngIf="this.isLoggedIn" routerLink="/checkout" name="Chekout">
+  <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="Shopping cart">
   Checkout
 </a>
