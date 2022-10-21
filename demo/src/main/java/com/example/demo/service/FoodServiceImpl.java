@@ -33,10 +33,11 @@ public class FoodServiceImpl extends BaseService {
 
     @Transactional
     public FoodResponseDTO deleteFood(FoodServiceDTO input) {
-        Food foundFood = foodRepository.findByName(input.getName());
+        Food foundFood = foodRepository.findFoodByName(input.getName());
         checkIfNull(foundFood, input.getName());
-        foodRepository.delete(foundFood);
         FoodResponseDTO deletedFood = modelMapper.map(foundFood, FoodResponseDTO.class);
+        foodRepository.delete(foundFood);
+
         return deletedFood;
     }
 
@@ -61,7 +62,7 @@ public class FoodServiceImpl extends BaseService {
     }
 
     public Food findByName(String foodName) {
-        Food foundFood = foodRepository.findByName(foodName);
+        Food foundFood = foodRepository.findFoodByName(foodName);
         checkIfNull(foundFood,foodName);
         return foundFood;
     }

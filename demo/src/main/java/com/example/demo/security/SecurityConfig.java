@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ModelMapper modelMapper;
-    public static final String[] PUBLIC_URLS = {"/login","/users/register","/users/all","/foodCategory/allFoods","/users/delete","/order/create"};
+    public static final String[] PUBLIC_URLS = {"/login","/users/register","/users/all","/foodCategory/allFoods","/users/delete","/order/create", "/food/delete"};
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {//konfigurira auth obekta
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Integer> {
-   Food findByName(String foodName);
+   Food findFoodByName(String foodName);
 }
