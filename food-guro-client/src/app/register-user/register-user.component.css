@@ -1,8 +1,19 @@
-.registerPage{
-   background-image: url("src/assets/pictures/registerPageBackground.jpg"); 
-   background-size:cover;
+.registerPage {
+   background-image: url("src/assets/pictures/registerPageBackground.jpg");
+   background-size: cover;
    background-repeat: no-repeat;
    width: 100%;
    height: 100%;
-   position:absolute;
-  }
+   position: absolute;
+}
+
+.registration {
+   color: rgb(212, 203, 203);
+   font-size: 38px;
+   font-weight: bold;
+}
+
+.labels {
+   color: aliceblue;
+   font-weight: bold;
+}

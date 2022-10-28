@@ -1,29 +1,25 @@
-<a [routerLink]="['/']">
-  <h1>
-    <strong style="color:rgb(255, 157, 0);">FoodGuro</strong>
-  </h1>
-</a>
+<a class="guroTextLogo" [routerLink]="['/']">FoodGuro</a>
 
-<img class="guroLogo" src="assets/pictures/guro-logo.png" alt="Guro logo">
+<img class="guroLogo" src="assets/pictures/guro-logo.png" alt="GuroLogoIcon">
 
-<button class="registerButton" type="button" name="Register" *ngIf="!this.isLoggedIn">
+<button class="btn registerButton" name="Register" routerLink="/register" *ngIf="!this.isLoggedIn">
   Register
 </button>
 
-<button class="loginButton" type="button" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn">
+<button class="btn loginButton" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn">
   Login
 </button>
 
-<button class="logoutButton" type="button" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()">
+<button class="btn logoutButton" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()">
   Logout
 </button>
 
-<button class="adminMenuButton" type="button" routerLink="/adminMenu" name="adminMenu" *ngIf="isAdmin()">
+<button class="btn adminMenuButton" routerLink="/adminMenu" name="adminMenu" *ngIf="isAdmin()">
   Admin Menu
 </button>
 
 
-<a class="button fancy-button" style="color: rgb(0, 0, 0);" *ngIf="this.isLoggedIn" routerLink="/checkout" name="Chekout">
-  <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="Shopping cart">
+<a class="btn checkoutButton" style="color: rgb(0, 0, 0);" *ngIf="this.isLoggedIn" routerLink="/checkout">
+  <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="ShoppingCartIcon">
   Checkout
 </a>

@@ -15,8 +15,6 @@ export class RegisterUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitted = false;
-
   onSubmit(userForm: any) {
     this.userService.register(userForm).subscribe(x => this.notifierService.notify("success", `User ${x.username} registered successfully!`));
     this.router.navigateByUrl('/');

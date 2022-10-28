@@ -13,3 +13,14 @@
   height: 100%;
   position: absolute;
 }
+
+.labels {
+  color: rgb(65, 60, 60);
+  font-weight: bold;
+}
+
+.login {
+  font-size: 32px;
+  color: rgb(65, 60, 60);
+  font-weight: bolder;
+}

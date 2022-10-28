@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons,NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../service/category.service';
 import { NotifierService } from 'angular-notifier';
 import { FoodService } from '../service/food-service';
@@ -12,15 +12,15 @@ import { UserService } from '../service/user.service';
   templateUrl: './admin-menu.component.html',
   styleUrls: ['./admin-menu.component.css']
 })
-export class AdminMenuComponent implements OnInit{
+export class AdminMenuComponent implements OnInit {
   public categories!: FoodCategory[];
-  public filterCategories! :FoodCategory[];
+  public filterCategories!: FoodCategory[];
   public users!: User[];
   public filterUsers!: User[];
-  
+
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService:FoodService, private userService: UserService) {}
+  constructor(private modalService: NgbModal, private categoryService: CategoryService, private notifierService: NotifierService, private foodService: FoodService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe(x => {
@@ -32,9 +32,9 @@ export class AdminMenuComponent implements OnInit{
       this.filterUsers = this.users;
     });
   }
-  
-  open(content:any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -49,21 +49,18 @@ export class AdminMenuComponent implements OnInit{
     } else {
       return `with: ${reason}`;
     }
-  } 
-
-  createCategory(nameForm:any){
-    console.log(nameForm);
-    this.categoryService.create(nameForm).subscribe(x=> this.notifierService.notify("success", `Category ${x.name} created successfully!`));
   }
 
-  deleteCategory(nameForm:any){
-    console.log(nameForm);
-    this.categoryService.delete(nameForm).subscribe(x=> this.notifierService.notify("success", `Category ${x.name} deleted successfully!`));
+  createCategory(nameForm: any) {
+    this.categoryService.create(nameForm).subscribe(foodCategory => this.notifierService.notify("success", `Category ${foodCategory.name} created successfully!`));
   }
 
-   createFood(nameForm:any){
-    console.log(nameForm);
-    this.foodService.create(nameForm).subscribe(x=> this.notifierService.notify("success", `Food ${x.name} created successfully!`));
+  deleteCategory(nameForm: any) {
+    this.categoryService.delete(nameForm).subscribe(foodCategory => this.notifierService.notify("success", `Category ${foodCategory.name} deleted successfully!`));
+  }
+
+  createFood(nameForm: any) {
+    this.foodService.create(nameForm).subscribe(food => this.notifierService.notify("success", `Food ${food.name} created successfully!`));
   }
 
 }

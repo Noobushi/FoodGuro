@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
@@ -13,9 +13,9 @@ import { User } from '../user';
 export class UserTableComponent {
   @Input() users!: User[];
   @Input() filterUsers!: User[];
-   
+
   constructor(private userService: UserService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute) {
-      
+
   }
 
   private reloadCurrentRoute() {
@@ -30,7 +30,7 @@ export class UserTableComponent {
       this.modalService.dismissAll();
       this.reloadCurrentRoute();
     });
-  
+
   }
 
   openDelete(form: any, username: string) {
@@ -60,16 +60,14 @@ export class UserTableComponent {
       this.modalService.dismissAll();
       this.reloadCurrentRoute();
     });
-    console.log(user);
-    
   }
-  
-searchByName(name:string) {
-  let cloneUsers: User[] = []; 
-  this.users.forEach(val => cloneUsers.push(Object.assign({}, val)));  ;
 
-  this.filterUsers = (name) ? cloneUsers.filter(x1 => x1.username.toLocaleLowerCase().includes(name.toLowerCase()))
-  : this.users;
-}
+  searchByName(name: string) {
+    let cloneUsers: User[] = [];
+    this.users.forEach(val => cloneUsers.push(Object.assign({}, val)));;
+
+    this.filterUsers = (name) ? cloneUsers.filter(x1 => x1.username.toLocaleLowerCase().includes(name.toLowerCase()))
+      : this.users;
+  }
 
 }

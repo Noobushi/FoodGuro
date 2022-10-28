@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../service/auth.service';
 import { User } from '../user';
 
 @Component({
@@ -9,7 +9,7 @@ import { User } from '../user';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  isLoggedIn! : boolean;
+  isLoggedIn!: boolean;
   user!: User | null
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -17,8 +17,8 @@ export class TopBarComponent implements OnInit {
     this.authService.userSubject.subscribe(u => {
       this.user = u;
     });
-    this.authService.isLoginSubject.subscribe(u=>{
-      this.isLoggedIn=u;
+    this.authService.isLoginSubject.subscribe(u => {
+      this.isLoggedIn = u;
     });
   }
 
@@ -26,8 +26,8 @@ export class TopBarComponent implements OnInit {
     this.authService.logout();
   }
 
-  isAdmin() : boolean {
-    if(this.user?.userRole.includes('ROLE_ADMIN')) {
+  isAdmin(): boolean {
+    if (this.user?.userRole.includes('ROLE_ADMIN')) {
       return true;
     }
     return false;

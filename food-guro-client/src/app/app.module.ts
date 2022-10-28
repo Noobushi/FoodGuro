@@ -22,7 +22,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { FoodTableComponent } from './food-table/food-table.component';
 import { AuthInterceptor } from './auth.interceptor';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';

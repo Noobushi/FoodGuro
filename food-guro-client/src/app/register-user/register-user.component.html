@@ -1,56 +1,48 @@
 <div class="registerPage">
-<div class="container">
-    <div [hidden]="submitted" style="margin-top: 15px;">
-        <h1>Registration</h1>
+    <div class="container">
+        <p class="registration">Registration</p>
         <form (ngSubmit)="onSubmit(userForm.value)" #userForm="ngForm">
-            <div class="form-group">
-                <label for="firstName" style="color: rgb(212, 203, 203);">First Name</label>
-                <input type="text" class="form-control" id="firstName" required ngModel name="firstName"
-                    #firstName="ngModel">
+            <div class="form-group col-md-2">
+                <label class="labels" for="firstName">First Name</label>
+                <input placeholder="Gosho" type="text" class="form-control" required ngModel name="firstName" #firstName="ngModel">
                 <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
                     Please enter valid name!
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="lastName" style="color: rgb(212, 203, 203);">Last Name</label>
-                <input type="text" class="form-control" id="lastName" required ngModel name="lastName"
-                    #lastName="ngModel">
+            <div class="form-group col-md-2">
+                <label class="labels" for="lastName">Last Name</label>
+                <input placeholder="Goshev" type="text" class="form-control" required ngModel name="lastName" #lastName="ngModel">
                 <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
                     Please enter valid name!
-
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label for="city" style="color: rgb(212, 203, 203);">City</label>
-                <input type="text" class="form-control" id="city" required ngModel name="city"
-                    #city="ngModel">
+
+            <div class="form-group col-md-2">
+                <label class="labels" for="city">City</label>
+                <input placeholder="Sofia" type="text" class="form-control" required ngModel name="city" #city="ngModel">
                 <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
                     Please enter valid name!
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="username" style="color: rgb(245, 241, 241);">Username</label>
-                <input type="text" class="form-control" id="username" required ngModel name="username"
-                    #username="ngModel">
+            <div class="form-group col-md-2">
+                <label class="labels" for="username">Username</label>
+                <input placeholder="goshoJavata" type="text" class="form-control" required ngModel name="username" #username="ngModel">
                 <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
                     Please enter valid name!
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="password" style="color: rgb(245, 239, 239);">Password</label>
-                <input type="text" class="form-control" id="password" required ngModel name="password"
-                    #password="ngModel">
+            <div class="form-group col-md-2">
+                <label class="labels" for="password">Password</label>
+                <input placeholder="goshkata123" type="text" class="form-control" required ngModel name="password" #password="ngModel">
                 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                     Please enter valid password!
                 </div>
-            </div>
-            
-            <button type="submit" class="btn btn-success">
-                Submit
-            </button>
+            </div><br>
+
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
+</div>

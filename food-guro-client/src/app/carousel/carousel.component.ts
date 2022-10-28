@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-carousel',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
+  isLoggedIn!: boolean;
+  user!: User | null
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.userSubject.subscribe(u => {
+      this.user = u;
+    });
+    this.authService.isLoginSubject.subscribe(u => {
+      this.isLoggedIn = u;
+    });
   }
 
 }
