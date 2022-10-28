@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FoodCategory } from '../food-category';
-import { FoodService } from '../service/food-service';
+import { CategoryService } from '../service/category.service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 
 @Component({
@@ -11,10 +11,11 @@ import { ShoppingCartService } from '../service/shopping-cart.service';
 })
 export class ListCategoryComponent implements OnInit {
   public categories$!: Observable<FoodCategory[]>;
-  constructor(private foodService: FoodService, private shoppingCartService: ShoppingCartService) { }
+  constructor(private categoryService: CategoryService, private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
-    this.categories$ = this.foodService.getFoods();
+    this.categories$ = this.categoryService.getAll();
+
   }
 
   addFood(food: any) {

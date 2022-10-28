@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, PipeTransform } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FoodCategory } from '../food-category';
 import { FoodService } from '../service/food-service';
 import { NotifierService } from 'angular-notifier';
@@ -15,7 +15,7 @@ export class FoodTableComponent {
   @Input() categories!: FoodCategory[];
   @Input() filterCategories!: FoodCategory[];
 
-  constructor(private foodService: FoodService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private foodService: FoodService, private notifierService: NotifierService, private modalService: NgbModal, private router: Router) {
 
   }
 

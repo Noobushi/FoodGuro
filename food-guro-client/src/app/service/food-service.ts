@@ -12,21 +12,24 @@ export class FoodService {
 
   constructor(private http: HttpClient) {
     this.host = 'http://localhost:8080'
-   }
-
-  public getFoods(): Observable<FoodCategory[]>{
-    return this.http.get<FoodCategory[]>(`${this.host}/api/foodCategory/all`)
   }
 
-   public create(foodForm:any) : Observable<Food>{
+
+  public create(foodForm: any): Observable<Food> {
     return this.http.post<Food>(`${this.host}/api/food/create`, foodForm);
-   }
+  }
 
-   public delete(foodForm:any) : Observable<Food>{
-    return this.http.post<Food>(`${this.host}/api/food/delete`, {name : foodForm});
-   }
+  public delete(foodForm: any): Observable<Food> {
+    return this.http.post<Food>(`${this.host}/api/food/delete`, { name: foodForm });
+  }
 
-   public edit(foodForm:any) : Observable<Food>{
+  public edit(foodForm: any): Observable<Food> {
     return this.http.post<Food>(`${this.host}/api/food/edit`, foodForm);
-   }
+  }
+
+  public getFoodsInCategory(foodForm: any): Observable<Food[]> {
+    return this.http.get<Food[]>(`${this.host}/api/foodCategory/allFoods`)
+  }
+
+
 }

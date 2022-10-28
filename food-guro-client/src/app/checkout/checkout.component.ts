@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ShoppingCartItem } from '../shopping-cart-item';
 
@@ -14,7 +13,7 @@ export class CheckoutComponent implements OnInit {
   total: any;
   discount: any;
   tempTotal: number = 0;
-  constructor(private shoppingCartService: ShoppingCartService, private route: Router) {
+  constructor(private shoppingCartService: ShoppingCartService) {
     this.checkoutList = [];
   }
 

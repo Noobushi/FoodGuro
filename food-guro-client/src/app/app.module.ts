@@ -34,6 +34,7 @@ import { RippleModule } from 'primeng/ripple';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CategoryProductsComponent } from './category-products/category-products.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -96,7 +97,8 @@ const customNotifierOptions: NotifierOptions = {
       { path: 'category', component: ListCategoryComponent },
       { path: 'adminMenu', component: AdminMenuComponent },
       { path: 'checkout', component: CheckoutComponent },
-      { path: 'productDetails/:id', component: ProductDetailsComponent }
+      { path: 'productDetails/:id', component: ProductDetailsComponent },
+      { path: 'categoryProducts', component: CategoryProductsComponent }
 
     ]),
     NgbModule
@@ -114,6 +116,7 @@ const customNotifierOptions: NotifierOptions = {
     UserTableComponent,
     CheckoutComponent,
     ProductDetailsComponent,
+    CategoryProductsComponent,
   ],
   providers: [
     FoodService,

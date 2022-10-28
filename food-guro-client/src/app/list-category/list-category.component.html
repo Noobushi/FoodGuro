@@ -15,7 +15,7 @@
               <!-- Custom content-->
               <div class="media flex-lg-row p-3">
                 <div class="media-body order-2 order-lg-1">
-                  <h5 style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{category.name}}</h5>
+                  <h5 routerLink="/categoryProducts" style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{category.name}}</h5>
                   <div class="font-italic text-muted mb-0 small" *ngFor="let food of category.foods">
                     <h6 id="fname" class="font-weight-bold my-2" style=" font-size:240%;">{{food.name}}</h6>
                     <p id="fdesc" style="font-size: 140%;">{{food.description}}</p>
