@@ -35,9 +35,8 @@ public class FoodServiceImpl extends BaseService {
     public FoodResponseDTO deleteFood(FoodServiceDTO input) {
         Food foundFood = foodRepository.findFoodByName(input.getName());
         checkIfNull(foundFood, input.getName());
+        foodRepository.deleteFood(foundFood.getId());
         FoodResponseDTO deletedFood = modelMapper.map(foundFood, FoodResponseDTO.class);
-        foodRepository.delete(foundFood);
-
         return deletedFood;
     }
 

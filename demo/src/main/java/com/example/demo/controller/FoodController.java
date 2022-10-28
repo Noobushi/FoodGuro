@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/food")
-public class FoodController extends BaseController{
+public class FoodController extends BaseController {
 
     private final FoodServiceImpl foodServiceImpl;
 
@@ -27,7 +27,7 @@ public class FoodController extends BaseController{
         return new ResponseEntity<>(foodServiceImpl.createFood(food), HttpStatus.CREATED);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete")
     public ResponseEntity<FoodResponseDTO> deleteFood(@RequestBody FoodServiceDTO foodServiceDTO) {
         return new ResponseEntity<>(foodServiceImpl.deleteFood(foodServiceDTO), HttpStatus.OK);
