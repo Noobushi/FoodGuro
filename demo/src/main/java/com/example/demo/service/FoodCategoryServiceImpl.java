@@ -64,9 +64,9 @@ public class FoodCategoryServiceImpl extends BaseService {
     }
 
     @Transactional
-    public List<FoodServiceDTO> getFoodsInCategory(FoodCategoryServiceDTO input) {
-        FoodCategory foodCategory = foodCategoryRepository.findByName(input.getName());
-        checkIfNull(foodCategory, input.getName());
+    public List<FoodServiceDTO> getFoodsInCategory(String categoryName) {
+        FoodCategory foodCategory = foodCategoryRepository.findByName(categoryName);
+        checkIfNull(foodCategory, categoryName);
         return foodCategory.getFoods().stream().map(food -> modelMapper.map(food, FoodServiceDTO.class)
         ).collect(Collectors.toList());
     }

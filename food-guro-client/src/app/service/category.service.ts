@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Food } from '../food';
 import { FoodCategory } from '../food-category';
 
 @Injectable({
@@ -26,5 +27,7 @@ export class CategoryService {
     return this.http.get<FoodCategory[]>(`${this.host}/api/foodCategory/all`);
   }
 
-
+  public getFoodsInCategory(foodCategory: String): Observable<Food[]> {
+    return this.http.get<Food[]>(`${this.host}/api/foodCategory/allFoods?category=${foodCategory}`);
+  }
 }

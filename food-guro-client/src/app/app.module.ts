@@ -35,6 +35,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
+import { NgxNavigationWithDataComponent } from "ngx-navigation-with-data";
+import { TransferService } from './service/transfer-service';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -119,6 +121,8 @@ const customNotifierOptions: NotifierOptions = {
     CategoryProductsComponent,
   ],
   providers: [
+    TransferService,
+    NgxNavigationWithDataComponent,
     FoodService,
     UserService,
     ShoppingCartService,

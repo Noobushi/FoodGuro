@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Food } from '../food';
-import { FoodCategory } from '../food-category';
 import { CategoryService } from '../service/category.service';
 import { FoodService } from '../service/food-service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
+import { TransferService } from '../service/transfer-service';
 
 @Component({
   selector: 'app-category-products',
@@ -12,18 +11,18 @@ import { ShoppingCartService } from '../service/shopping-cart.service';
   styleUrls: ['./category-products.component.css']
 })
 export class CategoryProductsComponent implements OnInit {
-  public categories!: Observable<FoodCategory[]>;
-  public foods!: Observable<Food[]>;
-  constructor(private foodService: FoodService, private shoppingCartService: ShoppingCartService, private categoryService: CategoryService) { }
+  public foods!: Food[];
+  public categoryName: String = "";
+  constructor(private categoryService: CategoryService, private shoppingCartService: ShoppingCartService, private transferService: TransferService) {
+  }
 
   ngOnInit(): void {
-    this.categories = this.categoryService.getAll();
-    console.log(this.categoryService.getAll());
-    this.foods = this.foodService.getFoodsInCategory(this.categories);
-    console.log(this.foodService.getFoodsInCategory(this.categories));
+    this.categoryName = this.transferService.retrieveString();
+    this.categoryService.getFoodsInCategory(this.categoryName).subscribe(value => this.foods = value);
   }
 
   addFood(food: any) {
     this.shoppingCartService.addToCart(food);
   }
+
 }

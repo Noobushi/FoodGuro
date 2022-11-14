@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.10.2",
     "angular-notifier": "^11.0.0",
     "bootstrap": "^5.2.0",
+    "ngx-navigation-with-data": "^2.0.0",
     "package_name": "^1.0.2",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",

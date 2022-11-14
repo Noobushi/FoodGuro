@@ -12,4 +12,6 @@ export class Food {
         this.price = price;
         this.description = description;
     }
+
+
 }
