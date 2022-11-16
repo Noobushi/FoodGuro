@@ -44,7 +44,9 @@ public class FoodServiceImpl extends BaseService {
     @Transactional
     public FoodResponseDTO deleteFood(FoodServiceDTO input) {
         Food foundFood = foodRepository.findFoodByName(input.getName());
-        checkIfNull(foundFood, input.getName());
+        foundFood.getImage().forEach(image -> imageRepository.deleteById(image.getId()));
+        foundFood.setImage(new ArrayList<>());
+        checkIfNull(foundFood,input.getName());
         foodRepository.deleteFood(foundFood.getId());
         FoodResponseDTO deletedFood = modelMapper.map(foundFood, FoodResponseDTO.class);
         return deletedFood;
@@ -84,8 +86,6 @@ public class FoodServiceImpl extends BaseService {
 
     public List<ImageDataBaseServiceDTO> getAllImagesForFood(String foodName){
         Food foundFood= findByName(foodName);
-//        List<ImageDataBase> images = foundFood.getImage();
-//        return images;
         return foundFood.getImage().stream().map(image -> modelMapper.map(image, ImageDataBaseServiceDTO.class)
         ).collect(Collectors.toList());
 

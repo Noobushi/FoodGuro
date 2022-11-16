@@ -1,6 +1,9 @@
 package com.example.demo.dto.foodDTO;
 
+import com.example.demo.entity.ImageDataBase;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class FoodResponseDTO {
 
@@ -13,6 +16,9 @@ public class FoodResponseDTO {
     private BigDecimal price;
 
     private String description;
+
+    private List<ImageDataBase> image;
+
 
     public FoodResponseDTO() {
     }
@@ -55,5 +61,13 @@ public class FoodResponseDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<ImageDataBase> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageDataBase> image) {
+        this.image = image;
     }
 }
