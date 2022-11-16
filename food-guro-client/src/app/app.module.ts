@@ -38,6 +38,7 @@ import { CategoryProductsComponent } from './category-products/category-products
 import { NgxNavigationWithDataComponent } from "ngx-navigation-with-data";
 import { TransferService } from './service/transfer-service';
 
+
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {

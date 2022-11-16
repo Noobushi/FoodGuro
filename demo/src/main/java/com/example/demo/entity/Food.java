@@ -2,11 +2,11 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
 public class Food extends BaseEntity {
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -17,6 +17,10 @@ public class Food extends BaseEntity {
 
     @Lob
     private String description;
+
+    @OneToMany(targetEntity = ImageDataBase.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "food_id")
+    private List<ImageDataBase> image;
 
     public Food() {
     }
@@ -51,5 +55,13 @@ public class Food extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<ImageDataBase> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageDataBase> image) {
+        this.image = image;
     }
 }

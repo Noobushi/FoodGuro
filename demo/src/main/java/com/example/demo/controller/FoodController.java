@@ -2,14 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.foodDTO.FoodResponseDTO;
 import com.example.demo.dto.foodDTO.FoodServiceDTO;
+import com.example.demo.dto.imageDataBaseDTO.ImageDataBaseServiceDTO;
+import com.example.demo.entity.ImageDataBase;
 import com.example.demo.service.FoodServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/food")
@@ -38,5 +39,11 @@ public class FoodController extends BaseController {
     public ResponseEntity<FoodResponseDTO> editFood(@RequestBody FoodServiceDTO foodServiceDTO) {
         return new ResponseEntity<>(foodServiceImpl.editFood(foodServiceDTO), HttpStatus.CREATED);
     }
+
+    @GetMapping("/allImages")
+    public ResponseEntity<List<ImageDataBaseServiceDTO>> getAllImagesForFood(@RequestParam String foodName) {
+        return new ResponseEntity<>(foodServiceImpl.getAllImagesForFood(foodName), HttpStatus.OK);
+    }
+
 
 }

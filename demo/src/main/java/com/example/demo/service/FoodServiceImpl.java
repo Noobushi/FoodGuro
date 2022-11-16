@@ -1,23 +1,33 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.foodDTO.FoodResponseDTO;
+import com.example.demo.dto.imageDataBaseDTO.ImageDataBaseServiceDTO;
 import com.example.demo.entity.Food;
 import com.example.demo.entity.FoodCategory;
 import com.example.demo.dto.foodDTO.FoodServiceDTO;
+import com.example.demo.entity.ImageDataBase;
 import com.example.demo.repository.FoodRepository;
+import com.example.demo.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FoodServiceImpl extends BaseService {
     private final FoodCategoryServiceImpl foodCategoryService;
     private final FoodRepository foodRepository;
 
+    private final ImageRepository imageRepository;
+
     @Autowired
-    public FoodServiceImpl(FoodCategoryServiceImpl foodCategoryService, FoodRepository foodRepository) {
+    public FoodServiceImpl(FoodCategoryServiceImpl foodCategoryService, FoodRepository foodRepository, ImageRepository imageRepository) {
         this.foodCategoryService = foodCategoryService;
         this.foodRepository = foodRepository;
+        this.imageRepository = imageRepository;
     }
 
     @Transactional
@@ -64,5 +74,20 @@ public class FoodServiceImpl extends BaseService {
         Food foundFood = foodRepository.findFoodByName(foodName);
         checkIfNull(foundFood,foodName);
         return foundFood;
+    }
+
+    public ImageDataBase findImageWithName(String imageName){
+        ImageDataBase foundImage = imageRepository.findImageByName(imageName);
+        checkIfNull(foundImage,imageName);
+        return foundImage;
+    }
+
+    public List<ImageDataBaseServiceDTO> getAllImagesForFood(String foodName){
+        Food foundFood= findByName(foodName);
+//        List<ImageDataBase> images = foundFood.getImage();
+//        return images;
+        return foundFood.getImage().stream().map(image -> modelMapper.map(image, ImageDataBaseServiceDTO.class)
+        ).collect(Collectors.toList());
+
     }
 }

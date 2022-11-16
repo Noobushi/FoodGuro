@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.entity.Food;
-import com.example.demo.entity.FoodCategory;
-import com.example.demo.entity.User;
-import com.example.demo.entity.UserRoles;
+import com.example.demo.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -26,6 +24,7 @@ public class DBInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
         List<FoodCategory> foodCategoryList = em.createQuery("from FoodCategory", FoodCategory.class).setMaxResults(1).getResultList();
         FoodCategory meatCategory = new FoodCategory();
         FoodCategory veggiesCategory = new FoodCategory();
@@ -34,6 +33,7 @@ public class DBInitializer implements CommandLineRunner {
             em.persist(meatCategory);
             veggiesCategory.setName("Veggies");
             em.persist(veggiesCategory);
+
         }
 
         List<Food> foodList = em.createQuery("from Food", Food.class).setMaxResults(1).getResultList();
@@ -43,6 +43,7 @@ public class DBInitializer implements CommandLineRunner {
             steak.setName("Steak");
             steak.setPrice(new BigDecimal("3.99"));
             steak.setDescription("Medium-rare pork steak");
+            steak.setImage(new ArrayList<>());
             em.persist(steak);
 
             Food chicken = new Food();
@@ -50,6 +51,7 @@ public class DBInitializer implements CommandLineRunner {
             chicken.setName("Chicken");
             chicken.setPrice(new BigDecimal("2.99"));
             chicken.setDescription("Crispy chicken");
+            chicken.setImage(new ArrayList<>());
             em.persist(chicken);
 
             Food carrots = new Food();
@@ -57,6 +59,7 @@ public class DBInitializer implements CommandLineRunner {
             carrots.setName("Carrots");
             carrots.setPrice(new BigDecimal("1.50"));
             carrots.setDescription("Chopped with olive oil");
+            carrots.setImage(new ArrayList<>());
             em.persist(carrots);
 
             Food apple = new Food();
@@ -64,7 +67,42 @@ public class DBInitializer implements CommandLineRunner {
             apple.setName("Apple");
             apple.setPrice(new BigDecimal("1.20"));
             apple.setDescription("Sweet red apple");
+            apple.setImage(new ArrayList<>());
             em.persist(apple);
+
+            List<ImageDataBase> steakImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+            List<ImageDataBase> chickenImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+            List<ImageDataBase> carrotsImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+            List<ImageDataBase> imageDataBaseList4 = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+
+            ImageDataBase steakImage = new ImageDataBase();
+            ImageDataBase chickenImage = new ImageDataBase();
+            ImageDataBase carrotsImage = new ImageDataBase();
+            ImageDataBase appleImage = new ImageDataBase();
+
+            steakImage.setName("SteakImage");
+            em.persist(steakImage);
+
+            chickenImage.setName("ChickenImage");
+            em.persist(chickenImage);
+
+            carrotsImage.setName("CarrotsImage");
+            em.persist(carrotsImage);
+
+            appleImage.setName("AppleImage");
+            em.persist(appleImage);
+
+            steakImagesList.add(steakImage);
+            steak.getImage().addAll(steakImagesList);
+
+            chickenImagesList.add(chickenImage);
+            chicken.getImage().addAll(chickenImagesList);
+
+            carrotsImagesList.add(carrotsImage);
+            carrots.getImage().addAll(carrotsImagesList);
+
+            imageDataBaseList4.add(appleImage);
+            apple.getImage().addAll(imageDataBaseList4);
         }
 
         List<User> userList = em.createQuery("from User", User.class).setMaxResults(1).getResultList();

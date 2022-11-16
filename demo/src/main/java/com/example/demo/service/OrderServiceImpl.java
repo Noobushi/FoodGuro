@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.foodDTO.FoodServiceDTO;
 import com.example.demo.dto.orderFoodDTO.OrderFoodResponseDTO;
 import com.example.demo.entity.Food;
 import com.example.demo.entity.OrderFood;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
