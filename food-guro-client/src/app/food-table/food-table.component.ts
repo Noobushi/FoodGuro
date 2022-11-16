@@ -54,7 +54,8 @@ export class FoodTableComponent {
       name: nameForm.name,
       foodCategory: nameForm.foodCategory,
       price: nameForm.price,
-      description: nameForm.description
+      description: nameForm.description,
+      images: nameForm.images
     };
     this.foodService.edit(food).subscribe(x => {
       this.notifierService.notify("success", `Food ${x.name} updated successfully!`);

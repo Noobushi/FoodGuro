@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../food';
 import { CategoryService } from '../service/category.service';
-import { FoodService } from '../service/food-service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { TransferService } from '../service/transfer-service';
 

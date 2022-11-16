@@ -16,7 +16,7 @@ export class ShoppingCartService {
   addToCart(food: Food) {
     const foundFood: ShoppingCartItem[] = this.shoppingCartList.filter(product => product.id === food.id)
     if (foundFood.length === 0) {
-      const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description);
+      const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description, food.images);
       this.shoppingCartList.push(newCartItem);
     }
     else {

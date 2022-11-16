@@ -15,4 +15,8 @@
         <br><button (click)="addFood(shoppingCartItem)" class="btn btn-primary details">Add to cart</button>
         <br><br><button routerLink="/checkout" class="btn btn-primary details">Back to checkout</button>
     </div>
+    <div *ngFor="let image of images">
+        {{image.name}}
+
+    </div>
 </div>
