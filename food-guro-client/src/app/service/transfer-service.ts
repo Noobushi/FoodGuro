@@ -6,8 +6,8 @@ export class TransferService {
     constructor() {
 
     }
-    saveString(produIds: any) {
-        this.myString = produIds;
+    saveString(text: any) {
+        this.myString = text;
     }
     retrieveString() {
         return this.myString;

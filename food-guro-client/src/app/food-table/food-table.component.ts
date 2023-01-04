@@ -3,7 +3,7 @@ import { FoodCategory } from '../food-category';
 import { FoodService } from '../service/food-service';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Food } from '../food';
 
 @Component({
@@ -55,7 +55,7 @@ export class FoodTableComponent {
       foodCategory: nameForm.foodCategory,
       price: nameForm.price,
       description: nameForm.description,
-      images: nameForm.images
+      image: nameForm.image
     };
     this.foodService.edit(food).subscribe(x => {
       this.notifierService.notify("success", `Food ${x.name} updated successfully!`);

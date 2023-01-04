@@ -3,7 +3,7 @@
         <div class="productName">
             {{shoppingCartItem.name}}
         </div>
-        <img class="productImage" src=assets\pictures\loginPageBackground.jpg>
+        <img class="productImage" [src]="imagePath">
         <div class="productDescription">
             <a style="font-size: 40px; ">Description</a>
             <br>{{shoppingCartItem.description}}
@@ -14,9 +14,5 @@
         </div>
         <br><button (click)="addFood(shoppingCartItem)" class="btn btn-primary details">Add to cart</button>
         <br><br><button routerLink="/checkout" class="btn btn-primary details">Back to checkout</button>
-    </div>
-    <div *ngFor="let image of images">
-        {{image.name}}
-
     </div>
 </div>

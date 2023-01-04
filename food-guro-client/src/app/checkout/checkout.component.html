@@ -15,12 +15,13 @@
         </tr>
         <tr *ngFor="let shoppingCartItem of checkoutList">
             <td style="text-align:left;">
-                <div class="product-image" [routerLink]="['/productDetails', shoppingCartItem.id]">
-                    <img src=assets\pictures\loginPageBackground.jpg width="81">
-                </div>
-                <div style="margin-top:10px;">
+                <div class="table-product-description">
                     {{shoppingCartItem.name}} : {{shoppingCartItem.description}}
+                    <p class="product-view-details" [routerLink]="['/productDetails', shoppingCartItem.id]">
+                        View Details
+                    </p>
                 </div>
+
             </td>
             <td class="sc_col"></td>
             <td class="sc_col">

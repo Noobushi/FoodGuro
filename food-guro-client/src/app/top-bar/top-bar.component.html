@@ -1,25 +1,43 @@
-<a class="guroTextLogo" [routerLink]="['/']">FoodGuro</a>
+<div class="row-lg-9">
 
-<img class="guroLogo" src="assets/pictures/guro-logo.png" alt="GuroLogoIcon">
+  <div class="col-auto logoTextContainer">
+    <a class="guroTextLogo" [routerLink]="['/']">
+      FoodGuro
+    </a>
+  </div>
 
-<button class="btn registerButton" name="Register" routerLink="/register" *ngIf="!this.isLoggedIn">
-  Register
-</button>
+  <div class="col-auto logoContainer">
+    <img class="guroLogo" src="assets/pictures/guro-logo.png" alt="GuroLogoIcon">
+  </div>
 
-<button class="btn loginButton" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn">
-  Login
-</button>
+  <div class="col-auto buttonsContainer">
 
-<button class="btn logoutButton" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()">
-  Logout
-</button>
+    <button class="btn registerButton" name="Register" routerLink="/register" *ngIf="!this.isLoggedIn">
+      Register
+    </button>
 
-<button class="btn adminMenuButton" routerLink="/adminMenu" name="adminMenu" *ngIf="isAdmin()">
-  Admin Menu
-</button>
+    <button class="btn loginButton" routerLink="/login" name="Login" *ngIf="!this.isLoggedIn">
+      Login
+    </button>
 
+    <button class="btn logoutButton" routerLink="/" name="Logout" *ngIf="this.isLoggedIn" (click)="logMeOut()">
+      Logout
+    </button>
+  </div>
 
-<a class="btn checkoutButton" style="color: rgb(0, 0, 0);" *ngIf="this.isLoggedIn" routerLink="/checkout">
-  <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="ShoppingCartIcon">
-  Checkout
-</a>
+  <div class="col-auto adminContainer">
+
+    <button class="btn adminMenuButton" routerLink="/adminMenu" *ngIf="isAdmin()">
+      Admin Menu
+    </button>
+  </div>
+
+  <div class="col-auto cartContainer">
+
+    <a class="btn checkoutButton" *ngIf="this.isLoggedIn" routerLink="/checkout">
+      <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="ShoppingCartIcon">
+      Checkout
+    </a>
+  </div>
+
+</div>

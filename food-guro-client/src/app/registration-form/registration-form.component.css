@@ -1,0 +1,21 @@
+.labels {
+    color: aliceblue;
+    font-weight: bold;
+    font-size: large;
+}
+
+.form-control {
+    margin: 10px;
+    margin-left: 0px;
+}
+
+::placeholder {
+    font-style: italic;
+    opacity: 0.4;
+}
+
+.alert {
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+}

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Food } from '../food';
 import { FoodCategory } from '../food-category';
+import { FoodImages } from '../food-images';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class CategoryService {
 
   public getFoodsInCategory(foodCategory: String): Observable<Food[]> {
     return this.http.get<Food[]>(`${this.host}/api/foodCategory/allFoods?category=${foodCategory}`);
+  }
+
+  public getAllImages(categoryId: number): Observable<FoodImages[]> {
+    return this.http.get<FoodImages[]>(`${this.host}/api/foodCategory/allImages?categoryId=${categoryId}`)
   }
 }

@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
-
 import { RouterModule } from '@angular/router';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { FoodAlertsComponent } from './food-alerts/food-alerts.component';
 import { FoodService } from './service/food-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListCategoryComponent } from './list-category/list-category.component';
@@ -24,19 +21,13 @@ import { FoodTableComponent } from './food-table/food-table.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './service/auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
-import { ButtonModule } from 'primeng/button';
-import { PanelModule } from 'primeng/panel';
-import { DropdownModule } from 'primeng/dropdown';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { RatingModule } from 'primeng/rating';
-import { RippleModule } from 'primeng/ripple';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
-import { NgxNavigationWithDataComponent } from "ngx-navigation-with-data";
 import { TransferService } from './service/transfer-service';
+import { AppRoutingModule } from './app-routing.module';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -79,6 +70,7 @@ const customNotifierOptions: NotifierOptions = {
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -86,31 +78,12 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
-    PanelModule,
-    DialogModule,
-    DropdownModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    RatingModule,
-    RouterModule.forRoot([
-      { path: '', component: CarouselComponent },
-      { path: 'register', component: RegisterUserComponent },
-      { path: 'login', component: LoginUserComponent },
-      { path: 'category', component: ListCategoryComponent },
-      { path: 'adminMenu', component: AdminMenuComponent },
-      { path: 'checkout', component: CheckoutComponent },
-      { path: 'productDetails/:id', component: ProductDetailsComponent },
-      { path: 'categoryProducts', component: CategoryProductsComponent }
-
-    ]),
     NgbModule
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
     ListCategoryComponent,
-    FoodAlertsComponent,
     RegisterUserComponent,
     LoginUserComponent,
     CarouselComponent,
@@ -120,10 +93,11 @@ const customNotifierOptions: NotifierOptions = {
     CheckoutComponent,
     ProductDetailsComponent,
     CategoryProductsComponent,
+    RegistrationFormComponent,
   ],
   providers: [
+    RouterModule,
     TransferService,
-    NgxNavigationWithDataComponent,
     FoodService,
     UserService,
     ShoppingCartService,

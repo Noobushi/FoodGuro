@@ -8,20 +8,22 @@ import { ShoppingCartItem } from '../shopping-cart-item';
 export class ShoppingCartService {
   shoppingCartList: ShoppingCartItem[];
   discount: number = 0;
-
+  foundFood: ShoppingCartItem[] = [];
   constructor() {
     this.shoppingCartList = [];
   }
 
   addToCart(food: Food) {
-    const foundFood: ShoppingCartItem[] = this.shoppingCartList.filter(product => product.id === food.id)
-    if (foundFood.length === 0) {
-      const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description, food.images);
+    this.foundFood = this.shoppingCartList.filter(product => product.id === food.id)
+    if (this.foundFood.length === 0) {
+      const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description, food.image);
       this.shoppingCartList.push(newCartItem);
+
     }
     else {
-      foundFood[0].quantity++;
+      this.foundFood[0].quantity++;
     }
+
   }
 
   removeFromCart(cartItem: ShoppingCartItem) {
@@ -43,6 +45,7 @@ export class ShoppingCartService {
   getProduct(productId: number) {
     return this.shoppingCartList.filter(e => e.id == productId);
   }
+
 
 }
 

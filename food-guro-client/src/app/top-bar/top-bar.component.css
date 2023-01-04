@@ -1,61 +1,69 @@
-.registerButton {
-    position: absolute;
-    left: 240px;
-    top: 18px;
-    background-color: rgba(240, 182, 24, 0.966);
-    color: black;
+.row-lg-9 {
+    display: flex;
+    align-items: center;
 }
 
-.loginButton {
-    position: absolute;
-    left: 340px;
-    top: 18px;
-    background-color: rgb(240, 182, 24);
-    color: black;
-    height: 35spx;
-    width: 70px;
-}
-
-.logoutButton {
-    position: absolute;
-    left: 240px;
-    top: 18px;
-    background-color: rgb(240, 182, 24);
-    color: black;
-    height: 35spx;
-    width: 70px;
-}
-
-.guroLogo {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    left: 170px;
-    top: 10px;
-    border: none;
-}
-
-.shoppingCart {
-    width: 30px;
-    height: 25px;
+.logoTextContainer {
+    display: flex;
+    width: 160px;
+    justify-content: flex-start;
 }
 
 .guroTextLogo {
     color: rgb(255, 157, 0);
     font-weight: bolder;
     font-size: 32px;
-    text-decoration: none;
 }
 
-.checkoutButton {
-    background-color: white;
-    color: #1976d2;
-    padding-right: 10px;
-    padding-left: 3px;
+.logoContainer {
+    display: flex;
+    width: 80px;
+    justify-content: center;
+}
+
+.guroLogo {
+    width: 50px;
+    height: 50px;
+}
+
+.buttonsContainer {
+    display: flex;
+    width: 350px;
+    justify-content: flex-start;
+}
+
+.loginButton,
+.registerButton,
+.logoutButton {
+    background-color: rgb(240, 182, 24);
+    color: black;
+    margin-right: 20px;
+}
+
+.adminContainer {
+    display: flex;
+    width: 300px;
+    justify-content: center;
 }
 
 .adminMenuButton {
     background-color: #1976d2;
     color: white;
-    padding: 8px 16px;
+}
+
+.cartContainer {
+    display: flex;
+    width: 600px;
+    justify-content: flex-end;
+}
+
+.shoppingCart {
+    width: 30px;
+    height: 25px;
+    padding-right: 5px;
+}
+
+.checkoutButton {
+    background-color: white;
+    color: black;
 }

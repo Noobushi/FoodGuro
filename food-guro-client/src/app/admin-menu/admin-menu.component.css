@@ -1,4 +1,36 @@
-.adminMenuPage {
-    margin-left: 20px;
-    margin-top: 15px;
+.container-fluid {
+    background-color: antiquewhite;
+}
+
+.dropdownMenu {
+    background-color: #1976d2;
+    padding: 0px;
+    border-radius: 10px;
+}
+
+.dropdownItemMenu:hover {
+    background-color: rgb(95, 84, 84);
+    border-radius: 10px;
+}
+
+.dropdownItemMenu {
+    color: white;
+}
+
+.manageMenu {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+p {
+    color: rgb(73, 68, 68);
+    font-size: 35px;
+}
+
+.modal-header {
+    background-color: #1976d2;
+}
+
+h3 {
+    color: black;
 }
