@@ -88,6 +88,5 @@ public class FoodServiceImpl extends BaseService {
         Food foundFood= findByName(foodName);
         return foundFood.getImage().stream().map(image -> modelMapper.map(image, ImageDataBaseServiceDTO.class)
         ).collect(Collectors.toList());
-
     }
 }

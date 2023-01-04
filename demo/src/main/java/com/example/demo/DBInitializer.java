@@ -24,16 +24,15 @@ public class DBInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
         List<FoodCategory> foodCategoryList = em.createQuery("from FoodCategory", FoodCategory.class).setMaxResults(1).getResultList();
         FoodCategory meatCategory = new FoodCategory();
         FoodCategory veggiesCategory = new FoodCategory();
         if (foodCategoryList.isEmpty()) {
             meatCategory.setName("Meat");
             em.persist(meatCategory);
+
             veggiesCategory.setName("Veggies");
             em.persist(veggiesCategory);
-
         }
 
         List<Food> foodList = em.createQuery("from Food", Food.class).setMaxResults(1).getResultList();
@@ -73,23 +72,23 @@ public class DBInitializer implements CommandLineRunner {
             List<ImageDataBase> steakImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
             List<ImageDataBase> chickenImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
             List<ImageDataBase> carrotsImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
-            List<ImageDataBase> imageDataBaseList4 = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+            List<ImageDataBase> appleImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
 
             ImageDataBase steakImage = new ImageDataBase();
             ImageDataBase chickenImage = new ImageDataBase();
             ImageDataBase carrotsImage = new ImageDataBase();
             ImageDataBase appleImage = new ImageDataBase();
 
-            steakImage.setName("SteakImage");
+            steakImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771100/steakImage_jrthpa.jpg");
             em.persist(steakImage);
 
-            chickenImage.setName("ChickenImage");
+            chickenImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771078/chickenImage_mhnr8h.png");
             em.persist(chickenImage);
 
-            carrotsImage.setName("CarrotsImage");
+            carrotsImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771084/carrotsImage_mydx7s.jpg");
             em.persist(carrotsImage);
 
-            appleImage.setName("AppleImage");
+            appleImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771088/appleImage_gsdumf.jpg");
             em.persist(appleImage);
 
             steakImagesList.add(steakImage);
@@ -101,8 +100,8 @@ public class DBInitializer implements CommandLineRunner {
             carrotsImagesList.add(carrotsImage);
             carrots.getImage().addAll(carrotsImagesList);
 
-            imageDataBaseList4.add(appleImage);
-            apple.getImage().addAll(imageDataBaseList4);
+            appleImagesList.add(appleImage);
+            apple.getImage().addAll(appleImagesList);
         }
 
         List<User> userList = em.createQuery("from User", User.class).setMaxResults(1).getResultList();

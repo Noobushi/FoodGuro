@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,4 +30,5 @@ public class FoodCategory extends BaseEntity{
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
+
 }

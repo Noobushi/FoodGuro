@@ -40,4 +40,5 @@ public class FoodCategoryController extends BaseController{
     public ResponseEntity<List<FoodServiceDTO>> getAllFoodsInCategory( @RequestParam String category) {
         return new ResponseEntity<>(foodCategoryServiceImpl.getFoodsInCategory(category), HttpStatus.OK);
     }
+
 }
