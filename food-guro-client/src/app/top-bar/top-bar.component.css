@@ -1,3 +1,5 @@
+@import "~animate.css/animate.css";
+
 .row-lg-9 {
     display: flex;
     align-items: center;
@@ -5,14 +7,28 @@
 
 .logoTextContainer {
     display: flex;
-    width: 160px;
+    width: 130px;
     justify-content: flex-start;
 }
 
 .guroTextLogo {
-    color: rgb(255, 157, 0);
     font-weight: bolder;
+    font-family: cursive;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px black;
     font-size: 32px;
+}
+
+.guroTextLogo:hover {
+    -webkit-text-fill-color: orange;
+    -webkit-text-stroke-width: 3px;
+}
+
+.guroTextLogo:focus {
+    -webkit-text-fill-color: orange;
+    -webkit-text-stroke-width: 3px;
+    animation-name: pulse;
+    animation-duration: 1s;
 }
 
 .logoContainer {
@@ -24,6 +40,18 @@
 .guroLogo {
     width: 50px;
     height: 50px;
+}
+
+.guroLogo:hover {
+    animation-name: pulse;
+    animation-duration: 1s;
+}
+
+.angryGuroLogo {
+    width: 50px;
+    height: 50px;
+    animation-name: tada;
+    animation-duration: 1.5s;
 }
 
 .buttonsContainer {

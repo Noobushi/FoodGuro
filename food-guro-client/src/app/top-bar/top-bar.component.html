@@ -7,7 +7,8 @@
   </div>
 
   <div class="col-auto logoContainer">
-    <img class="guroLogo" src="assets/pictures/guro-logo.png" alt="GuroLogoIcon">
+    <img src="assets/pictures/angryGuroLogo.png" alt="angryGuroLogoIcon" class="angryGuroLogo" *ngIf="isAnnoyed">
+    <img class="guroLogo" src={{logoImageIcon}} alt="GuroLogoIcon" (click)="clickCounter()" *ngIf="isAnnoyed==false">
   </div>
 
   <div class="col-auto buttonsContainer">

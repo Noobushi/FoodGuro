@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { User } from '../user';
 
@@ -10,8 +9,12 @@ import { User } from '../user';
 })
 export class TopBarComponent implements OnInit {
   isLoggedIn!: boolean;
-  user!: User | null
-  constructor(private authService: AuthService, private router: Router) { }
+  user!: User | null;
+  isAnnoyed: boolean = false;
+  counter: number = 0;
+  logoImageIcon: string = "assets/pictures/guro-logo.png";
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.userSubject.subscribe(u => {
@@ -31,6 +34,39 @@ export class TopBarComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  clickCounter() {
+    this.counter++;
+    if (this.counter > 6) {
+      this.isAnnoyed = true;
+    }
+    switch (this.counter) {
+      case 1: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageOne.png";
+        break;
+      }
+      case 2: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageTwo.png";
+        break;
+      }
+      case 3: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageThree.png";
+        break;
+      }
+      case 4: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageFour.png";
+        break;
+      }
+      case 5: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageFive.png";
+        break;
+      }
+      case 6: {
+        this.logoImageIcon = "assets/pictures/angryGuroLogoStageSix.png";
+        break;
+      }
+    }
   }
 
 }
