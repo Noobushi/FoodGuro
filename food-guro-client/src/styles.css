@@ -1,5 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~angular-notifier/styles";
+/* @import "~angular-notifier/styles"; */
+@import "node_modules/angular-notifier/styles";
 @import "~animate.css/animate.css";
 
 * {
