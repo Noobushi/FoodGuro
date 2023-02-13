@@ -1,10 +1,10 @@
 import { Food } from "./food";
 
-export class Order{
+export class Order {
     id!: number;
     username!: string;
     foods: Food[] = [];
-    public constructor(){
+    public constructor() {
 
     }
 }

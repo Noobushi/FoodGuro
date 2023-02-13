@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodImages } from '../food-images';
+import { FoodImages } from '../classes/food-images';
 import { CategoryService } from '../service/category.service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
-import { ShoppingCartItem } from '../shopping-cart-item';
+import { ShoppingCartItem } from '../classes/shopping-cart-item';
 
 @Component({
   selector: 'app-checkout',

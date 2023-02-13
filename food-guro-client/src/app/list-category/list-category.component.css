@@ -1,18 +1,88 @@
-.mainPage {
-  background-image: url("src/assets/pictures/homePageBackground.jpg");
+@import "~animate.css/animate.css";
+
+.container-fluid {
+  text-align: center;
 }
 
-.list-group-item {
-  background-color: rgb(9, 9, 9);
+.mainContainer {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.media {
-  background-color: rgb(255, 250, 250);
-  border-radius: 0%;
+.mat-grid-tile {
+  border-color: black;
+  border-style: solid;
 }
 
-.topic {
-  color: whitesmoke;
-  font-size: 60px;
+.content {
+  width: 100%;
+  text-align: center;
+}
+
+.contentBrowse {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  background-image: url("src/assets/pictures/101Foods.jpg");
+  -webkit-text-fill-color: orange;
+  -webkit-text-stroke: 3px black;
+  border-color: black;
+  border-style: solid;
+  border-width: 5px;
+  align-content: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 50px;
+}
+
+.contentSpan {
+  font-family: cursive;
+  font-size: 20px;
+}
+
+.imageFormat {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* SIDEBAR */
+
+.mat-drawer {
+  width: 250px;
+}
+
+.container-fluid {
+  height: 100%;
+  padding: 0;
+  justify-content: center;
+  background-image: url("src/assets/pictures/sidebarBackground.jpg");
+}
+
+.row-lg {
   font-weight: bolder;
+  font-family: cursive;
+  -webkit-text-fill-color: rgb(240, 182, 24);
+  -webkit-text-stroke: 2px black;
+  font-size: 30px;
+  background-color: rgb(9, 9, 9, 0.3);
+}
+
+.row-lg:hover {
+  animation-name: jello;
+  animation-duration: 1s;
+}
+
+.title {
+  font-weight: bolder;
+  font-family: cursive;
+  -webkit-text-fill-color: rgb(105, 72, 9);
+  -webkit-text-stroke: 2px black;
+  font-size: 30px;
+}
+
+.separator {
+  height: 30px;
 }

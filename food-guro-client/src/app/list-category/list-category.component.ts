@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
-import { FoodCategory } from '../food-category';
+import { FoodCategory } from '../classes/food-category';
 import { CategoryService } from '../service/category.service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { TransferService } from '../service/transfer-service';
@@ -19,8 +19,6 @@ export class ListCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAll();
-
-
   }
 
   addFood(food: any) {
@@ -31,6 +29,5 @@ export class ListCategoryComponent implements OnInit {
   getCategory(name: String) {
     this.transferService.saveString(name);
   }
-
 
 }

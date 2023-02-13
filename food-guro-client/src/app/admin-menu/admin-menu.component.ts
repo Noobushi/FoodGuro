@@ -3,8 +3,8 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../service/category.service';
 import { NotifierService } from 'angular-notifier';
 import { FoodService } from '../service/food-service';
-import { FoodCategory } from '../food-category';
-import { User } from '../user';
+import { FoodCategory } from '../classes/food-category';
+import { User } from '../classes/user';
 import { UserService } from '../service/user.service';
 
 @Component({

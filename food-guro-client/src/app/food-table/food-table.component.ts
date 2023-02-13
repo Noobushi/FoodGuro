@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { FoodCategory } from '../food-category';
+import { FoodCategory } from '../classes/food-category';
 import { FoodService } from '../service/food-service';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Food } from '../food';
+import { Food } from '../classes/food';
 
 @Component({
   selector: 'app-food-table',

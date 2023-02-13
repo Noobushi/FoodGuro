@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Food } from '../food';
-import { FoodCategory } from '../food-category';
-import { FoodImages } from '../food-images';
+import { Food } from '../classes/food';
+import { FoodCategory } from '../classes/food-category';
+import { FoodImages } from '../classes/food-images';
 
 @Injectable({
   providedIn: 'root'

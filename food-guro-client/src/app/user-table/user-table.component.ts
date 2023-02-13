@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { UserService } from '../service/user.service';
-import { User } from '../user';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-user-table',

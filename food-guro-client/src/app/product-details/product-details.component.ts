@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { FoodImages } from '../food-images';
+import { FoodImages } from '../classes/food-images';
 import { FoodService } from '../service/food-service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
-import { ShoppingCartItem } from '../shopping-cart-item';
+import { ShoppingCartItem } from '../classes/shopping-cart-item';
 
 @Component({
   selector: 'app-product-details',

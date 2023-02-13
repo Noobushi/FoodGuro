@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user';
+import { User } from '../classes/user';
 import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../service/auth.service';
 import { take } from 'rxjs';

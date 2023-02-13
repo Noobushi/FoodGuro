@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FoodService } from './service/food-service';
@@ -28,7 +27,8 @@ import { CategoryProductsComponent } from './category-products/category-products
 import { TransferService } from './service/transfer-service';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -78,7 +78,9 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MatSidenavModule,
+    MatGridListModule
   ],
   declarations: [
     AppComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
-import { Food } from '../food';
+import { Food } from '../classes/food';
 import { CategoryService } from '../service/category.service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { TransferService } from '../service/transfer-service';

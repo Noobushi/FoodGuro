@@ -1,26 +1,28 @@
-<ngb-carousel>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img class="carouselInner sliderCategory">
-    </div>
-    <div class="carousel-caption">
-      <p class="carouselCategories">Categories</p>
-      <p class="carouselDescription">Chose from vast variety of foods suited for every taste</p>
-      <a routerLink="/category">Continue to the categories page.</a>
-    </div>
-  </ng-template>
-
-  <ng-template ngbSlide *ngIf="!this.isLoggedIn">
-    <div class="picsum-img-wrapper">
-      <img class="carouselInner sliderUser">
-    </div>
-    <div class="jumbotron-fluid">
-      <div class="carousel-caption">
-        <p class="carouselUser">Login/Register</p>
-        <a class="links" routerLink="/register">Create your profile and join our community.</a><br>
-        <strong style="color: rgb(183, 192, 187); font-size:large;">OR</strong><br>
-        <a class="links" routerLink="/login">Login with an existing account.</a>
+<div class="container-fluid">
+  <ngb-carousel>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img class="carouselInner sliderCategory">
       </div>
-    </div>
-  </ng-template>
-</ngb-carousel>
+      <div class="carousel-caption">
+        <p class="carouselCategories">Categories</p>
+        <p class="carouselDescription">Chose from vast variety of foods suited for every taste</p>
+        <a routerLink="/category">Continue to the categories page.</a>
+      </div>
+    </ng-template>
+
+    <ng-template ngbSlide *ngIf="!this.isLoggedIn">
+      <div class="picsum-img-wrapper">
+        <img class="carouselInner sliderUser">
+      </div>
+      <div class="jumbotron-fluid">
+        <div class="carousel-caption">
+          <p class="carouselUser">Login/Register</p>
+          <a class="links" routerLink="/register">Create your profile and join our community.</a><br>
+          <strong style="color: rgb(183, 192, 187); font-size:large;">OR</strong><br>
+          <a class="links" routerLink="/login">Login with an existing account.</a>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>

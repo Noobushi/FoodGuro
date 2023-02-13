@@ -1,3 +1,11 @@
+.container-fluid {
+  background-image: url("src/assets/pictures/slider-category.jpg");
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  position: absolute;
+}
+
 .sliderCategory {
   background-image: url("src/assets/pictures/slider-category.jpg");
   background-size: cover;

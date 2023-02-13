@@ -1,11 +1,12 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-/* @import "~angular-notifier/styles"; */
 @import "node_modules/angular-notifier/styles";
 @import "~animate.css/animate.css";
 
 * {
   font-family: 'Roboto', Arial, sans-serif;
 }
+
+
 
 a {
   cursor: pointer;
