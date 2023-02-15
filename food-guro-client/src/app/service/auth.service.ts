@@ -43,6 +43,7 @@ export class AuthService {
   saveJwtToken(token: string) {
     localStorage.setItem("token", token);
   }
+
   getUser(): User {
     const userString = localStorage.getItem("user");
     return JSON.parse(userString!);

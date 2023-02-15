@@ -1,124 +1,37 @@
-<div class="checkoutMenu">
-    <div style="margin-left:10px; font-size: 25px;"><strong>Your order:</strong></div>
-    <div *ngIf="checkoutList.length < 1" style="margin-left:10px; font-size:20px;"><strong>Your cart is empty!</strong></div>
-    <table *ngIf="checkoutList.length!==0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td style="width: 500px;">Product</td>
-            <td style="width: 1px;"></td>
-            <td style="width: 120px;">Quantity</td>
-            <td style="width: 1px;"></td>
-            <td style="width: 100px;">Price</td>
-            <td style="width: 1px;"></td>
-            <td style="width: 100px;">Discount</td>
-            <td style="width: 1px;"></td>
-            <td style="width: 100px;">Total</td>
-        </tr>
-        <tr *ngFor="let shoppingCartItem of checkoutList">
-            <td style="text-align:left;">
-                <div class="table-product-description">
-                    {{shoppingCartItem.name}} : {{shoppingCartItem.description}}
-                    <p class="product-view-details" [routerLink]="['/productDetails', shoppingCartItem.id]">
-                        View Details
-                    </p>
-                </div>
-
-            </td>
-            <td class="sc_col"></td>
-            <td class="sc_col">
-                <div style="padding-top: 10px;">
-                    <div class="quantityCell">
-                        <div class="btn_minus"><img src=assets\pictures\minus.png (click)="decrease(shoppingCartItem)"></div>
-                        <div class="ml-3 mr-3">{{shoppingCartItem.quantity}}</div>
-                        <div class="btn_plus"><img src=assets\pictures\plus.png (click)="increase(shoppingCartItem)"></div>
-                    </div>
-                </div>
-            </td>
-            <td class="sc_col"></td>
-            <td class="sc_col">
-                <div style="padding-top: 10px;">
-                    {{shoppingCartItem.price | currency:'EUR'}}
-                </div>
-            </td>
-            <td class="sc_col"></td>
-            <td class="sc_col">
-                <div style="padding-top: 10px;">
-                    {{discount | percent}}
-                </div>
-            </td>
-            <td class="sc_col"></td>
-            <td class="sc_col">
-                <div>
-                    {{(shoppingCartItem.price*shoppingCartItem.quantity).toFixed(2) | currency:'EUR'}}
-                </div>
-            </td>
-        </tr>
-    </table>
-
-    <div class="totalSum" *ngIf="checkoutList.length !== 0">
-        <strong> <mark style="background-color: rgb(236, 230, 230);">Your total is: {{total.toFixed(2) | currency:'EUR'}}</mark></strong>
-    </div>
-    <button routerLink="/category" style="margin-left: 10px;">Back to Categories</button>
-
-    <div name="separator" style="height:30px;"></div>
-
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="inputFields">
-                    <h3>Billing Address</h3>
-                    <label for="fname" style="margin-top: 44px;">Full Name</label>
-                    <input type="text" id="fname" placeholder="John M. Doe">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" placeholder="john@example.com">
-                    <label for="adress">Address</label>
-                    <input type="text" id="adress" placeholder="542 W. 15th Street">
-                    <label for="city">City</label>
-                    <input type="text" id="city" placeholder="Sofia">
-
-                    <div class="row">
-                        <div class="inputFields">
-                            <label for="number">Telephone Number</label>
-                            <input type="text" id="number" placeholder="0899-9999-89">
-                        </div>
-                        <div class="inputFields">
-                            <label for="zip">Zip</label>
-                            <input type="text" id="zip" placeholder="1001">
+<div class="container-fluid">
+    <div class="row-auto">
+        <div style="font-size: 25px; font-weight: bolder;">Your order:</div>
+        <div *ngIf="checkoutList.length < 1" style="font-size:20px; font-weight: bolder;">Your cart is empty!</div>
+        <table *ngIf="checkoutList.length!==0" width="100%">
+            <tr>
+                <th style="width: 500px;">Product</th>
+                <th style="width: 120px;">Quantity</th>
+                <th style="width: 100px;">Price</th>
+                <th style="width: 100px;">Discount</th>
+                <th style="width: 100px;">Total</th>
+            </tr>
+            <tr *ngFor="let shoppingCartItem of checkoutList">
+                <td style="text-align:left;">
+                    <div class="tableProductDescription">
+                        {{shoppingCartItem.name}} : {{shoppingCartItem.description}}
+                        <div class="productViewDetails" [routerLink]="['/productDetails', shoppingCartItem.id]">
+                            View Details
                         </div>
                     </div>
-                </div>
-
-                <div class="inputFields">
-                    <h3>Payment</h3>
-                    <label for="fname">Accepted Cards</label>
-                    <div class="icon-container">
-                        <img class="visaCard" src="assets\pictures\visaIcon.jpg" width="80">
-                        <img class="visaCard" src="assets\pictures\mastercardIcon.jpg" width="80">
-                        <img class="visaCard" src="assets\pictures\paypalIcon.png" width="120">
-                        <img class="visaCard" src="assets\pictures\revolutIcon.png" width="130">
-                    </div>
-                    <label for="cname">Name on Card</label>
-                    <input type="text" id="cname" placeholder="John More Doe">
-                    <label for="ccnum">Credit card number</label>
-                    <input type="text" id="ccnum" placeholder="1111-2222-3333-4444">
-                    <label for="expmonth">Exp Month</label>
-                    <input type="text" id="expmonth" placeholder="September">
-
-                    <div class="row">
-                        <div class="inputFields">
-                            <label for="expyear">Exp Year</label>
-                            <input type="text" id="expyear" placeholder="2018">
-                        </div>
-                        <div class="inputFields">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" placeholder="352">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <label>
-                <input type="checkbox" unchecked="unchecked" name="sameadr"> Shipping address same as billing
-            </label>
-            <input type="submit" value="Confirm my order" class="btn">
-        </form>
+                </td>
+                <td>
+                    <img src=assets\pictures\minus.png (click)="decrease(shoppingCartItem)">
+                    {{shoppingCartItem.quantity}}
+                    <img src=assets\pictures\plus.png (click)="increase(shoppingCartItem)">
+                </td>
+                <td>{{shoppingCartItem.price | currency:'EUR'}}</td>
+                <td>{{discount | percent}}</td>
+                <td>{{(shoppingCartItem.price*shoppingCartItem.quantity) | currency:'EUR'}}</td>
+            </tr>
+        </table>
+        <div class="totalSum" *ngIf="checkoutList.length !== 0">
+            Your total is: {{total | currency:'EUR'}}
+        </div>
+        <button style="margin-top: 5px;" routerLink="/category">Back to Categories</button>
     </div>
 </div>

@@ -6,11 +6,10 @@ import { ShoppingCartItem } from '../classes/shopping-cart-item';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  shoppingCartList: ShoppingCartItem[];
+  shoppingCartList: ShoppingCartItem[] = [];
   discount: number = 0;
   foundFood: ShoppingCartItem[] = [];
   constructor() {
-    this.shoppingCartList = [];
   }
 
   addToCart(food: Food) {
@@ -18,7 +17,6 @@ export class ShoppingCartService {
     if (this.foundFood.length === 0) {
       const newCartItem = new ShoppingCartItem(food.id, food.foodCategory, food.name, food.price, food.description, food.image);
       this.shoppingCartList.push(newCartItem);
-
     }
     else {
       this.foundFood[0].quantity++;
@@ -26,8 +24,8 @@ export class ShoppingCartService {
 
   }
 
-  removeFromCart(cartItem: ShoppingCartItem) {
-    this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
+  removeFromCart(cartItem: ShoppingCartItem): ShoppingCartItem[] {
+    return this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
   }
 
   calculateDiscount(total: number) {
@@ -42,10 +40,9 @@ export class ShoppingCartService {
     }
   }
 
-  getProduct(productId: number) {
-    return this.shoppingCartList.filter(e => e.id == productId);
+  getProduct(productId: number): ShoppingCartItem {
+    return this.shoppingCartList.find(e => e.id == productId) as ShoppingCartItem;
   }
-
 
 }
 

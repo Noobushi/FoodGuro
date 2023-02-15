@@ -1,27 +1,25 @@
 <div class="mainPage">
-    <div>
-        <div class="row" style="min-width: 70%;">
-            <div class="col-lg-8 mx-auto" *ngFor="let food of foods">
-                <!-- List group-->
-                <ul class="list-group shadow">
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{food.name}}</h5>
-                                <div class="font-italic text-muted mb-0 small">
-                                    <p id="fdesc" style="font-size: 140%;">{{food.description}}</p>
-                                    <p id="fprice" style="font-size: 140%;">{{food.price}}</p>
-                                    <button type="button" class="btn btn-success" (click)="addFood(food)">
-                                        Add to cart!
-                                    </button>
-                                </div>
+    <div class="row" style="min-width: 70%;">
+        <div class="col-lg-8 mx-auto" *ngFor="let food of foods">
+            <!-- List group-->
+            <ul class="list-group shadow">
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{food.name}}</h5>
+                            <div class="font-italic text-muted mb-0 small">
+                                <p style="font-size: 140%;">{{food.description}}</p>
+                                <p style="font-size: 140%;">{{food.price}}</p>
+                                <button type="button" class="btn btn-success" (click)="addFood(food)">
+                                    Add to cart!
+                                </button>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

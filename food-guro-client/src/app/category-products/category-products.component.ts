@@ -11,6 +11,7 @@ import { TransferService } from '../service/transfer-service';
   styleUrls: ['./category-products.component.css']
 })
 export class CategoryProductsComponent implements OnInit {
+
   public foods!: Food[];
   public categoryName: String = "";
   constructor(private categoryService: CategoryService, private shoppingCartService: ShoppingCartService, private transferService: TransferService, private notifierService: NotifierService) {

@@ -28,10 +28,10 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
+
   handleProductDetails() {
     const theProductId: number = + this.route.snapshot.paramMap.get('id')!;
-    const result = this.shoppingCartService.getProduct(theProductId);
-    this.shoppingCartItem = result[0];
+    this.shoppingCartItem = this.shoppingCartService.getProduct(theProductId);
   }
 
   addFood(shoppingCartItem: ShoppingCartItem) {
