@@ -17,7 +17,6 @@ public class UserServiceDTO {
 
     private String userRole;
 
-
     public UserServiceDTO() {
     }
 
@@ -76,4 +75,5 @@ public class UserServiceDTO {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+
 }

@@ -14,6 +14,8 @@ public class UserResponseDTO {
 
     private String userRole;
 
+    private int orderId;
+
     public UserResponseDTO() {
     }
 
@@ -63,5 +65,13 @@ public class UserResponseDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

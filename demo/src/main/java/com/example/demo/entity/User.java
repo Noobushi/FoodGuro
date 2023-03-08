@@ -1,21 +1,20 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class User extends BaseEntity {
 
 
-    @OneToMany(targetEntity = OrderFood.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<OrderFood> orderFood;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderList_id", referencedColumnName = "id", unique = true)
+    private OrderList orderList;
     private String firstName;
 
     private String lastName;
 
     private String city;
-    
+
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -66,12 +65,12 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public List<OrderFood> getOrder() {
-        return orderFood;
+    public OrderList getOrder() {
+        return orderList;
     }
 
-    public void setOrder(List<OrderFood> orderFood) {
-        this.orderFood = orderFood;
+    public void setOrder(OrderList orderList) {
+        this.orderList = orderList;
     }
 
     public UserRoles getUserRole() {
@@ -82,4 +81,3 @@ public class User extends BaseEntity {
         this.userRole = userRole;
     }
 }
-

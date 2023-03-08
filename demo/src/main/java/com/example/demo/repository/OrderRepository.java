@@ -1,7 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.OrderFood;
+import com.example.demo.entity.OrderList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<OrderFood,Integer> {
+public interface OrderRepository extends JpaRepository<OrderList,Integer> {
+    OrderList findOrderByUsername(String username);
 }

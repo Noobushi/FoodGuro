@@ -2,13 +2,13 @@ package com.example.demo.dto.orderFoodDTO;
 
 import java.util.List;
 
-public class OrderFoodResponseDTO {
+public class OrderListResponseDTO {
 
     public String username;
 
     List<String> foods;
 
-    public OrderFoodResponseDTO() {
+    public OrderListResponseDTO() {
     }
 
     public String getUsername() {

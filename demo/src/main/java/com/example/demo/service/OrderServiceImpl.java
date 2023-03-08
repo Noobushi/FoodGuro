@@ -1,15 +1,18 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.orderFoodDTO.OrderFoodResponseDTO;
+import com.example.demo.dto.foodDTO.FoodResponseDTO;
+import com.example.demo.dto.orderFoodDTO.OrderListResponseDTO;
 import com.example.demo.entity.Food;
-import com.example.demo.entity.OrderFood;
+import com.example.demo.entity.OrderList;
 import com.example.demo.entity.User;
-import com.example.demo.dto.orderFoodDTO.OrderFoodServiceDTO;
+import com.example.demo.dto.orderFoodDTO.OrderListServiceDTO;
 import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,16 +29,39 @@ public class OrderServiceImpl extends BaseService{
     }
 
     @Transactional
-    public OrderFoodResponseDTO createOrder(OrderFoodServiceDTO input) {
-        OrderFood newOrderFood = new OrderFood();
-        newOrderFood.setFoods(input.getFoods().stream().map(foodServiceImpl::findByName).collect(Collectors.toList()));
+    public OrderListResponseDTO createOrder(OrderListServiceDTO input) {
+        OrderList newOrderList = new OrderList();
+        newOrderList.setFoods(input.getFoods().stream().map(foodServiceImpl::findByName).collect(Collectors.toList()));
         User foundUser = userService.findByName(input.getUsername());
-        newOrderFood.setUser(foundUser);
-        orderRepository.save(newOrderFood);
-        OrderFoodResponseDTO order = new OrderFoodResponseDTO();
-        order.setUsername(newOrderFood.getUser().getUsername());
-        order.setFoods(newOrderFood.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
+        newOrderList.setUser(foundUser);
+        newOrderList.setUsername(foundUser.getUsername());
+        orderRepository.save(newOrderList);
+//        OrderFoodResponseDTO order = modelMapper.map(newOrderFood, OrderFoodResponseDTO.class);
+
+        OrderListResponseDTO order = new OrderListResponseDTO();
+        order.setUsername(newOrderList.getUser().getUsername());
+        order.setFoods(newOrderList.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
+
         return order;
+    }
+
+    @Transactional
+    public List<FoodResponseDTO> getFoodsInOrder(Integer orderId){
+        OrderList orderList = orderRepository.getById(orderId);
+        return orderList.getFoods().stream().map(food -> modelMapper.map(food, FoodResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public OrderListResponseDTO deleteOrder(OrderListServiceDTO order) {
+        OrderList foundOrderList = orderRepository.findOrderByUsername(order.getUsername());
+        checkIfNull(foundOrderList, order.getUsername());
+        orderRepository.delete(foundOrderList);
+
+        OrderListResponseDTO deletedOrder = new OrderListResponseDTO();
+        deletedOrder.setUsername(foundOrderList.getUsername());
+        deletedOrder.setFoods(foundOrderList.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
+
+        return deletedOrder;
     }
 
 }
