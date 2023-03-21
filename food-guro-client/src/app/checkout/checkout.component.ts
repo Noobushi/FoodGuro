@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FoodImages } from '../classes/food-images';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ShoppingCartItem } from '../classes/shopping-cart-item';
@@ -8,7 +8,7 @@ import { ShoppingCartItem } from '../classes/shopping-cart-item';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent implements OnInit, OnDestroy {
+export class CheckoutComponent implements OnInit {
 
   checkoutList: ShoppingCartItem[] = [];
 
@@ -19,9 +19,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   images: FoodImages[] = [];
 
   constructor(private shoppingCartService: ShoppingCartService) {
-  }
-  ngOnDestroy(): void {
-    this.saveCheckout(this.checkoutList);
   }
 
   ngOnInit(): void {
@@ -40,6 +37,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   increase(shoppingCartItem: ShoppingCartItem) {
     shoppingCartItem.quantity++;
+    this.shoppingCartService.saveCartList();
     this.calculateTotal();
   }
 
@@ -48,6 +46,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     if (shoppingCartItem.quantity === 0) {
       this.checkoutList = this.shoppingCartService.removeFromCart(shoppingCartItem);
     }
+    this.shoppingCartService.saveCartList();
     this.calculateTotal();
   }
 
@@ -57,13 +56,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     Math.round(this.total = this.tempTotal - (this.tempTotal * this.discount));
   }
 
-  saveCheckout(checkoutList: ShoppingCartItem[]) {
-    localStorage.setItem("checkoutList", JSON.stringify(checkoutList));
-  }
-
   getCheckout(): ShoppingCartItem[] {
     const checkoutList = localStorage.getItem("checkoutList");
     return JSON.parse(checkoutList!);
+  }
+
+  removeItem(shoppingCartItem: ShoppingCartItem): void {
+    this.checkoutList = this.shoppingCartService.removeFromCart(shoppingCartItem);
   }
 
 }

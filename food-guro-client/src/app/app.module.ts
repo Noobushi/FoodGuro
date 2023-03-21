@@ -26,7 +26,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CategoryProductsComponent } from './category-products/category-products.component';
 import { TransferService } from './service/transfer-service';
 import { AppRoutingModule } from './app-routing.module';
-import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 
@@ -95,7 +94,6 @@ const customNotifierOptions: NotifierOptions = {
     CheckoutComponent,
     ProductDetailsComponent,
     CategoryProductsComponent,
-    RegistrationFormComponent,
   ],
   providers: [
     RouterModule,

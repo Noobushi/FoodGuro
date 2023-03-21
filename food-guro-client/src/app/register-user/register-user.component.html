@@ -1,17 +1,17 @@
 <div class="container-fluid">
-    <div class="row-auto">
+    <div class="row-auto col-md-2">
         <p class="registration">Registration</p>
         <form (ngSubmit)="onSubmit(userForm.value)" #userForm="ngForm">
-
-            <app-registration-form [fieldName]="'First Name'" [placeholderText]="'Georgi'"></app-registration-form>
-
-            <app-registration-form [fieldName]="'Last Name'" [placeholderText]="'Ivanov'"></app-registration-form>
-
-            <app-registration-form [fieldName]="'From City'" [placeholderText]="'Sofia'"></app-registration-form>
-
-            <app-registration-form [fieldName]="'Username'" [placeholderText]="'goshkata23'"></app-registration-form>
-
-            <app-registration-form [fieldName]="'Password'" [placeholderText]="'GI321'"></app-registration-form>
+            <label class="labels">First Name</label>
+            <input type="text" class="form-control" [(ngModel)]="firstName" name="firstName">
+            <label class="labels">Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]="lastName" name="lastName">
+            <label class="labels">City</label>
+            <input type="text" class="form-control" [(ngModel)]="city" name="city">
+            <label class="labels">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="username" name="username">
+            <label class="labels">Password</label>
+            <input type="password" class="form-control" [(ngModel)]="password" name="password">
 
             <button type="submit" class="btn btn-success">Submit</button>
         </form>

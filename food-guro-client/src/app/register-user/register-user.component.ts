@@ -9,6 +9,11 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
+  firstName!: string;
+  lastName!: string;
+  city!: string;
+  username!: string;
+  password!: number;
 
   constructor(private userService: UserService, private notifierService: NotifierService, private router: Router) { }
 
@@ -19,6 +24,5 @@ export class RegisterUserComponent implements OnInit {
     this.userService.register(userForm).subscribe(x => this.notifierService.notify("success", `User ${x.username} registered successfully!`));
     this.router.navigateByUrl('/');
   }
-
 
 }

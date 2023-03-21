@@ -1,7 +1,0 @@
-<div class="form-group col-md-2">
-    <label class="labels" for="formName">{{fieldName}}</label>
-    <input placeholder={{placeholderText}} type="text" class="form-control" required ngModel name="formName" #formName="ngModel">
-    <div [hidden]="formName.valid || formName.pristine" class="alert alert-dark">
-        Please enter valid name!
-    </div>
-</div>

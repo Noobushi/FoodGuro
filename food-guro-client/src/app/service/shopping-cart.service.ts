@@ -10,6 +10,10 @@ export class ShoppingCartService {
   discount: number = 0;
   foundFood: ShoppingCartItem[] = [];
   constructor() {
+    const savedCardList = localStorage.getItem("shoppingCartList");
+    if (savedCardList) {
+      this.shoppingCartList = JSON.parse(savedCardList);
+    }
   }
 
   addToCart(food: Food) {
@@ -21,11 +25,13 @@ export class ShoppingCartService {
     else {
       this.foundFood[0].quantity++;
     }
-
+    this.saveCartList();
   }
 
   removeFromCart(cartItem: ShoppingCartItem): ShoppingCartItem[] {
-    return this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
+    this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
+    this.saveCartList();
+    return this.shoppingCartList;
   }
 
   calculateDiscount(total: number) {
@@ -42,6 +48,15 @@ export class ShoppingCartService {
 
   getProduct(productId: number): ShoppingCartItem {
     return this.shoppingCartList.find(e => e.id == productId) as ShoppingCartItem;
+  }
+
+  saveCartList(): void {
+    localStorage.setItem("shoppingCartList", JSON.stringify(this.shoppingCartList));
+  }
+
+  getCartList(): ShoppingCartItem[] {
+    const savedCartList = localStorage.getItem('shoppingCartList');
+    return savedCartList ? JSON.parse(savedCartList) : [];
   }
 
 }
