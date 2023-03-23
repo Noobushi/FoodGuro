@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.foodDTO.FoodResponseDTO;
-import com.example.demo.dto.foodDTO.FoodServiceDTO;
 import com.example.demo.dto.orderFoodDTO.OrderListResponseDTO;
 import com.example.demo.dto.orderFoodDTO.OrderListServiceDTO;
 import com.example.demo.service.OrderServiceImpl;
@@ -21,8 +20,8 @@ public class OrderController extends BaseController{
         this.orderServiceImpl = orderServiceImpl;
     }
     @PostMapping("/create")
-    public ResponseEntity<OrderListResponseDTO> createOrder(@RequestBody OrderListServiceDTO order) {
-        return new ResponseEntity<>(orderServiceImpl.createOrder(order),HttpStatus.CREATED);
+    public ResponseEntity<OrderListResponseDTO> createOrder(@RequestBody OrderListServiceDTO order, @RequestParam String username) {
+        return new ResponseEntity<>(orderServiceImpl.createOrder(order, username),HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
@@ -31,7 +30,9 @@ public class OrderController extends BaseController{
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<OrderListResponseDTO> deleteFood(@RequestBody OrderListServiceDTO order) {
-        return new ResponseEntity<>(orderServiceImpl.deleteOrder(order), HttpStatus.OK);
+    public ResponseEntity<Void> deleteOrder(@RequestParam Integer orderId) {
+        orderServiceImpl.deleteOrder(orderId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

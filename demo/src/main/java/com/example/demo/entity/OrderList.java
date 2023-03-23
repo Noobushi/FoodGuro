@@ -9,10 +9,8 @@ public class OrderList extends BaseEntity {
     @OneToOne(mappedBy = "orderList")
     private User user;
 
-    @OneToMany(targetEntity = Food.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Food.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Food> foods;
-
-    private String username;
 
     public OrderList() {
     }
@@ -33,11 +31,4 @@ public class OrderList extends BaseEntity {
         this.user = user;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

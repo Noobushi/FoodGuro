@@ -7,7 +7,6 @@ import java.util.List;
 
 public class FoodResponseDTO {
 
-
     private int id;
     private String name;
 

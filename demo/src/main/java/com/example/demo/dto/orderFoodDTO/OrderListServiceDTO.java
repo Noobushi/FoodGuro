@@ -1,29 +1,21 @@
 package com.example.demo.dto.orderFoodDTO;
 
+import com.example.demo.entity.Food;
+
 import java.util.List;
 
 public class OrderListServiceDTO {
 
-    private String username;
-
-    List<String> foods;
+    List<Food> foods;
 
     public OrderListServiceDTO() {
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<String> getFoods() {
+    public List<Food> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<String> foods) {
+    public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
 }

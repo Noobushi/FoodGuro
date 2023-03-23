@@ -7,40 +7,62 @@ import com.example.demo.entity.OrderList;
 import com.example.demo.entity.User;
 import com.example.demo.dto.orderFoodDTO.OrderListServiceDTO;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl extends BaseService{
-
-    private final UserServiceImpl userService;
     private final OrderRepository orderRepository;
-    private final FoodServiceImpl foodServiceImpl;
+
+    private final UserRepository userRepository;
     @Autowired
-    public OrderServiceImpl(UserServiceImpl userService, OrderRepository orderRepository, FoodServiceImpl foodServiceImpl) {
-        this.userService = userService;
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
-        this.foodServiceImpl = foodServiceImpl;
+        this.userRepository = userRepository;
     }
 
     @Transactional
-    public OrderListResponseDTO createOrder(OrderListServiceDTO input) {
+    public OrderListResponseDTO createOrder(OrderListServiceDTO input, String username) {
+        User foundUser = userRepository.findUserByUsername(username);
+        OrderList existingOrderList = foundUser.getOrderList();
+
+        if(existingOrderList != null){
+            foundUser.setOrderList(null);
+            orderRepository.delete(existingOrderList);
+        }
+
         OrderList newOrderList = new OrderList();
-        newOrderList.setFoods(input.getFoods().stream().map(foodServiceImpl::findByName).collect(Collectors.toList()));
-        User foundUser = userService.findByName(input.getUsername());
+        newOrderList.setFoods(input.getFoods().stream().map(food -> {
+            Food f = new Food();
+            f.setFoodCategory(food.getFoodCategory());
+            f.setName(food.getName());
+            f.setPrice(food.getPrice());
+            f.setDescription(food.getDescription());
+            f.setImage(food.getImage());
+            return f;
+        }).collect(Collectors.toList()));
+
         newOrderList.setUser(foundUser);
-        newOrderList.setUsername(foundUser.getUsername());
         orderRepository.save(newOrderList);
-//        OrderFoodResponseDTO order = modelMapper.map(newOrderFood, OrderFoodResponseDTO.class);
+
+        foundUser.setOrderList(newOrderList);
+        userRepository.save(foundUser);
 
         OrderListResponseDTO order = new OrderListResponseDTO();
-        order.setUsername(newOrderList.getUser().getUsername());
-        order.setFoods(newOrderList.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
+        order.setFoods(newOrderList.getFoods().stream().map(food -> {
+            Food f = new Food();
+            f.setFoodCategory(food.getFoodCategory());
+            f.setName(food.getName());
+            f.setPrice(food.getPrice());
+            f.setDescription(food.getDescription());
+            f.setImage(food.getImage());
+            return f;
+        }).collect(Collectors.toList()));
 
         return order;
     }
@@ -52,16 +74,11 @@ public class OrderServiceImpl extends BaseService{
     }
 
     @Transactional
-    public OrderListResponseDTO deleteOrder(OrderListServiceDTO order) {
-        OrderList foundOrderList = orderRepository.findOrderByUsername(order.getUsername());
-        checkIfNull(foundOrderList, order.getUsername());
-        orderRepository.delete(foundOrderList);
-
-        OrderListResponseDTO deletedOrder = new OrderListResponseDTO();
-        deletedOrder.setUsername(foundOrderList.getUsername());
-        deletedOrder.setFoods(foundOrderList.getFoods().stream().map(Food::getName).collect(Collectors.toList()));
-
-        return deletedOrder;
+    public void deleteOrder(Integer orderId) {
+        OrderList orderList = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        User user = orderList.getUser();
+        user.setOrderList(null);
+        orderRepository.deleteById(orderList.getId());
     }
-
 }
+

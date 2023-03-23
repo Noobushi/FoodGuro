@@ -1,6 +1,5 @@
 package com.example.demo.dto.userDTO;
 
-
 public class UserServiceDTO {
 
     private Integer id;

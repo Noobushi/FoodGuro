@@ -7,7 +7,7 @@ public class User extends BaseEntity {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderList_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "orderList_id", referencedColumnName = "id")
     private OrderList orderList;
     private String firstName;
 
@@ -65,11 +65,11 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public OrderList getOrder() {
+    public OrderList getOrderList() {
         return orderList;
     }
 
-    public void setOrder(OrderList orderList) {
+    public void setOrderList(OrderList orderList) {
         this.orderList = orderList;
     }
 

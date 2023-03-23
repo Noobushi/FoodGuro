@@ -63,4 +63,5 @@ public class Food extends BaseEntity {
     public void setImage(List<ImageDataBase> image) {
         this.image = image;
     }
+
 }
