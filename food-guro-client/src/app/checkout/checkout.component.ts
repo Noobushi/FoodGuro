@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodImages } from '../classes/food-images';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ShoppingCartItem } from '../classes/shopping-cart-item';
+import { OrderService } from '../service/order.service';
+import { AuthService } from '../service/auth.service';
+import { Order } from '../classes/order';
 
 @Component({
   selector: 'app-checkout',
@@ -15,23 +17,16 @@ export class CheckoutComponent implements OnInit {
   total: number = 0;
   discount: number = 0;
   tempTotal: number = 0;
-  imagePath: string = "";
-  images: FoodImages[] = [];
+  order: Order = new Order();
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService, private authService: AuthService) {
+
   }
 
   ngOnInit(): void {
     this.getCheckout();
     this.checkoutList = this.shoppingCartService.shoppingCartList;
     this.calculateTotal();
-
-
-    // this.checkoutList.map(food => food.name).forEach(foodName => this.foodService.getAllImages(foodName).subscribe((value) => {
-    //   this.images = value;
-    //   console.log(this.images);
-    //   this.imagePath = value[0].name;
-    // }));
 
   }
 
@@ -65,4 +60,10 @@ export class CheckoutComponent implements OnInit {
     this.checkoutList = this.shoppingCartService.removeFromCart(shoppingCartItem);
   }
 
+  saveMyCart() {
+    this.order.foods = this.checkoutList;
+    console.log(this.authService.getUser().username)
+    this.orderService.create(this.order, this.authService.getUser().username).subscribe(x => console.log(x));
+    console.log(this.order);
+  }
 }

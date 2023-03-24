@@ -26,6 +26,7 @@ export class ShoppingCartService {
       this.foundFood[0].quantity++;
     }
     this.saveCartList();
+
   }
 
   removeFromCart(cartItem: ShoppingCartItem): ShoppingCartItem[] {
