@@ -2,14 +2,12 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @Entity
 public class Food extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private FoodCategory foodCategory;
+    private String category;
     private String name;
 
     private BigDecimal price;
@@ -17,11 +15,20 @@ public class Food extends BaseEntity {
     @Lob
     private String description;
 
-    @OneToMany(targetEntity = ImageDataBase.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_id")
-    private List<ImageDataBase> image;
+
+    private String imagePath;
+
+    private Integer quantity;
 
     public Food() {
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -40,14 +47,6 @@ public class Food extends BaseEntity {
         this.price = price;
     }
 
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
-    }
-
-    public void setFoodCategory(FoodCategory foodCategory) {
-        this.foodCategory = foodCategory;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -56,12 +55,19 @@ public class Food extends BaseEntity {
         this.description = description;
     }
 
-    public List<ImageDataBase> getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(List<ImageDataBase> image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

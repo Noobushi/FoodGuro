@@ -39,11 +39,12 @@ public class OrderServiceImpl extends BaseService{
         OrderList newOrderList = new OrderList();
         newOrderList.setFoods(input.getFoods().stream().map(food -> {
             Food f = new Food();
-            f.setFoodCategory(food.getFoodCategory());
+            f.setCategory(food.getCategory());
             f.setName(food.getName());
             f.setPrice(food.getPrice());
             f.setDescription(food.getDescription());
-            f.setImage(food.getImage());
+            f.setImagePath(food.getImagePath());
+            f.setQuantity(food.getQuantity());
             return f;
         }).collect(Collectors.toList()));
 
@@ -56,11 +57,12 @@ public class OrderServiceImpl extends BaseService{
         OrderListResponseDTO order = new OrderListResponseDTO();
         order.setFoods(newOrderList.getFoods().stream().map(food -> {
             Food f = new Food();
-            f.setFoodCategory(food.getFoodCategory());
+            f.setCategory(food.getCategory());
             f.setName(food.getName());
             f.setPrice(food.getPrice());
             f.setDescription(food.getDescription());
-            f.setImage(food.getImage());
+            f.setImagePath(food.getImagePath());
+            f.setQuantity(food.getQuantity());
             return f;
         }).collect(Collectors.toList()));
 

@@ -38,70 +38,50 @@ public class DBInitializer implements CommandLineRunner {
         List<Food> foodList = em.createQuery("from Food", Food.class).setMaxResults(1).getResultList();
         if (foodList.isEmpty()) {
             Food steak = new Food();
-            steak.setFoodCategory(meatCategory);
+            steak.setCategory(meatCategory.getName());
             steak.setName("Steak");
             steak.setPrice(new BigDecimal("3.99"));
             steak.setDescription("Medium-rare pork steak");
-            steak.setImage(new ArrayList<>());
+            steak.setImagePath("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771100/steakImage_jrthpa.jpg");
+            steak.setQuantity(1);
             em.persist(steak);
 
             Food chicken = new Food();
-            chicken.setFoodCategory(meatCategory);
+            chicken.setCategory(meatCategory.getName());
             chicken.setName("Chicken");
             chicken.setPrice(new BigDecimal("2.99"));
             chicken.setDescription("Crispy chicken");
-            chicken.setImage(new ArrayList<>());
+            chicken.setImagePath("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771078/chickenImage_mhnr8h.png");
+            chicken.setQuantity(1);
             em.persist(chicken);
 
             Food carrots = new Food();
-            carrots.setFoodCategory(veggiesCategory);
+            carrots.setCategory(veggiesCategory.getName());
             carrots.setName("Carrots");
             carrots.setPrice(new BigDecimal("1.50"));
             carrots.setDescription("Chopped with olive oil");
-            carrots.setImage(new ArrayList<>());
+            carrots.setImagePath("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771084/carrotsImage_mydx7s.jpg");
+            carrots.setQuantity(1);
             em.persist(carrots);
 
             Food apple = new Food();
-            apple.setFoodCategory(veggiesCategory);
+            apple.setCategory(veggiesCategory.getName());
             apple.setName("Apple");
             apple.setPrice(new BigDecimal("1.20"));
             apple.setDescription("Sweet red apple");
-            apple.setImage(new ArrayList<>());
+            apple.setImagePath("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771088/appleImage_gsdumf.jpg");
+            apple.setQuantity(1);
             em.persist(apple);
 
-            List<ImageDataBase> steakImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
-            List<ImageDataBase> chickenImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
-            List<ImageDataBase> carrotsImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
-            List<ImageDataBase> appleImagesList = em.createQuery("from ImageDataBase", ImageDataBase.class).setMaxResults(1).getResultList();
+            List<Food> meatList = new ArrayList<>();
+            meatList.add(steak);
+            meatList.add(chicken);
+            meatCategory.setFoods(meatList);
 
-            ImageDataBase steakImage = new ImageDataBase();
-            ImageDataBase chickenImage = new ImageDataBase();
-            ImageDataBase carrotsImage = new ImageDataBase();
-            ImageDataBase appleImage = new ImageDataBase();
-
-            steakImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771100/steakImage_jrthpa.jpg");
-            em.persist(steakImage);
-
-            chickenImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771078/chickenImage_mhnr8h.png");
-            em.persist(chickenImage);
-
-            carrotsImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771084/carrotsImage_mydx7s.jpg");
-            em.persist(carrotsImage);
-
-            appleImage.setName("https://res.cloudinary.com/dtbhkxrkn/image/upload/v1668771088/appleImage_gsdumf.jpg");
-            em.persist(appleImage);
-
-            steakImagesList.add(steakImage);
-            steak.getImage().addAll(steakImagesList);
-
-            chickenImagesList.add(chickenImage);
-            chicken.getImage().addAll(chickenImagesList);
-
-            carrotsImagesList.add(carrotsImage);
-            carrots.getImage().addAll(carrotsImagesList);
-
-            appleImagesList.add(appleImage);
-            apple.getImage().addAll(appleImagesList);
+            List<Food> veggiesList = new ArrayList<>();
+            veggiesList.add(carrots);
+            veggiesList.add(apple);
+            veggiesCategory.setFoods(veggiesList);
         }
 
         List<User> userList = em.createQuery("from User", User.class).setMaxResults(1).getResultList();

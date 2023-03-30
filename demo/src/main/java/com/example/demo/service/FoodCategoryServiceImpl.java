@@ -25,10 +25,10 @@ public class FoodCategoryServiceImpl extends BaseService {
 
     @Transactional
     public FoodCategoryResponseDTO createFoodCategory(FoodCategoryServiceDTO input) {
-        FoodCategory newFoodCategory = modelMapper.map(input, FoodCategory.class);
-        foodCategoryRepository.save(newFoodCategory);
-        FoodCategoryResponseDTO returnFoodCategory = modelMapper.map(newFoodCategory, FoodCategoryResponseDTO.class);
-        return returnFoodCategory;
+        FoodCategory newCategory = modelMapper.map(input, FoodCategory.class);
+        foodCategoryRepository.save(newCategory);
+        FoodCategoryResponseDTO returnCategory = modelMapper.map(newCategory, FoodCategoryResponseDTO.class);
+        return returnCategory;
     }
 
     public FoodCategory findByName(String foodCategoryName) {
@@ -42,7 +42,6 @@ public class FoodCategoryServiceImpl extends BaseService {
         this.foodCategoryRepository.findAll().forEach(foodCategory -> {
             List<FoodServiceDTO> currentFoodCategory = foodCategory.getFoods().stream().map(food -> {
                 FoodServiceDTO foodServiceDTO = modelMapper.map(food, FoodServiceDTO.class);
-                foodServiceDTO.setFoodCategory(food.getFoodCategory().getName());
                 return foodServiceDTO;
             }).collect(Collectors.toList());
 

@@ -1,7 +1,5 @@
 package com.example.demo.dto.foodDTO;
 
-import com.example.demo.entity.ImageDataBase;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -9,7 +7,7 @@ public class FoodServiceDTO {
 
     private int id;
 
-    private String foodCategory;
+    private String category;
 
     private String name;
 
@@ -17,17 +15,19 @@ public class FoodServiceDTO {
 
     private String description;
 
-    private List<ImageDataBase> image;
+    private List<String> images;
+
+    private Integer quantity;
 
     public FoodServiceDTO() {
     }
 
-    public String getFoodCategory() {
-        return foodCategory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setFoodCategory(String foodCategory) {
-        this.foodCategory = foodCategory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -61,11 +61,19 @@ public class FoodServiceDTO {
         this.description = description;
     }
 
-    public List<ImageDataBase> getImage() {
-        return image;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setImage(List<ImageDataBase> image) {
-        this.image = image;
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

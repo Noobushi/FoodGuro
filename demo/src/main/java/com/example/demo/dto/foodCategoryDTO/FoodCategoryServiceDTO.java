@@ -1,7 +1,6 @@
 package com.example.demo.dto.foodCategoryDTO;
 
 import com.example.demo.dto.foodDTO.FoodServiceDTO;
-import com.example.demo.entity.ImageDataBase;
 
 import java.util.List;
 
@@ -11,8 +10,6 @@ public class FoodCategoryServiceDTO {
     private String name;
 
     private List<FoodServiceDTO> foods;
-
-    private List<ImageDataBase> image;
 
     public FoodCategoryServiceDTO() {
     }
@@ -41,11 +38,5 @@ public class FoodCategoryServiceDTO {
         this.id = id;
     }
 
-    public List<ImageDataBase> getImage() {
-        return image;
-    }
 
-    public void setImage(List<ImageDataBase> image) {
-        this.image = image;
-    }
 }
