@@ -35,27 +35,24 @@ export class FoodTableComponent {
   }
 
   openDelete(form: any, foodName: string) {
-    console.log(form);
     const modalRef = this.modalService.open(form);
-    console.log(modalRef);
-    console.log(modalRef.componentInstance.name);
     modalRef.componentInstance.name = foodName;
   }
 
   openEdit(form: any, food: Food) {
     const modalRef = this.modalService.open(form);
     modalRef.componentInstance.food = food;
-
   }
 
   editFood(nameForm: Food, id: number) {
     const food: Food = {
       id: id,
       name: nameForm.name,
-      foodCategory: nameForm.foodCategory,
+      category: nameForm.category,
       price: nameForm.price,
       description: nameForm.description,
-      image: nameForm.image
+      imagePath: nameForm.imagePath,
+      quantity: nameForm.quantity
     };
     this.foodService.edit(food).subscribe(x => {
       this.notifierService.notify("success", `Food ${x.name} updated successfully!`);

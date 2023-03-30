@@ -20,7 +20,6 @@ export class CheckoutComponent implements OnInit {
   order: Order = new Order();
 
   constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService, private authService: AuthService) {
-
   }
 
   ngOnInit(): void {
@@ -66,4 +65,5 @@ export class CheckoutComponent implements OnInit {
     this.orderService.create(this.order, this.authService.getUser().username).subscribe(x => console.log(x));
     console.log(this.order);
   }
+
 }

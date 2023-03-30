@@ -60,7 +60,10 @@ export class AdminMenuComponent implements OnInit {
   }
 
   createFood(nameForm: any) {
-    this.foodService.create(nameForm).subscribe(food => this.notifierService.notify("success", `Food ${food.name} created successfully!`));
+    this.foodService.create(nameForm).subscribe(food => {
+      this.notifierService.notify("success", `Food ${food.name} created successfully!`)
+      this.ngOnInit()
+    });
   }
 
 }

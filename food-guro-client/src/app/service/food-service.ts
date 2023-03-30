@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Food } from '../classes/food';
-import { FoodImages } from '../classes/food-images';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +26,8 @@ export class FoodService {
     return this.http.post<Food>(`${this.host}/api/food/edit`, foodForm);
   }
 
-  public getAllImages(foodName: String): Observable<FoodImages[]> {
-    return this.http.get<FoodImages[]>(`${this.host}/api/food/allImages?foodName=${foodName}`)
+  public getImage(foodName: string): Observable<string> {
+    return this.http.get<string>(`${this.host}/api/food/image?foodName=${foodName}`)
   }
 
 

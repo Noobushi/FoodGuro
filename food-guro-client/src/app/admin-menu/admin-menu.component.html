@@ -82,19 +82,25 @@
       <form #foodForm="ngForm" (ngSubmit)="createFood(foodForm.value)">
 
         <label>Add food</label>
-        <input name="food" ngModel #foodNameField="ngModel" class="form-control" placeholder="Enter name">
+        <input name="name" ngModel #foodNameField="ngModel" class="form-control" placeholder="Enter name">
 
         <label>Add in category</label>
         <input name="category" ngModel #foodCategoryField="ngModel" class="form-control" placeholder="Enter category name">
 
         <label>Add price</label>
-        <input name="price" ngModel #foodPriceField="ngModel" class="form-control" placeholder="Enter food price">
+        <input name="price" ngModel #foodPriceField="ngModel" class="form-control" placeholder="Enter food price" type="number">
 
-        <label>Add Description</label>
+        <label>Add description</label>
         <input name="description" ngModel #foodDescriptionField="ngModel" class="form-control" placeholder="Enter food description">
 
+        <label>Add quantity</label>
+        <input name="quantity" ngModel #foodQuantityField="ngModel" class="form-control" placeholder="Enter food quantity" type="number">
+
+        <label>Add image</label>
+        <input name="image" ngModel #foodQuantityField="ngModel" class="form-control" placeholder="Enter image URL">
+
         <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-dark" (click)="createFood(foodForm.value); modal.dismiss('Cross click')">Create</button>
+          <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Create</button>
         </div>
 
       </form>

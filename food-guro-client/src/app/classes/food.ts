@@ -1,20 +1,20 @@
-import { FoodImages } from "./food-images";
 
 export class Food {
     id: number;
-    foodCategory: string;
+    category: string;
     name: string;
     price: number;
     description: string;
-    image: FoodImages[];
-
-    public constructor(id: number, foodCategory: string, name: string, price: number, description: string, image: FoodImages[]) {
+    imagePath: string;
+    quantity: number;
+    public constructor(id: number, category: string, name: string, price: number, description: string, imagePath: string, quantity: number) {
         this.id = id;
-        this.foodCategory = foodCategory;
+        this.category = category;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.image = image;
+        this.imagePath = imagePath;
+        this.quantity = quantity;
     }
 
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { FoodImages } from '../classes/food-images';
 import { FoodService } from '../service/food-service';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ShoppingCartItem } from '../classes/shopping-cart-item';
@@ -14,18 +13,15 @@ import { ShoppingCartItem } from '../classes/shopping-cart-item';
 export class ProductDetailsComponent implements OnInit {
 
   shoppingCartItem!: ShoppingCartItem;
-  images: FoodImages[] = [];
   imagePath: string = "";
   constructor(private shoppingCartService: ShoppingCartService, private route: ActivatedRoute, private foodService: FoodService, private notifierService: NotifierService) {
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => { this.handleProductDetails(); })
-    this.foodService.getAllImages(this.shoppingCartItem.name).subscribe({
-      next: (value) => {
-        this.images = value;
-        this.imagePath = value[0].name;
-      }
+    this.foodService.getImage(this.shoppingCartItem.name).subscribe((name) => {
+      this.imagePath = name;
+      console.log(name)
     });
   }
 
