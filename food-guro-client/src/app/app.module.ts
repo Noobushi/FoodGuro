@@ -21,7 +21,6 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './service/auth.service';
 import { UserTableComponent } from './user-table/user-table.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ShoppingCartService } from './service/shopping-cart.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
 import { TransferService } from './service/transfer-service';
@@ -93,14 +92,13 @@ const customNotifierOptions: NotifierOptions = {
     UserTableComponent,
     CheckoutComponent,
     ProductDetailsComponent,
-    CategoryProductsComponent,
+    CategoryProductsComponent
   ],
   providers: [
     RouterModule,
     TransferService,
     FoodService,
     UserService,
-    ShoppingCartService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService
   ],

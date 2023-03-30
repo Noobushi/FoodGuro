@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCartService } from '../service/shopping-cart.service';
-import { ShoppingCartItem } from '../classes/shopping-cart-item';
 import { OrderService } from '../service/order.service';
 import { AuthService } from '../service/auth.service';
 import { Order } from '../classes/order';
+import { Food } from '../classes/food';
+import { FoodService } from '../service/food-service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,51 +12,51 @@ import { Order } from '../classes/order';
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutList: ShoppingCartItem[] = [];
+  checkoutList: Food[] = [];
 
   total: number = 0;
   discount: number = 0;
   tempTotal: number = 0;
   order: Order = new Order();
 
-  constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService, private authService: AuthService) {
+  constructor(private foodService: FoodService, private orderService: OrderService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.getCheckout();
-    this.checkoutList = this.shoppingCartService.shoppingCartList;
+    this.checkoutList = this.foodService.shoppingCartList;
     this.calculateTotal();
 
   }
 
-  increase(shoppingCartItem: ShoppingCartItem) {
+  increase(shoppingCartItem: Food) {
     shoppingCartItem.quantity++;
-    this.shoppingCartService.saveCartList();
+    this.foodService.saveCartList();
     this.calculateTotal();
   }
 
-  decrease(shoppingCartItem: ShoppingCartItem) {
+  decrease(shoppingCartItem: Food) {
     shoppingCartItem.quantity--;
     if (shoppingCartItem.quantity === 0) {
-      this.checkoutList = this.shoppingCartService.removeFromCart(shoppingCartItem);
+      this.checkoutList = this.foodService.removeFromCart(shoppingCartItem);
     }
-    this.shoppingCartService.saveCartList();
+    this.foodService.saveCartList();
     this.calculateTotal();
   }
 
   calculateTotal(): void {
     this.tempTotal = this.checkoutList.map(e => e.price * e.quantity).reduce((sum, next) => sum = sum + next);
-    this.discount = this.shoppingCartService.calculateDiscount(this.tempTotal);
+    this.discount = this.foodService.calculateDiscount(this.tempTotal);
     Math.round(this.total = this.tempTotal - (this.tempTotal * this.discount));
   }
 
-  getCheckout(): ShoppingCartItem[] {
+  getCheckout(): Food[] {
     const checkoutList = localStorage.getItem("checkoutList");
     return JSON.parse(checkoutList!);
   }
 
-  removeItem(shoppingCartItem: ShoppingCartItem): void {
-    this.checkoutList = this.shoppingCartService.removeFromCart(shoppingCartItem);
+  removeItem(shoppingCartItem: Food): void {
+    this.checkoutList = this.foodService.removeFromCart(shoppingCartItem);
   }
 
   saveMyCart() {

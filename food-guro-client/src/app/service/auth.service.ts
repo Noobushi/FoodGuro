@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../classes/user';
-import { ShoppingCartService } from './shopping-cart.service';
+import { FoodService } from './food-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService {
   public baseURL = "http://localhost:8080";
   isLoginSubject;
   userSubject;
-  constructor(private http: HttpClient, private shoppingCartService: ShoppingCartService) {
+  constructor(private http: HttpClient, private foodService: FoodService) {
     this.isLoginSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
     this.userSubject = new BehaviorSubject<User | null>(this.isUser());
   }
@@ -56,7 +56,7 @@ export class AuthService {
     this.isLoginSubject.next(false);
     this.userSubject.next(null);
     localStorage.removeItem("shoppingCartList");
-    this.shoppingCartService.shoppingCartList = [];
+    this.foodService.shoppingCartList = [];
   }
   getToken(): string {
     return localStorage.getItem("token") as string;
