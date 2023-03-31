@@ -13,11 +13,10 @@ import { FoodService } from '../service/food-service';
 export class CheckoutComponent implements OnInit {
 
   checkoutList: Food[] = [];
-
   total: number = 0;
   discount: number = 0;
   tempTotal: number = 0;
-  order: Order = new Order();
+  order: Order = new Order([]);
 
   constructor(private foodService: FoodService, private orderService: OrderService, private authService: AuthService) {
   }
@@ -61,9 +60,7 @@ export class CheckoutComponent implements OnInit {
 
   saveMyCart() {
     this.order.foods = this.checkoutList;
-    console.log(this.authService.getUser().username)
-    this.orderService.create(this.order, this.authService.getUser().username).subscribe(x => console.log(x));
-    console.log(this.order);
+    this.orderService.create(this.order, this.authService.getUser().username).subscribe();
   }
 
 }

@@ -17,6 +17,4 @@ export class OrderService {
     return this.http.post<Order>(`${this.host}/api/order/create?username=${username}`, order);
   }
 
-
-
 }
