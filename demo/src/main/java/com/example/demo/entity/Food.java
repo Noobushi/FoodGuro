@@ -15,7 +15,6 @@ public class Food extends BaseEntity {
     @Lob
     private String description;
 
-
     private String imagePath;
 
     private Integer quantity;

@@ -15,7 +15,7 @@ public class FoodServiceDTO {
 
     private String description;
 
-    private List<String> images;
+    private String imagePath;
 
     private Integer quantity;
 
@@ -61,12 +61,12 @@ public class FoodServiceDTO {
         this.description = description;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public Integer getQuantity() {

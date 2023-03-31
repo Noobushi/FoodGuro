@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class FoodServiceImpl extends BaseService {
@@ -33,7 +35,7 @@ public class FoodServiceImpl extends BaseService {
 
     @Transactional
     public FoodResponseDTO deleteFood(FoodServiceDTO input) {
-        Food foundFood = foodRepository.findFoodByName(input.getName());
+        Food foundFood = foodRepository.findByName(input.getName());
         checkIfNull(foundFood,input.getName());
         foodRepository.deleteFood(foundFood.getId());
         FoodResponseDTO deletedFood = modelMapper.map(foundFood, FoodResponseDTO.class);
@@ -61,13 +63,18 @@ public class FoodServiceImpl extends BaseService {
     }
 
     public Food findByName(String foodName) {
-        Food foundFood = foodRepository.findFoodByName(foodName);
+        Food foundFood = foodRepository.findByName(foodName);
         checkIfNull(foundFood,foodName);
         return foundFood;
     }
 
     public String getImage(String foodName){
-        Food foundFood = findByName(foodName);
-        return foundFood.getImagePath();
+        List<Food> foundFood = foodRepository.findFoodByName(foodName);
+        for(Food food : foundFood){
+            if(food.getName().equals(foodName)){
+                return food.getImagePath();
+            }
+        }
+        throw new NullPointerException(String.format("%s object doesnt exist!",foodName));
     }
 }

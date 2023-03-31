@@ -7,9 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Integer> {
-   Food findFoodByName(String foodName);
+  List<Food> findFoodByName(String foodName);
+  Food findByName(String foodName);
    @Modifying
    @Query("delete from Food f where f.id=:id")
    void deleteFood(@Param("id") Integer id);
