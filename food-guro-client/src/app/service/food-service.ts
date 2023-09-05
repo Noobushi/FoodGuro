@@ -2,22 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Food } from '../classes/food';
+import { Order } from '../classes/order';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class FoodService {
   private host;
   shoppingCartList: Food[] = [];
   discount: number = 0;
   foundFood: Food[] = [];
+  order: Order = new Order([]);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private orderService: OrderService) {
     this.host = 'http://localhost:8080';
-    const savedCardList = localStorage.getItem("shoppingCartList");
-    if (savedCardList) {
-      this.shoppingCartList = JSON.parse(savedCardList);
-    }
   }
 
   addToCart(food: Food) {
@@ -29,13 +29,12 @@ export class FoodService {
     else {
       this.foundFood[0].quantity++;
     }
-    this.saveCartList();
-
+    this.saveMyCart();
   }
 
   removeFromCart(cartItem: Food): Food[] {
     this.shoppingCartList = this.shoppingCartList.filter(e => e.id !== cartItem.id);
-    this.saveCartList();
+    this.saveMyCart();
     return this.shoppingCartList;
   }
 
@@ -53,10 +52,6 @@ export class FoodService {
 
   getProduct(productId: number): Food {
     return this.shoppingCartList.find(e => e.id == productId) as Food;
-  }
-
-  saveCartList(): void {
-    localStorage.setItem("shoppingCartList", JSON.stringify(this.shoppingCartList));
   }
 
   getCartList(): Food[] {
@@ -80,5 +75,8 @@ export class FoodService {
     return this.http.get<string>(`${this.host}/api/food/image?foodName=${foodName}`)
   }
 
-
+  saveMyCart() {
+    this.order.foods = this.shoppingCartList;
+    this.orderService.create(this.order, "Igracha").subscribe();
+  }
 }

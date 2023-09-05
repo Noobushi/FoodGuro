@@ -27,6 +27,7 @@ import { TransferService } from './service/transfer-service';
 import { AppRoutingModule } from './app-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -78,7 +79,8 @@ const customNotifierOptions: NotifierOptions = {
     BrowserAnimationsModule,
     NgbModule,
     MatSidenavModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ],
   declarations: [
     AppComponent,

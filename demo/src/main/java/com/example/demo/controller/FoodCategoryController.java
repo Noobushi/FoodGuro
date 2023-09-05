@@ -36,8 +36,8 @@ public class FoodCategoryController extends BaseController{
         return new ResponseEntity<>(foodCategoryServiceImpl.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/allFoods")
-    public ResponseEntity<List<FoodServiceDTO>> getAllFoodsInCategory( @RequestParam String category) {
+    @GetMapping("/{category}")
+    public ResponseEntity<List<FoodServiceDTO>> getAllFoodsInCategory( @PathVariable String category) {
         return new ResponseEntity<>(foodCategoryServiceImpl.getFoodsInCategory(category), HttpStatus.OK);
     }
 

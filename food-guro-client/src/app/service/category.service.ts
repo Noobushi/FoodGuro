@@ -27,8 +27,8 @@ export class CategoryService {
     return this.http.get<FoodCategory[]>(`${this.host}/api/foodCategory/all`);
   }
 
-  public getFoodsInCategory(foodCategory: String): Observable<Food[]> {
-    return this.http.get<Food[]>(`${this.host}/api/foodCategory/allFoods?category=${foodCategory}`);
+  public getFoodsInCategory(foodCategory: string): Observable<Food[]> {
+    return this.http.get<Food[]>(`${this.host}/api/foodCategory/${foodCategory}`);
   }
 
   public getAllImages(categoryId: number): Observable<string> {

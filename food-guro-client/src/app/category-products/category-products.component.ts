@@ -3,7 +3,7 @@ import { NotifierService } from 'angular-notifier';
 import { Food } from '../classes/food';
 import { CategoryService } from '../service/category.service';
 import { FoodService } from '../service/food-service';
-import { TransferService } from '../service/transfer-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-category-products',
@@ -12,14 +12,24 @@ import { TransferService } from '../service/transfer-service';
 })
 export class CategoryProductsComponent implements OnInit {
 
-  public foods!: Food[];
-  public categoryName: String = "";
-  constructor(private categoryService: CategoryService, private foodService: FoodService, private transferService: TransferService, private notifierService: NotifierService) {
+  foods!: Food[];
+  categoryName: string = "";
+  shoppingCartItem!: Food;
+  imagePath: string[] = [];
+  constructor(private categoryService: CategoryService, private foodService: FoodService, private notifierService: NotifierService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.categoryName = this.transferService.retrieveString();
-    this.categoryService.getFoodsInCategory(this.categoryName).subscribe(value => this.foods = value);
+    this.route.params.subscribe(params => {
+      this.categoryName = params['foodCategory'];
+    })
+    this.categoryService.getFoodsInCategory(this.categoryName).subscribe((value) => {
+      this.foods = value;
+      for (let i = 0; i < value.length; i++) {
+        this.imagePath[i] = value[i].imagePath;
+      }
+    });
   }
 
   addFood(food: any) {

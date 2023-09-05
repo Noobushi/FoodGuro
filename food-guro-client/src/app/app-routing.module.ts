@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'adminMenu', component: AdminMenuComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  { path: 'categoryProducts', component: CategoryProductsComponent }
+  { path: 'categoryProducts/:foodCategory', component: CategoryProductsComponent }
 ];
 
 @NgModule({

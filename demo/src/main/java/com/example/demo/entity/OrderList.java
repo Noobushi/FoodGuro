@@ -6,11 +6,10 @@ import java.util.List;
 @Entity
 public class OrderList extends BaseEntity {
 
-    @OneToOne(mappedBy = "orderList")
-    private User user;
+    private String username;
 
     @OneToMany(targetEntity = Food.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<Food> foods;
+    private List<Food> foods;
 
     public OrderList() {
     }
@@ -23,12 +22,11 @@ public class OrderList extends BaseEntity {
         this.foods = foods;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
 }

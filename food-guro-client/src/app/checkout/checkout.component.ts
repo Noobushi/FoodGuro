@@ -22,15 +22,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCheckout();
-    this.checkoutList = this.foodService.shoppingCartList;
+    this.orderService.retrieve(1).subscribe(value => {
+      this.checkoutList = value;
+    });
     this.calculateTotal();
 
   }
 
   increase(shoppingCartItem: Food) {
     shoppingCartItem.quantity++;
-    this.foodService.saveCartList();
+    this.saveMyCart();
     this.calculateTotal();
   }
 
@@ -39,7 +40,7 @@ export class CheckoutComponent implements OnInit {
     if (shoppingCartItem.quantity === 0) {
       this.checkoutList = this.foodService.removeFromCart(shoppingCartItem);
     }
-    this.foodService.saveCartList();
+    this.saveMyCart();
     this.calculateTotal();
   }
 
@@ -49,13 +50,9 @@ export class CheckoutComponent implements OnInit {
     Math.round(this.total = this.tempTotal - (this.tempTotal * this.discount));
   }
 
-  getCheckout(): Food[] {
-    const checkoutList = localStorage.getItem("checkoutList");
-    return JSON.parse(checkoutList!);
-  }
-
   removeItem(shoppingCartItem: Food): void {
     this.checkoutList = this.foodService.removeFromCart(shoppingCartItem);
+    this.saveMyCart();
   }
 
   saveMyCart() {

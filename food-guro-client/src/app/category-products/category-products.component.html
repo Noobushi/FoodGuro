@@ -1,25 +1,22 @@
 <div class="mainPage">
-    <div class="row" style="min-width: 70%;">
-        <div class="col-lg-8 mx-auto" *ngFor="let food of foods">
-            <!-- List group-->
-            <ul class="list-group shadow">
-                <!-- list group item-->
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div class="media flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 style="color:rgb(6, 6, 6); font-size:300%; text-align:center;">{{food.name}}</h5>
-                            <div class="font-italic text-muted mb-0 small">
-                                <p style="font-size: 140%;">{{food.description}}</p>
-                                <p style="font-size: 140%;">{{food.price}}</p>
-                                <button type="button" class="btn btn-success" (click)="addFood(food)">
-                                    Add to cart!
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <div class="card-container" *ngFor="let food of foods; let i=index;">
+        <mat-card class="card-component">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <img class="avatar-image" [src]="imagePath[i]" alt="Photo of the food">
+                </div>
+                <mat-card-title>{{food.name}}</mat-card-title>
+                <mat-card-subtitle>{{food.category}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="imagePath[i]" alt="Photo of the food">
+            <mat-card-content>
+                <div>{{food.description}}</div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button style="margin-right: 33%;" class="btn btn-success" routerLink="/checkout">Go to Cart</button>
+                <div style="margin-right: 2%">{{food.price | currency:'EUR'}}</div>
+                <button mat-button class="btn btn-success" (click)="addFood(food)">Add to Cart!</button>
+            </mat-card-actions>
+        </mat-card>
     </div>
 </div>

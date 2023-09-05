@@ -29,10 +29,4 @@ public class OrderController extends BaseController{
         return new ResponseEntity<>(orderServiceImpl.getFoodsInOrder(orderId), HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<Void> deleteOrder(@RequestParam Integer orderId) {
-        orderServiceImpl.deleteOrder(orderId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
 }

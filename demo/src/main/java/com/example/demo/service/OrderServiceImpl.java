@@ -6,6 +6,7 @@ import com.example.demo.entity.Food;
 import com.example.demo.entity.OrderList;
 import com.example.demo.entity.User;
 import com.example.demo.dto.orderFoodDTO.OrderListServiceDTO;
+import com.example.demo.repository.FoodRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,52 +21,39 @@ public class OrderServiceImpl extends BaseService{
     private final OrderRepository orderRepository;
 
     private final UserRepository userRepository;
+
+    private final FoodRepository foodRepository;
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, FoodRepository foodRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.foodRepository = foodRepository;
     }
 
     @Transactional
     public OrderListResponseDTO createOrder(OrderListServiceDTO input, String username) {
         User foundUser = userRepository.findUserByUsername(username);
-        OrderList existingOrderList = foundUser.getOrderList();
 
-        if(existingOrderList != null){
-            foundUser.setOrderList(null);
-            orderRepository.delete(existingOrderList);
+        OrderList existingOrderList = foundUser.getOrderList();
+        if (existingOrderList != null) {
+            existingOrderList.getFoods().clear();
+        } else {
+            existingOrderList = new OrderList();
+            foundUser.setOrderList(existingOrderList);
         }
 
-        OrderList newOrderList = new OrderList();
-        newOrderList.setFoods(input.getFoods().stream().map(food -> {
-            Food f = new Food();
-            f.setCategory(food.getCategory());
-            f.setName(food.getName());
-            f.setPrice(food.getPrice());
-            f.setDescription(food.getDescription());
-            f.setImagePath(food.getImagePath());
-            f.setQuantity(food.getQuantity());
-            return f;
+        existingOrderList.setFoods(input.getFoods().stream().map(food -> {
+            Food retrievedFood = foodRepository.findByName(food.getName());
+            retrievedFood.setQuantity(food.getQuantity());
+            return retrievedFood;
         }).collect(Collectors.toList()));
+        existingOrderList.setUsername(foundUser.getUsername());
 
-        newOrderList.setUser(foundUser);
-        orderRepository.save(newOrderList);
-
-        foundUser.setOrderList(newOrderList);
+        orderRepository.save(existingOrderList);
         userRepository.save(foundUser);
 
         OrderListResponseDTO order = new OrderListResponseDTO();
-        order.setFoods(newOrderList.getFoods().stream().map(food -> {
-            Food f = new Food();
-            f.setCategory(food.getCategory());
-            f.setName(food.getName());
-            f.setPrice(food.getPrice());
-            f.setDescription(food.getDescription());
-            f.setImagePath(food.getImagePath());
-            f.setQuantity(food.getQuantity());
-            return f;
-        }).collect(Collectors.toList()));
-
+        order.setFoods(existingOrderList.getFoods());
         return order;
     }
 
@@ -75,12 +63,5 @@ public class OrderServiceImpl extends BaseService{
         return orderList.getFoods().stream().map(food -> modelMapper.map(food, FoodResponseDTO.class)).collect(Collectors.toList());
     }
 
-    @Transactional
-    public void deleteOrder(Integer orderId) {
-        OrderList orderList = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
-        User user = orderList.getUser();
-        user.setOrderList(null);
-        orderRepository.deleteById(orderList.getId());
-    }
 }
 

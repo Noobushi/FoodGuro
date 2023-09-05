@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="title">Categories</div>
       <div class="separator"></div>
-      <div class="row-lg" *ngFor="let category of categories$ | async" routerLink="/categoryProducts" (click)="getCategory(category.name)">
+      <div class="row-lg" *ngFor="let category of categories$ | async" routerLink="/categoryProducts/{{category.name}}" (click)="getCategory(category.name)">
         {{category.name}}
       </div>
     </div>

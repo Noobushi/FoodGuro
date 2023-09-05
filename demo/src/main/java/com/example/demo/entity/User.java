@@ -3,9 +3,8 @@ package com.example.demo.entity;
 import javax.persistence.*;
 
 @Entity
+
 public class User extends BaseEntity {
-
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderList_id", referencedColumnName = "id")
     private OrderList orderList;
