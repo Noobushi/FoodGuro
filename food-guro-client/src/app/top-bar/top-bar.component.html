@@ -8,7 +8,7 @@
 
   <div class="col-auto logoContainer">
     <img src="assets/pictures/angryGuroLogo.png" alt="angryGuroLogoIcon" class="angryGuroLogo" *ngIf="isAnnoyed">
-    <img class="guroLogo" src={{logoImageIcon}} alt="GuroLogoIcon" (click)="clickCounter()" *ngIf="isAnnoyed==false">
+    <img class="guroLogo" src={{logoImageIcon}} alt="GuroLogoIcon" (click)="clickCounter()" *ngIf="!isAnnoyed">
   </div>
 
   <div class="col-auto buttonsContainer">
@@ -36,8 +36,9 @@
   <div class="col-auto cartContainer">
 
     <a class="btn checkoutButton" *ngIf="this.isLoggedIn" routerLink="/checkout">
-      <img class="shoppingCart" src="assets/pictures/shopping-cart.PNG" alt="ShoppingCartIcon">
-      Checkout
+      <div [matBadge]="productCounter" matBadgeSize="small">
+        <mat-icon class="shoppingCartIcon">shopping_cart</mat-icon>
+      </div>
     </a>
   </div>
 

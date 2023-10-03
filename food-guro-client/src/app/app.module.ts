@@ -28,6 +28,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatIconModule } from '@angular/material/icon';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -80,7 +82,9 @@ const customNotifierOptions: NotifierOptions = {
     NgbModule,
     MatSidenavModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   declarations: [
     AppComponent,
